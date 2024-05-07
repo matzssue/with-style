@@ -1,0 +1,5 @@
+/build
+/mock
+/src/generated
+tsconfig.json
+schema.json
