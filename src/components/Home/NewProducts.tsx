@@ -1,7 +1,7 @@
 import manNewProducts from '../../../public/images/man-new-products.jpg';
 import womanNewProducts from '../../../public/images/woman-new-products.jpg';
 import Image from 'next/image';
-import { MotionCard } from '../Cards/MotionCard/MotionCard';
+import { MotionCard } from '../Cards/MotionCard';
 import Link from 'next/link';
 import {
   Carousel,
@@ -10,10 +10,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import ProductCard from '@/components/Cards/ProductCard/ProductCard';
+import ProductCard from '@/components/Cards/ProductCard';
 import summerOne from '../../../public/images/summer one.jpg';
-import summerTwo from '../../../public/images/summer two.jpg';
-import summerThree from '../../../public/images/summer three.jpg';
+import summerTwo from '../../../public/images/summer one.webp';
+import summerThree from '../../../public/images/summer three.webp';
 
 export const NewProducts = () => {
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];

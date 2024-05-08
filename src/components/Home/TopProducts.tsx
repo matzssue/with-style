@@ -5,7 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import ProductCard from '@/components/Cards/ProductCard/ProductCard';
+import ProductCard from '@/components/Cards/ProductCard';
 
 export const TopProducts = () => {
   return (
