@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import shoes from '../../../../public/shoes1.jpg';
-
+import shoes from '../../../public/shoes1.jpg';
 export default function ProductCard() {
   return (
     <div>
