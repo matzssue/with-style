@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/carousel';
 import ProductCard from '@/components/Cards/ProductCard';
 import summerOne from '../../../public/images/summer one.jpg';
-import summerTwo from '../../../public/images/summer one.webp';
-import summerThree from '../../../public/images/summer three.webp';
+import summerTwo from '../../../public/images/summer one.jpg';
+import summerThree from '../../../public/images/summer three.jpg';
 
 export const NewProducts = () => {
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
