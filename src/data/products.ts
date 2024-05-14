@@ -1,12 +1,20 @@
 import prisma from '@/lib/prisma';
 
 export const getProduct = async (id: string) => {
-  console.log('id', id);
-  const product = await prisma.product.findUnique({ where: { id } });
-  return product;
+  try {
+    console.log('id', id);
+    const product = await prisma.product.findUnique({ where: { id } });
+    return product;
+  } catch (err) {
+    throw new Error('Error getting product');
+  }
 };
 
 export const getAllProducts = async () => {
-  const products = await prisma.product.findMany();
-  return products;
+  try {
+    const products = await prisma.product.findMany();
+    return products;
+  } catch (err) {
+    throw new Error('Error getting products');
+  }
 };
