@@ -6,7 +6,7 @@ type ProductQuantity = {
   quantity: number;
 };
 
-type ProductInStore = Product & ProductQuantity;
+export type ProductInStore = Product & ProductQuantity;
 
 type Store = {
   cart: ProductInStore[];
@@ -17,7 +17,7 @@ type Store = {
 type Actions = {
   addToCart: (Item: Product) => void;
   removeFromCart: (Item: Product) => void;
-  decrease: (Item: Product) => void;
+  decreaseQuantity: (Item: Product) => void;
 };
 
 const INITIAL_STATE = {
@@ -31,7 +31,7 @@ export const useCartStore = create(
     (set, get) => ({
       cart: INITIAL_STATE.cart,
       totalItems: INITIAL_STATE.totalItems,
-      totalPrice: +INITIAL_STATE.totalPrice.toFixed(2),
+      totalPrice: INITIAL_STATE.totalPrice,
       addToCart: (product: Product) => {
         const cart = get().cart;
         const cartItem = cart.find((item) => item.id === product.id);
@@ -49,18 +49,18 @@ export const useCartStore = create(
           set((state) => ({
             cart: updatedCart,
             totalItems: state.totalItems + 1,
-            totalPrice: state.totalPrice + product.price,
+            totalPrice: +(state.totalPrice + product.price).toFixed(2),
           }));
         } else {
           const updatedCart = [...cart, { ...product, quantity: 1 }];
           set((state) => ({
             cart: updatedCart,
             totalItems: state.totalItems + 1,
-            totalPrice: state.totalPrice + product.price,
+            totalPrice: +(state.totalPrice + product.price).toFixed(2),
           }));
         }
       },
-      decrease: (product: Product) => {
+      decreaseQuantity: (product: Product) => {
         const cart = get().cart;
         const cartItem = cart.find((item) => item.id === product.id);
         console.log('my cart item', cartItem);
@@ -76,13 +76,13 @@ export const useCartStore = create(
           set((state) => ({
             cart: updatedCart,
             totalItems: state.totalItems - 1,
-            totalPrice: state.totalPrice - product.price,
+            totalPrice: +(state.totalPrice - product.price).toFixed(2),
           }));
         } else {
           set((state) => ({
             cart: state.cart.filter((item) => item.id !== product.id),
             totalItems: state.totalItems - 1,
-            totalPrice: state.totalPrice - product.price,
+            totalPrice: +(state.totalPrice - product.price).toFixed(2),
           }));
         }
       },
@@ -90,7 +90,7 @@ export const useCartStore = create(
         set((state) => ({
           cart: state.cart.filter((item) => item.id !== product.id),
           totalItems: 0,
-          totalPrice: state.totalPrice - product.price,
+          totalPrice: +(state.totalPrice - product.price).toFixed(2),
         }));
       },
     }),
