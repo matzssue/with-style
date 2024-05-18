@@ -14,6 +14,7 @@ import ProductCard from '@/components/Cards/ProductCard';
 import summerOne from '../../../public/images/summer one.jpg';
 import summerTwo from '../../../public/images/summer one.jpg';
 import summerThree from '../../../public/images/summer three.jpg';
+import { ButtonLink } from '../Buttons/ButtonLink';
 
 export const NewProducts = () => {
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
@@ -27,12 +28,7 @@ export const NewProducts = () => {
               <p className='text-4xl font-bold text-primary'>
                 New summer collection{' '}
               </p>
-              <Link
-                className=' before:ease relative  flex h-12 w-40 items-center justify-center overflow-hidden border border-secondary bg-secondary text-center text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-secondary hover:before:-translate-x-40'
-                href={'#'}
-              >
-                <span>Checkout</span>
-              </Link>
+              <ButtonLink href='#'>Check collection</ButtonLink>
             </div>
             <div className='flex justify-center gap-8 p-6'>
               <div className='flex flex-col'>
@@ -66,12 +62,7 @@ export const NewProducts = () => {
             <p className='text-4xl font-bold text-primary'>
               New sports collection{' '}
             </p>
-            <Link
-              className=' before:ease relative  flex h-12 w-40 items-center justify-center overflow-hidden border border-secondary bg-secondary text-center text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-secondary hover:before:-translate-x-40'
-              href={'#'}
-            >
-              <span>Checkout</span>
-            </Link>
+            <ButtonLink href='#'>Check collection</ButtonLink>
           </div>
           <div className='flex justify-center gap-8 p-6'>
             <div className='flex flex-col'>

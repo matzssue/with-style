@@ -7,7 +7,7 @@ import {
   clothingNavLinks,
   shoesNavLinks,
 } from '../../constants/navlist';
-import { NavLink } from '@/components/Navbar/NavBar';
+
 import { Fade } from 'react-awesome-reveal';
 import Image from 'next/image';
 import Link from 'next/link';
