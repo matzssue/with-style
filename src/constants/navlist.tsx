@@ -1,12 +1,14 @@
-import { PiTShirtLight } from 'react-icons/pi';
-import { PiPantsLight } from 'react-icons/pi';
-import { PiHoodieLight } from 'react-icons/pi';
-import { GiLabCoat } from 'react-icons/gi';
-import { PiDressLight } from 'react-icons/pi';
-import { GiBoots } from 'react-icons/gi';
-import { PiWatchLight } from 'react-icons/pi';
-import { GiBelt } from 'react-icons/gi';
-import { PiHandbagSimpleLight } from 'react-icons/pi';
+import {
+  PiTShirtLight,
+  PiHoodieLight,
+  PiPantsLight,
+  PiDressLight,
+  PiWatchLight,
+  PiHandbagSimpleLight,
+} from 'react-icons/pi';
+
+import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi';
+
 import { FaRedhat } from 'react-icons/fa6';
 
 export const clothingNavLinks = [
