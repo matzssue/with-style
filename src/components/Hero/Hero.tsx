@@ -8,7 +8,7 @@ import { ButtonLink } from '../Buttons/ButtonLink';
 import Link from 'next/link';
 export const Hero = () => {
   return (
-    <section className="my-5 flex h-[30rem] justify-between bg-[url('https://i.ibb.co/PQ32nyH/testbg1.jpg')] bg-cover bg-center">
+    <section className="my-5 flex h-[30rem] w-full justify-between bg-[url('https://i.ibb.co/PQ32nyH/testbg1.jpg')] bg-cover bg-center">
       <div className='flex w-3/5 flex-col items-center   justify-center p-5'>
         <div className='flex w-1/2 flex-col justify-start gap-1 px-5 py-2 text-start'>
           <div className='rounded-md bg-neutral-200 bg-opacity-55 px-2 py-4'>

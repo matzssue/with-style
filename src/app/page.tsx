@@ -7,20 +7,23 @@ import Header from '@/components/Header/Header';
 import { Hero } from '@/components/Hero/Hero';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { NavBar } from '@/components/Navbar/NavBar';
+import { StaticNavigation } from '@/components/Navbar/StaticNavigation';
+import UserBar from '@/components/UserBar/UserBar';
 
 export default function Home() {
   return (
     <>
-      <Header staticNavigation={<NavBar />} />
-      <Hero />
-      <Wrapper>
-        <main className='flex w-full flex-col items-center justify-between'>
-          <TopProducts />
-          <NewProducts />
-          <Categories />
-          <Benefits />
-        </main>
-      </Wrapper>
+      <Header staticNavigation={<StaticNavigation />} />
+
+      <UserBar />
+      <main className='flex w-full flex-col items-center justify-between'>
+        <Hero />
+        <TopProducts />
+        <NewProducts />
+        <Categories />
+        <Benefits />
+      </main>
+
       <Footer />
     </>
   );
