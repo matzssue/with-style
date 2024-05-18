@@ -1,4 +1,5 @@
 'use client';
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -23,13 +24,14 @@ import {
   shoesNavLinks,
 } from '@/constants/navlist';
 import { NavigationList } from '../NavigationList/NavigationList';
+// legacy behacior passhref do sprawdzenia
 
 export function NavBar() {
   return (
     <NavigationMenu className='hidden lg:flex '>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link href='/home' legacyBehavior passHref>
+          <Link href='/home'>
             <NavigationMenuLink
               style={{ fontSize: '24px' }}
               className={navigationMenuTriggerStyle()}
@@ -70,7 +72,7 @@ export function NavBar() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href='/about-us' legacyBehavior passHref>
+          <Link href='/about-us'>
             <NavigationMenuLink
               style={{ fontSize: '24px' }}
               className={navigationMenuTriggerStyle()}
@@ -82,9 +84,4 @@ export function NavBar() {
       </NavigationMenuList>
     </NavigationMenu>
   );
-}
-
-export function NavLink(props: Omit<ComponentProps<typeof Link>, 'className'>) {
-  const pathname = usePathname();
-  return <Link {...props} className={cn('hover:bg-accent')} />;
 }

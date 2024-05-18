@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { NavLink } from './NavBar';
+import Link from 'next/link';
 import {
   Drawer,
   DrawerClose,
@@ -18,7 +18,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { clothingNavLinks, shoesNavLinks } from '@/constants/navlist';
-export default function SideBar({ isOpen }) {
+export default function SideBar({ isOpen }: { isOpen: boolean }) {
   return (
     <Accordion
       type='single'
@@ -28,7 +28,7 @@ export default function SideBar({ isOpen }) {
       }`}
     >
       <AccordionItem className='border-b-0' value='item-1'>
-        <NavLink href={'/'}>Home</NavLink>
+        <Link href={'/'}>Home</Link>
       </AccordionItem>
       <AccordionItem className='border-b-0' value='item-1'>
         <AccordionTrigger
@@ -38,9 +38,9 @@ export default function SideBar({ isOpen }) {
         </AccordionTrigger>
         <AccordionContent className={cn('flex flex-col')}>
           {clothingNavLinks.map(({ link, title }) => (
-            <NavLink key={title} href={link}>
+            <Link key={title} href={link}>
               {title}
-            </NavLink>
+            </Link>
           ))}
         </AccordionContent>
       </AccordionItem>
@@ -52,9 +52,9 @@ export default function SideBar({ isOpen }) {
         </AccordionTrigger>
         <AccordionContent className={cn('flex flex-col')}>
           {shoesNavLinks.map(({ link, title }) => (
-            <NavLink key={title} href={link}>
+            <Link key={title} href={link}>
               {title}
-            </NavLink>
+            </Link>
           ))}
         </AccordionContent>
       </AccordionItem>

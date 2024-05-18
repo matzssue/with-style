@@ -6,10 +6,12 @@ import { NewProducts } from '@/components/Home/NewProducts';
 import Header from '@/components/Header/Header';
 import { Hero } from '@/components/Hero/Hero';
 import Wrapper from '@/components/Wrapper/Wrapper';
+import { NavBar } from '@/components/Navbar/NavBar';
+
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header staticNavigation={<NavBar />} />
       <Hero />
       <Wrapper>
         <main className='flex w-full flex-col items-center justify-between'>

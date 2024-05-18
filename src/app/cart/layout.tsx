@@ -6,7 +6,7 @@ import { NavBar } from '@/components/Navbar/NavBar';
 import { Footer } from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 
-export default async function RootLayout({
+export default async function CartLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
