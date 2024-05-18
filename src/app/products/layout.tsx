@@ -13,7 +13,7 @@ export default async function RootLayout({
 }>) {
   return (
     <>
-      <Header />
+      <Header staticNavigation={<NavBar />} />
 
       <main>{children}</main>
       <Footer />

@@ -1,4 +1,5 @@
 import Header from '@/components/Header/Header';
+import { NavBar } from '@/components/Navbar/NavBar';
 import Wrapper from '@/components/Wrapper/Wrapper';
 
 export default function AdminLayout({
@@ -8,7 +9,7 @@ export default function AdminLayout({
 }>) {
   return (
     <>
-      <Header></Header>
+      <Header staticNavigation={<NavBar />} />
       <Wrapper>{children}</Wrapper>
     </>
   );
