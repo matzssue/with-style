@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,7 +20,11 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { clothingNavLinks, shoesNavLinks } from '@/constants/navlist';
-export default function SideBar({ isOpen }: { isOpen: boolean }) {
+import { useSidebarStore } from '@/store/useSidebarStore';
+
+export default function SideBar() {
+  const isOpen = useSidebarStore((state) => state.isOpen);
+
   return (
     <Accordion
       type='single'
