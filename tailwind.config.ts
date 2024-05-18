@@ -27,7 +27,6 @@ const config = {
 
       colors: {
         border: 'hsl(var(--border))',
-
         text: 'hsl(var(--primary))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -35,6 +34,7 @@ const config = {
         foreground: 'hsl(var(--foreground))',
         bgNavButton: 'hsl(var(--bg-nav-button))',
         primary: {
+          white: 'hsl(var(--primary-white))',
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
