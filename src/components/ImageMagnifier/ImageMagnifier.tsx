@@ -27,7 +27,7 @@ export const ImageMagnifier = ({ imageUrl, altImage }: ImageMagnifier) => {
 
   return (
     <div
-      className='relative flex h-full  w-full justify-center bg-yellow-50'
+      className='relative flex h-full  w-full justify-center'
       onMouseEnter={() => setShowMagnifier(true)}
       onMouseLeave={() => setShowMagnifier(false)}
       onMouseMove={handleMouseHover}
@@ -50,7 +50,7 @@ export const ImageMagnifier = ({ imageUrl, altImage }: ImageMagnifier) => {
           }}
         >
           <div
-            className='h-[150px] w-[150px] cursor-zoom-in rounded-full border-2 border-solid border-secondary'
+            className='h-[150px] w-[150px] scale-150 cursor-zoom-in rounded-full border-2 border-solid border-secondary'
             style={{
               backgroundImage: `url(${imageUrl})`,
               backgroundPosition: `${position.x}% ${position.y}% `,
