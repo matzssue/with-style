@@ -1,3 +1,5 @@
+'use client';
+
 import Searchbar from '../Searchbar/Searchbar';
 
 import { UserMenu } from '../Auth/UserMenu';
@@ -7,7 +9,6 @@ import Link from 'next/link';
 
 export default function UserBar() {
   const { data: isLoggenIn } = useSession();
-  console.log('session', isLoggenIn);
 
   return (
     <div className='flex flex-row justify-between bg-neutral-100 p-5'>
