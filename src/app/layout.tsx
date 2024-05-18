@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Advent_Pro } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { SidebarContectProvider } from '../providers/SidebarContext';
+// import { SidebarContectProvider } from '../providers/SidebarContext';
 
 import { SessionProvider, useSession } from 'next-auth/react';
 import { auth } from '@/auth';
@@ -23,16 +23,14 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang='en'>
-        <SidebarContectProvider>
-          <body
-            className={cn(
-              'min-h-screen bg-background font-sans text-primary antialiased max-lg:flex max-lg:flex-col',
-              inter.variable
-            )}
-          >
-            {children}
-          </body>
-        </SidebarContectProvider>
+        <body
+          className={cn(
+            'min-h-screen bg-background font-sans text-primary antialiased max-lg:flex max-lg:flex-col',
+            inter.variable
+          )}
+        >
+          {children}
+        </body>
       </html>
     </SessionProvider>
   );
