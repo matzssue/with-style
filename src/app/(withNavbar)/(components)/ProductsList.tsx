@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Heart, ShoppingBag } from 'lucide-react';
-import type { Product } from '@prisma/client';
+import Image from 'next/image'
+import Link from 'next/link'
+import { Heart, ShoppingBag } from 'lucide-react'
+import type { Product } from '@prisma/client'
 
-import { useCartStore } from '@/store/useCartStore';
+import { useCartStore } from '@/store/useCartStore'
+import { useState } from 'react'
 
 export const ProductList = ({ products }: { products: Product[] }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
-  const cart = useCartStore((state) => state.cart);
-  console.log(cart);
+  const addToCart = useCartStore((state) => state.addToCart)
+
   return (
-    <div className='col-span-5 grid p-6  '>
+    <div className='p-6'>
       <ul className='flex flex-wrap gap-5'>
         {products.map((product) => (
           <li
@@ -30,8 +30,8 @@ export const ProductList = ({ products }: { products: Product[] }) => {
             </div>
 
             <Image
-              style={{ maxHeight: '350px' }}
-              height={100}
+              // style={{ maxHeight: '350px', maxWidth: '200px' }}
+              height={300}
               width={200}
               alt={product.name}
               src={product.imgUrl}
@@ -44,7 +44,7 @@ export const ProductList = ({ products }: { products: Product[] }) => {
               <div className='flex items-center gap-x-4'>
                 <Link
                   className='rounded-sm bg-white px-4 py-2 shadow-sm hover:scale-105'
-                  href={`/products/${product.id}`}
+                  href={`/product/${product.id}`}
                 >
                   Go to product
                 </Link>
@@ -59,5 +59,5 @@ export const ProductList = ({ products }: { products: Product[] }) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
