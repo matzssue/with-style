@@ -2,14 +2,14 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { BasketIcon } from '../../../public/icons/BasketIcon';
-import { CartItemsCard } from '../Cards/CartItemsCard';
-import { cn } from '@/lib/utils';
-import { useCartStore } from '@/store/useCartStore';
+} from '@/components/ui/popover'
+import { BasketIcon } from '../../../public/icons/BasketIcon'
+import { CartItemsCard } from '../Cards/CartItemsCard'
+import { cn } from '@/lib/utils'
+import { useCartStore } from '@/store/useCartStore'
 
 export const ShoppingBag = () => {
-  const totalItems = useCartStore((store) => store.totalItems);
+  const totalItems = useCartStore((store) => store.totalItems)
 
   return (
     <Popover>
@@ -23,5 +23,5 @@ export const ShoppingBag = () => {
         <CartItemsCard />
       </PopoverContent>
     </Popover>
-  );
-};
+  )
+}

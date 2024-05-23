@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '../ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '../ui/button'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -7,16 +7,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
   DropdownMenuItem,
-} from '../ui/dropdown-menu';
-import Link from 'next/link';
-import { useCurrentUser } from '@/hooks/use-current-user';
-import { CircleUserRound } from 'lucide-react';
+} from '../ui/dropdown-menu'
+import Link from 'next/link'
+import { useCurrentUser } from '@/hooks/use-current-user'
+import { CircleUserRound } from 'lucide-react'
 
-import { signOut } from 'next-auth/react';
-import { cn } from '@/lib/utils';
+import { signOut } from 'next-auth/react'
+import { cn } from '@/lib/utils'
 
 export const UserMenu = () => {
-  const user = useCurrentUser();
+  const user = useCurrentUser()
 
   return (
     <DropdownMenu>
@@ -58,5 +58,5 @@ export const UserMenu = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-};
+  )
+}

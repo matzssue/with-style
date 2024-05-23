@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
 export const MotionCard = ({
   children,
   index,
 }: {
-  children: ReactNode;
-  index: number;
+  children: ReactNode
+  index: number
 }) => {
   return (
     <motion.div
@@ -28,5 +28,5 @@ export const MotionCard = ({
     >
       {children}
     </motion.div>
-  );
-};
+  )
+}

@@ -1,18 +1,18 @@
-import prisma from '@/lib/prisma';
+import prisma from '@/lib/prisma'
 
 export const getuserByEmail = (email: string) => {
   try {
-    const user = prisma.user.findUnique({ where: { email } });
-    return user;
+    const user = prisma.user.findUnique({ where: { email } })
+    return user
   } catch {
-    return null;
+    return null
   }
-};
+}
 export const getuserById = (id: string) => {
   try {
-    const user = prisma.user.findUnique({ where: { id } });
-    return user;
+    const user = prisma.user.findUnique({ where: { id } })
+    return user
   } catch {
-    return null;
+    return null
   }
-};
+}

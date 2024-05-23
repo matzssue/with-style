@@ -1,7 +1,5 @@
-import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
-import iamge from './public/images/category-section-image.jpg';
-import image from '@/assets/images/woman-category-image.jpg';
+import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config = {
   darkMode: ['class'],
@@ -85,6 +83,6 @@ const config = {
     },
   },
   plugins: [require('tailwindcss-animate')],
-} satisfies Config;
+} satisfies Config
 
-export default config;
+export default config

@@ -1,6 +1,5 @@
-import Link from 'next/link';
-import RegisterForm from '../../../components/Forms/RegisterForm';
-import { GoogleButton } from '@/components/Auth/GoogleButton';
+import Link from 'next/link'
+import RegisterForm from '../../../components/Forms/RegisterForm'
 
 export default async function RegisterPage() {
   return (
@@ -14,5 +13,5 @@ export default async function RegisterPage() {
         </Link>
       </p>
     </>
-  );
+  )
 }

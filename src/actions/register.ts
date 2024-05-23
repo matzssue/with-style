@@ -1,27 +1,26 @@
-'use server';
+'use server'
 
-import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema';
-import bcrypr from 'bcrypt';
-import prisma from '@/lib/prisma';
-import { generateVerificationToken } from '@/lib/tokens';
+import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
+import bcrypr from 'bcrypt'
+import prisma from '@/lib/prisma'
 
 export const register = async (values: RegisterSchema) => {
-  const validatedFields = registerSchema.safeParse(values);
+  const validatedFields = registerSchema.safeParse(values)
   if (!validatedFields.success) {
-    return { error: 'Invalid fields!' };
+    return { error: 'Invalid fields!' }
   }
 
-  const { email, password, username } = validatedFields.data;
-  const hashedPassword = await bcrypr.hash(password, 10);
+  const { email, password, username } = validatedFields.data
+  const hashedPassword = await bcrypr.hash(password, 10)
 
   const existingUser = await prisma.user.findUnique({
     where: {
       email,
     },
-  });
+  })
 
   if (existingUser) {
-    return { error: 'Email arleady in use' };
+    return { error: 'Email arleady in use' }
   }
 
   await prisma.user.create({
@@ -30,8 +29,8 @@ export const register = async (values: RegisterSchema) => {
       email,
       password: hashedPassword,
     },
-  });
+  })
   // const verificationToken = await generateVerificationToken(email);
 
-  return { success: 'Account registered' };
-};
+  return { success: 'Account registered' }
+}

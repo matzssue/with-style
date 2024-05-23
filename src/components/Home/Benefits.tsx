@@ -1,6 +1,6 @@
-import { TbTruckDelivery } from 'react-icons/tb';
-import { RiRefund2Line } from 'react-icons/ri';
-import { Ri24HoursFill } from 'react-icons/ri';
+import { TbTruckDelivery } from 'react-icons/tb'
+import { RiRefund2Line } from 'react-icons/ri'
+import { Ri24HoursFill } from 'react-icons/ri'
 export const Benefits = () => {
   return (
     <section className='w-full'>
@@ -31,5 +31,5 @@ export const Benefits = () => {
         </ul>
       </div>
     </section>
-  );
-};
+  )
+}

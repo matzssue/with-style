@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 type CategoryCard = {
-  links: LinksProps[];
-  categoryTitle: string;
-};
+  links: LinksProps[]
+  categoryTitle: string
+}
 
 type LinksProps = {
-  title: string;
-  link: string;
-};
+  title: string
+  link: string
+}
 
 export const CategoryCard = ({ links, categoryTitle }: CategoryCard) => {
   return (
@@ -27,5 +27,5 @@ export const CategoryCard = ({ links, categoryTitle }: CategoryCard) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}

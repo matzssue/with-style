@@ -1,4 +1,4 @@
-import LoginForm from '@/components/Forms/LoginForm';
+import LoginForm from '@/components/Forms/LoginForm'
 
 export default function LoginPage() {
   return (
@@ -6,5 +6,5 @@ export default function LoginPage() {
       <h1 className='py-5 text-center text-2xl font-bold'>Sign in</h1>
       <LoginForm />
     </>
-  );
+  )
 }

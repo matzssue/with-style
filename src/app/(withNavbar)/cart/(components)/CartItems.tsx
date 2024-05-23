@@ -1,13 +1,13 @@
-import { useCartStore } from '@/store/useCartStore';
-import Image from 'next/image';
-import { Plus, Minus } from 'lucide-react';
+import { useCartStore } from '@/store/useCartStore'
+import Image from 'next/image'
+import { Plus, Minus } from 'lucide-react'
 
 export const CartItems = () => {
   const {
     cart: cartItems,
     decreaseQuantity,
     addToCart,
-  } = useCartStore((store) => store);
+  } = useCartStore((store) => store)
 
   return (
     <ul className='flex  flex-col gap-5'>
@@ -48,5 +48,5 @@ export const CartItems = () => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}

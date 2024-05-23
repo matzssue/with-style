@@ -1,10 +1,10 @@
-'use client';
-import { useSidebarStore } from '@/store/useSidebarStore';
+'use client'
+import { useSidebarStore } from '@/store/useSidebarStore'
 // import { useSidebarContext } from '@/providers/SidebarContext';
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'
 
 export default function Wrapper({ children }: { children: ReactNode }) {
-  const isOpen = useSidebarStore((state) => state.isOpen);
+  const isOpen = useSidebarStore((state) => state.isOpen)
 
   return (
     <div
@@ -12,5 +12,5 @@ export default function Wrapper({ children }: { children: ReactNode }) {
     >
       {children}
     </div>
-  );
+  )
 }

@@ -1,28 +1,26 @@
-'use server';
+'use server'
 
-import { LoginSchema, loginSchema } from '@/lib/schemas/auth-schema';
+import { LoginSchema, loginSchema } from '@/lib/schemas/auth-schema'
 
-import { signIn } from '@/auth';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
-import { AuthError } from 'next-auth';
-import { getuserByEmail } from '@/data/user';
-import { error } from 'console';
-import { generateVerificationToken } from '@/lib/tokens';
+import { signIn } from '@/auth'
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
+import { AuthError } from 'next-auth'
+import { getuserByEmail } from '@/data/user'
 
 export const login = async (values: LoginSchema) => {
-  console.log(values);
+  console.log(values)
 
-  const validatedFields = loginSchema.safeParse(values);
+  const validatedFields = loginSchema.safeParse(values)
 
   if (!validatedFields.success) {
-    return { error: 'Invalid fields!' };
+    return { error: 'Invalid fields!' }
   }
 
-  const { email, password } = validatedFields.data;
-  const existingUser = await getuserByEmail(email);
+  const { email, password } = validatedFields.data
+  const existingUser = await getuserByEmail(email)
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
-    return { error: 'Email does not exist!' };
+    return { error: 'Email does not exist!' }
   }
   // EMAIL VERIFICATION
 
@@ -38,18 +36,18 @@ export const login = async (values: LoginSchema) => {
       email,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
-    });
+    })
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
           return {
             error: 'Invalid credentials',
-          };
+          }
         default:
-          return { error: 'Something went wrong' };
+          return { error: 'Something went wrong' }
       }
     }
-    throw error;
+    throw error
   }
-};
+}

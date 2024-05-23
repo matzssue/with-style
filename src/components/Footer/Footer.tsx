@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Logo from '../../../public/Logo.png';
-import { TshirtIcon } from '../../../public/icons/TshirtIcon';
-import { FaInstagram } from 'react-icons/fa6';
-import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
-import Link from 'next/link';
+import Image from 'next/image'
+import Logo from '../../../public/Logo.png'
+import { TshirtIcon } from '../../../public/icons/TshirtIcon'
+import { FaInstagram } from 'react-icons/fa6'
+import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa'
+import Link from 'next/link'
 
 const Icons = [
   <FaFacebook size='1.5em' />,
@@ -11,7 +11,7 @@ const Icons = [
   <FaTwitter size='1.5em' />,
   <FaYoutube size='1.5em' />,
   <FaInstagram size='1.5em' />,
-];
+]
 
 export const Footer = () => {
   return (
@@ -61,5 +61,5 @@ export const Footer = () => {
         <p className='text-lg'>@ 2024 Created by: Mateusz K</p>
       </div>
     </footer>
-  );
-};
+  )
+}

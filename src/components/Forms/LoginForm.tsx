@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,21 +11,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import Alert from '../Alert/Alert';
-import { Input } from '@/components/ui/input';
+} from '@/components/ui/form'
+import Alert from '../Alert/Alert'
+import { Input } from '@/components/ui/input'
 import {
   LoginSchema,
   RegisterSchema,
   loginSchema,
   registerSchema,
-} from '@/lib/schemas/auth-schema';
-import { login } from '@/actions/login';
-import { useState } from 'react';
-import { GoogleButton } from '../Auth/GoogleButton';
+} from '@/lib/schemas/auth-schema'
+import { login } from '@/actions/login'
+import { useState } from 'react'
+import { GoogleButton } from '../Auth/GoogleButton'
 
 export default function LoginForm() {
-  const [error, setError] = useState<string | undefined>('');
+  const [error, setError] = useState<string | undefined>('')
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -33,17 +33,17 @@ export default function LoginForm() {
       email: '',
       password: '',
     },
-  });
+  })
 
   const onSubmit = (values: LoginSchema) => {
-    console.log('submit');
-    setError('');
+    console.log('submit')
+    setError('')
     login(values).then((data) => {
-      console.log('data', data);
-      setError(data?.error);
-    });
-    console.log(values);
-  };
+      console.log('data', data)
+      setError(data?.error)
+    })
+    console.log(values)
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -81,5 +81,5 @@ export default function LoginForm() {
         {error && <Alert type='error'>{error}</Alert>}
       </form>
     </Form>
-  );
+  )
 }
