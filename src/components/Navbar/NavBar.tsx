@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   NavigationMenu,
@@ -9,25 +9,22 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from '@/components/ui/navigation-menu';
-import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+} from '@/components/ui/navigation-menu'
+import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ReactNode, ComponentProps } from 'react';
-import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@/hooks/use-media-query';
+import Link from 'next/link'
 
 import {
   accessoriesNavLinks,
-  clothingNavLinks,
+  manNavLinks,
+  womanNavLinks,
   shoesNavLinks,
-} from '@/constants/navlist';
-import { NavigationList } from '../NavigationList/NavigationList';
-import { useSidebarStore } from '@/store/useSidebarStore';
+} from '@/constants/navlist'
+import { NavigationList } from '../NavigationList/NavigationList'
+import { useSidebarStore } from '@/store/useSidebarStore'
 
 export function NavBar() {
-  const toggleSidebar = useSidebarStore((state) => state.toggleNavigation);
+  const toggleSidebar = useSidebarStore((state) => state.toggleNavigation)
 
   return (
     <>
@@ -48,11 +45,21 @@ export function NavBar() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger style={{ fontSize: '24px' }}>
-              Clothing
+              Woman
             </NavigationMenuTrigger>
             <NavigationMenuContent className='z-50'>
               <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
-                <NavigationList list={clothingNavLinks} />
+                <NavigationList category='woman' list={womanNavLinks} />
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger style={{ fontSize: '24px' }}>
+              Man
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className='z-50'>
+              <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
+                <NavigationList category='man' list={manNavLinks} />
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
@@ -62,7 +69,7 @@ export function NavBar() {
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
-                <NavigationList list={shoesNavLinks} />
+                <NavigationList category='shoes' list={shoesNavLinks} />
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
@@ -72,7 +79,10 @@ export function NavBar() {
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
-                <NavigationList list={accessoriesNavLinks} />
+                <NavigationList
+                  category='accesories'
+                  list={accessoriesNavLinks}
+                />
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
@@ -90,5 +100,5 @@ export function NavBar() {
         </NavigationMenuList>
       </NavigationMenu>
     </>
-  );
+  )
 }
