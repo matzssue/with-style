@@ -93,7 +93,7 @@ model Product {
   type        ProductType
   orders      ProductInOrder[]
   imgUrl      String
-  size        Size?
+  size        Size[]
 }
 
 model Order {
