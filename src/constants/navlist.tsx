@@ -5,96 +5,138 @@ import {
   PiDressLight,
   PiWatchLight,
   PiHandbagSimpleLight,
-} from 'react-icons/pi';
+} from 'react-icons/pi'
 
-import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi';
+import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi'
 
-import { FaRedhat } from 'react-icons/fa6';
+import { FaRedhat } from 'react-icons/fa6'
 
-export const clothingNavLinks = [
+export const manNavLinks = [
   {
     title: 'T-shirt',
-    link: '#',
+    link: 'tshirt',
     icon: <PiTShirtLight />,
   },
   {
     title: 'Hoodie',
-    link: '#',
+    link: 'hoodie',
     icon: <PiHoodieLight />,
   },
   {
     title: 'Sweater',
-    link: '#',
+    link: 'sweater',
     icon: <PiHoodieLight />,
   },
   {
-    title: 'Coats',
-    link: '#',
+    title: 'Coat',
+    link: 'coat',
     icon: <GiLabCoat />,
   },
   {
-    title: 'Dresses',
-    link: '#',
-    icon: <PiDressLight />,
-  },
-  {
     title: 'Jeans',
-    link: '#',
+    link: 'jeans',
     icon: <PiPantsLight />,
   },
   {
     title: 'Sweatpants',
-    link: '#',
+    link: 'sweatpants',
     icon: <PiPantsLight />,
   },
   {
     title: 'Trousers',
-    link: '#',
+    link: 'trousers',
     icon: <PiPantsLight />,
   },
-];
+  { title: 'All', link: '/' },
+]
+
+export const womanNavLinks = [
+  {
+    title: 'T-shirt',
+    link: 'tshirt',
+    icon: <PiTShirtLight />,
+  },
+  {
+    title: 'Hoodie',
+    link: 'hoodie',
+    icon: <PiHoodieLight />,
+  },
+  {
+    title: 'Sweater',
+    link: 'sweater',
+    icon: <PiHoodieLight />,
+  },
+  {
+    title: 'Coat',
+    link: 'coat',
+    icon: <GiLabCoat />,
+  },
+  {
+    title: 'Dress',
+    link: 'dress',
+    icon: <PiDressLight />,
+  },
+  {
+    title: 'Jeans',
+    link: 'jeans',
+    icon: <PiPantsLight />,
+  },
+  {
+    title: 'Sweatpants',
+    link: 'sweatpants',
+    icon: <PiPantsLight />,
+  },
+  {
+    title: 'Trousers',
+    link: 'trousers',
+    icon: <PiPantsLight />,
+  },
+  { title: 'All', link: '/' },
+]
 
 export const shoesNavLinks = [
   {
     title: 'Sneakers',
-    link: '#',
+    link: 'sneakers',
     icon: <GiBoots />,
   },
   {
     title: 'Pumps',
-    link: '#',
+    link: 'pumps',
     icon: <GiBoots />,
   },
   {
     title: 'Flat shoes',
-    link: '#',
+    link: 'flatshoes',
     icon: <GiBoots />,
   },
   {
     title: 'Sport shoes',
-    link: '#',
+    link: 'sportshoes',
     icon: <GiBoots />,
   },
-];
+  { title: 'All', link: '/' },
+]
 export const accessoriesNavLinks = [
   {
     title: 'Watches',
-    link: '#',
+    link: 'watches',
     icon: <PiWatchLight />,
   },
   {
     title: 'Belts',
-    link: '#',
+    link: 'belts',
     icon: <GiBelt />,
   },
   {
     title: 'Bags',
-    link: '#',
+    link: 'bags',
     icon: <PiHandbagSimpleLight />,
   },
   {
     title: 'Caps',
-    link: '#',
+    link: 'caps',
     icon: <FaRedhat />,
   },
-];
+  { title: 'All', link: 'all' },
+]
