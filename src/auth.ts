@@ -1,8 +1,8 @@
-import authConfig from './auth.config';
-import { getuserById } from './data/user';
-import prisma from './lib/prisma';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import NextAuth, { type DefaultSession } from 'next-auth';
+import authConfig from './auth.config'
+import { getuserById } from './data/user'
+import prisma from './lib/prisma'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth, { type DefaultSession } from 'next-auth'
 
 export const {
   handlers: { GET, POST },
@@ -19,7 +19,7 @@ export const {
       await prisma.user.update({
         where: { id: user.id },
         data: { emailVerified: new Date() },
-      });
+      })
     },
   },
   callbacks: {
@@ -33,29 +33,29 @@ export const {
 
       // if (!existingUser?.emailVerified) return false;
 
-      return true;
+      return true
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = token.sub;
+        session.user.id = token.sub
       }
       if (token.role && session.user.role) {
-        session.user.role = token.role;
+        session.user.role = token.role
       }
-      return session;
+      return session
     },
     async jwt({ token }) {
-      if (!token.sub) return token;
+      if (!token.sub) return token
 
-      const user = await getuserById(token.sub);
+      const user = await getuserById(token.sub)
 
-      if (!user) return token;
-      token.role = user.role;
+      if (!user) return token
+      token.role = user.role
 
-      return token;
+      return token
     },
   },
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   ...authConfig,
-});
+})

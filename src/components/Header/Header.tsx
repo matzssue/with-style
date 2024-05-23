@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import Logo from '../../../public/Logo.png';
+import Image from 'next/image'
+import Logo from '../../../public/Logo.png'
 
 export default function Header({
   staticNavigation,
 }: {
-  staticNavigation: React.ReactNode;
+  staticNavigation: React.ReactNode
 }) {
   return (
     <>
@@ -23,5 +23,5 @@ export default function Header({
         </div>
       </header>
     </>
-  );
+  )
 }

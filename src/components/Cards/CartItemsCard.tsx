@@ -5,15 +5,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import shoes from '../../../public/shoes1.jpg';
-import Link from 'next/link';
-import { useCartStore } from '@/store/useCartStore';
+} from '@/components/ui/card'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+import shoes from '../../../public/shoes1.jpg'
+import Link from 'next/link'
+import { useCartStore } from '@/store/useCartStore'
 
 export const CartItemsCard = () => {
-  const { cart, totalItems, totalPrice } = useCartStore((store) => store);
+  const { cart, totalItems, totalPrice } = useCartStore((store) => store)
 
   return (
     <Card className={cn('border-0')}>
@@ -54,5 +54,5 @@ export const CartItemsCard = () => {
         </Link>
       </CardFooter>
     </Card>
-  );
-};
+  )
+}

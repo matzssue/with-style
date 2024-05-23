@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import Logo from '../../../public/Logo.png';
-import Image from 'next/image';
+import { ReactNode } from 'react'
+import Logo from '../../../public/Logo.png'
+import Image from 'next/image'
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className='flex h-screen w-full flex-col items-center justify-center bg-secondary'>
@@ -11,5 +11,5 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         {children}
       </div>
     </div>
-  );
+  )
 }

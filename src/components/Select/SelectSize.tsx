@@ -6,7 +6,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/select'
 
 export const SelectSize = () => {
   return (
@@ -25,5 +25,5 @@ export const SelectSize = () => {
         </SelectGroup>
       </SelectContent>
     </Select>
-  );
-};
+  )
+}

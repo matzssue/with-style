@@ -1,6 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "next", "prettier"],
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": [
+    "prettier" // Enables eslint-plugin-prettier
+  ],
   "rules": {
+    "prettier/prettier": "warn", // Or "error" if you prefer
     "react/jsx-key": "off"
   }
 }

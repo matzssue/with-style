@@ -1,13 +1,13 @@
-'use client';
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
-import { signIn } from 'next-auth/react';
+'use client'
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
+import { signIn } from 'next-auth/react'
 
 export const GoogleButton = () => {
   const onClick = () => {
     signIn('google', {
       callbackUrl: DEFAULT_LOGIN_REDIRECT,
-    });
-  };
+    })
+  }
 
   return (
     <div className='w-full px-6 sm:px-0'>
@@ -34,5 +34,5 @@ export const GoogleButton = () => {
         Sign up with Google<div></div>
       </button>
     </div>
-  );
-};
+  )
+}

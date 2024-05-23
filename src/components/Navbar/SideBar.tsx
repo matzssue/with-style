@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import Link from 'next/link';
+} from '@/components/ui/accordion'
+import Link from 'next/link'
 import {
   Drawer,
   DrawerClose,
@@ -18,12 +18,12 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { clothingNavLinks, shoesNavLinks } from '@/constants/navlist';
-import { useSidebarStore } from '@/store/useSidebarStore';
+} from '@/components/ui/drawer'
+import { manNavLinks, womanNavLinks, shoesNavLinks } from '@/constants/navlist'
+import { useSidebarStore } from '@/store/useSidebarStore'
 
 export default function SideBar() {
-  const isOpen = useSidebarStore((state) => state.isOpen);
+  const isOpen = useSidebarStore((state) => state.isOpen)
 
   return (
     <Accordion
@@ -43,7 +43,7 @@ export default function SideBar() {
           Clothing
         </AccordionTrigger>
         <AccordionContent className={cn('flex flex-col')}>
-          {clothingNavLinks.map(({ link, title }) => (
+          {manNavLinks.map(({ link, title }) => (
             <Link key={title} href={link}>
               {title}
             </Link>
@@ -76,5 +76,5 @@ export default function SideBar() {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import Searchbar from '../Searchbar/Searchbar';
+import Searchbar from '../Searchbar/Searchbar'
 
-import { UserMenu } from '../Auth/UserMenu';
-import { ShoppingBag } from '../ShoppingBag/ShoppingBag';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { UserMenu } from '../Auth/UserMenu'
+import { ShoppingBag } from '../ShoppingBag/ShoppingBag'
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function UserBar() {
-  const { data: isLoggenIn } = useSession();
+  const { data: isLoggenIn } = useSession()
 
   return (
     <div className='flex flex-row justify-between bg-neutral-100 p-5'>
@@ -27,5 +27,5 @@ export default function UserBar() {
         )}
       </div>
     </div>
-  );
+  )
 }

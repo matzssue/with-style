@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { ReactNode } from 'react';
+import Link from 'next/link'
+import { ReactNode } from 'react'
 
 export const ButtonLink = ({
   children,
   href,
   style,
 }: {
-  children: ReactNode;
-  href: string;
-  style?: React.CSSProperties;
+  children: ReactNode
+  href: string
+  style?: React.CSSProperties
 }) => {
   return (
     <Link
@@ -18,5 +18,5 @@ export const ButtonLink = ({
     >
       <span className='font-semibold'>{children}</span>
     </Link>
-  );
-};
+  )
+}

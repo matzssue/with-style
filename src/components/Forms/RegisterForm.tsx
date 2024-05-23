@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,17 +11,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema';
-import { useState } from 'react';
-import { register } from '@/actions/register';
-import Alert from '../Alert/Alert';
-import { GoogleButton } from '../Auth/GoogleButton';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
+import { useState } from 'react'
+import { register } from '@/actions/register'
+import Alert from '../Alert/Alert'
+import { GoogleButton } from '../Auth/GoogleButton'
 
 export default function RegisterForm() {
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
 
   const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
@@ -31,21 +31,21 @@ export default function RegisterForm() {
       password: '',
       confirmPassword: '',
     },
-  });
+  })
 
   const onSubmit = (values: RegisterSchema) => {
-    setError('');
-    setSuccess('');
+    setError('')
+    setSuccess('')
 
     register(values).then((data) => {
-      setError(data.error);
-      setSuccess(data.success);
-    });
+      setError(data.error)
+      setSuccess(data.success)
+    })
 
-    console.log(values);
-  };
+    console.log(values)
+  }
 
-  console.log('error', error, 'success', success);
+  console.log('error', error, 'success', success)
 
   return (
     <Form {...form}>
@@ -114,5 +114,5 @@ export default function RegisterForm() {
         {success && <Alert type='success'>{success}</Alert>}
       </form>
     </Form>
-  );
+  )
 }

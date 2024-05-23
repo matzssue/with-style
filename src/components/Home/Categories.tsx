@@ -1,17 +1,15 @@
-'use client';
-
-import CategorySectionImage from '../../../public/category-section-image.jpg';
+'use client'
 
 import {
   accessoriesNavLinks,
-  clothingNavLinks,
+  manNavLinks,
+  womanNavLinks,
   shoesNavLinks,
-} from '../../constants/navlist';
+} from '../../constants/navlist'
 
-import { Fade } from 'react-awesome-reveal';
-import Image from 'next/image';
-import Link from 'next/link';
-import { CategoryCard } from './CatergoryCard';
+import { Fade } from 'react-awesome-reveal'
+
+import { CategoryCard } from './CatergoryCard'
 export const Categories = () => {
   return (
     <Fade className='w-full'>
@@ -22,10 +20,10 @@ export const Categories = () => {
 
         <div className='flex justify-center gap-x-10 gap-y-5'>
           <div className="max-w-[450px] bg-[url('/woman-category-image.jpg')] bg-cover bg-center 2xl:min-h-[800px]">
-            <CategoryCard categoryTitle='For woman' links={clothingNavLinks} />
+            <CategoryCard categoryTitle='For woman' links={manNavLinks} />
           </div>
           <div className="max-w-[450px] bg-[url('/clothing.jpg')] bg-cover bg-center 2xl:min-h-[800px] ">
-            <CategoryCard categoryTitle='For man' links={clothingNavLinks} />
+            <CategoryCard categoryTitle='For man' links={womanNavLinks} />
           </div>
           <div className='flex flex-col gap-y-5'>
             <div className="max-w-[450px] bg-[url('/shoes.jpg')] bg-cover bg-center  2xl:min-h-[400px] ">
@@ -41,5 +39,5 @@ export const Categories = () => {
         </div>
       </section>
     </Fade>
-  );
-};
+  )
+}

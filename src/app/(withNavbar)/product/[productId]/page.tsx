@@ -1,33 +1,33 @@
-import { getProduct } from '@/data/products';
-import prisma from '@/lib/prisma';
+import { getProduct } from '@/data/products'
+import prisma from '@/lib/prisma'
 
-import { Heart, ShoppingBag } from 'lucide-react';
+import { Heart, ShoppingBag } from 'lucide-react'
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
 
-import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier';
-import { SelectSize } from '@/components/Select/SelectSize';
+import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
+import { SelectSize } from '@/components/Select/SelectSize'
 
 export async function generateStaticParams() {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany()
   return products.map((product) => ({
     productId: product.id,
-  }));
+  }))
 }
 
 export default async function ProductPage({
   params: { productId },
 }: {
-  params: { productId: string };
+  params: { productId: string }
 }) {
-  const product = await getProduct(productId);
-  if (!product) return <div>error</div>;
+  const product = await getProduct(productId)
+  if (!product) return <div>error</div>
   return (
     <section className='flex w-full items-center justify-center  p-5'>
       <div className=' flex w-1/2 justify-center gap-12 bg-neutral-100 p-5'>
@@ -86,5 +86,5 @@ export default async function ProductPage({
         </div>
       </div>
     </section>
-  );
+  )
 }

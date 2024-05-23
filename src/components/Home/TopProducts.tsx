@@ -4,8 +4,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
-import ProductCard from '@/components/Cards/ProductCard';
+} from '@/components/ui/carousel'
+import ProductCard from '@/components/Cards/ProductCard'
 
 export const TopProducts = () => {
   return (
@@ -28,5 +28,5 @@ export const TopProducts = () => {
         <CarouselNext />
       </Carousel>
     </section>
-  );
-};
+  )
+}

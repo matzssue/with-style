@@ -1,12 +1,10 @@
-'use client';
-import Image from 'next/image';
-import { Plus, Minus } from 'lucide-react';
-import { useCartStore } from '@/store/useCartStore';
-import { FaCcMastercard, FaPaypal, FaCcVisa } from 'react-icons/fa';
-import { ButtonLink } from '@/components/Buttons/ButtonLink';
-import { paymentMethods } from '@/constants/payment-methods';
-import { CardWrapper } from './(components)/CardWrapper';
-import { CartItems } from './(components)/CartItems';
+'use client'
+
+import { useCartStore } from '@/store/useCartStore'
+import { ButtonLink } from '@/components/Buttons/ButtonLink'
+import { paymentMethods } from '@/constants/payment-methods'
+import { CardWrapper } from './(components)/CardWrapper'
+import { CartItems } from './(components)/CartItems'
 export default function CartPage() {
   const {
     totalItems,
@@ -15,7 +13,7 @@ export default function CartPage() {
     removeFromCart,
 
     cart: cartItems,
-  } = useCartStore((store) => store);
+  } = useCartStore((store) => store)
 
   return (
     <section className='flex  justify-center  bg-neutral-50 p-10 '>
@@ -49,5 +47,5 @@ export default function CartPage() {
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,23 +1,15 @@
-import manNewProducts from '../../../public/images/man-new-products.jpg';
-import womanNewProducts from '../../../public/images/woman-new-products.jpg';
-import Image from 'next/image';
-import { MotionCard } from '../Cards/MotionCard';
-import Link from 'next/link';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import ProductCard from '@/components/Cards/ProductCard';
-import summerOne from '../../../public/images/summer one.jpg';
-import summerTwo from '../../../public/images/summer one.jpg';
-import summerThree from '../../../public/images/summer three.jpg';
-import { ButtonLink } from '../Buttons/ButtonLink';
+import manNewProducts from '../../../public/images/man-new-products.jpg'
+import womanNewProducts from '../../../public/images/woman-new-products.jpg'
+import Image from 'next/image'
+import { MotionCard } from '../Cards/MotionCard'
+import Link from 'next/link'
+import summerOne from '../../../public/images/summer one.jpg'
+import summerTwo from '../../../public/images/summer one.jpg'
+import summerThree from '../../../public/images/summer three.jpg'
+import { ButtonLink } from '../Buttons/ButtonLink'
 
 export const NewProducts = () => {
-  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
 
   return (
     <section className='flex w-full flex-col overflow-x-hidden'>
@@ -84,5 +76,5 @@ export const NewProducts = () => {
         </div>
       </MotionCard>
     </section>
-  );
-};
+  )
+}

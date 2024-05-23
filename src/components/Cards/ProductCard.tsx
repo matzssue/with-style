@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import shoes from '../../../public/shoes1.jpg';
+import Image from 'next/image'
+import shoes from '../../../public/shoes1.jpg'
 export default function ProductCard() {
   return (
     <div>
@@ -15,5 +15,5 @@ export default function ProductCard() {
         Price: <span className='font-semibold'> 136$</span>
       </p>
     </div>
-  );
+  )
 }

@@ -1,29 +1,28 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from 'next/image'
+import { useState } from 'react'
 
 type ImageMagnifier = {
-  imageUrl: string;
-  altImage: string;
-};
+  imageUrl: string
+  altImage: string
+}
 
 export const ImageMagnifier = ({ imageUrl, altImage }: ImageMagnifier) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [showMagnifier, setShowMagnifier] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [showMagnifier, setShowMagnifier] = useState(false)
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
 
   const handleMouseHover = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    const { left, top, width, height } =
-      e.currentTarget.getBoundingClientRect();
-    const x = ((e.pageX - left) / width) * 100;
-    const y = ((e.pageY - top) / height) * 100;
-    setPosition({ x, y });
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect()
+    const x = ((e.pageX - left) / width) * 100
+    const y = ((e.pageY - top) / height) * 100
+    setPosition({ x, y })
 
-    setCursorPosition({ x: e.pageX - left, y: e.pageY - top });
-  };
+    setCursorPosition({ x: e.pageX - left, y: e.pageY - top })
+  }
 
   return (
     <div
@@ -59,5 +58,5 @@ export const ImageMagnifier = ({ imageUrl, altImage }: ImageMagnifier) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
