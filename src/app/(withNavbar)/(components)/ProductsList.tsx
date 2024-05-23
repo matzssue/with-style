@@ -6,7 +6,6 @@ import { Heart, ShoppingBag } from 'lucide-react'
 import type { Product } from '@prisma/client'
 
 import { useCartStore } from '@/store/useCartStore'
-import { useState } from 'react'
 
 export const ProductList = ({ products }: { products: Product[] }) => {
   const addToCart = useCartStore((state) => state.addToCart)
@@ -30,7 +29,6 @@ export const ProductList = ({ products }: { products: Product[] }) => {
             </div>
 
             <Image
-              // style={{ maxHeight: '350px', maxWidth: '200px' }}
               height={300}
               width={200}
               alt={product.name}
