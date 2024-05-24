@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* div {
-  color: hsla(40, 89%, 69%, 0.409);
-} */
-
 @layer base {
   :root {
     --background: 0 0% 100%;
