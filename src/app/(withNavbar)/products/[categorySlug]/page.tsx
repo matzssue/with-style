@@ -38,10 +38,5 @@ export default async function CategoryProducts({
 
   const products = await fetchProducts()
 
-  return (
-    <>
-      <ProductsMenu />
-      <ProductList products={products} />
-    </>
-  )
+  return <ProductList products={products} />
 }
