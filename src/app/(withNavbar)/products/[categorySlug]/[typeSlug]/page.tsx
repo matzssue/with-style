@@ -15,7 +15,6 @@ export default async function TypeProducts({
   params: Params
   searchParams: ProductSearchParams
 }) {
-  console.log(searchParams, 'search2')
   async function fetchProducts() {
     const response = await axios.get(
       `http://localhost:3000/api/products/${params.categorySlug}/${params.typeSlug}`,
@@ -40,10 +39,5 @@ export default async function TypeProducts({
   }
 
   const products = await fetchProducts()
-  return (
-    <>
-      <ProductsMenu />
-      <ProductList products={products} />
-    </>
-  )
+  return <ProductList products={products} />
 }
