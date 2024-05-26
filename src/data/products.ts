@@ -43,3 +43,20 @@ export const getProductsByType = async (type: ProductType) => {
     throw new Error('Error getting products')
   }
 }
+
+export const getProductsBySubcategory = async (
+  subcategory: string,
+  limit: number
+) => {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        subcategory: subcategory,
+      },
+      take: limit,
+    })
+    return products
+  } catch (err) {
+    throw new Error('Error getting products')
+  }
+}
