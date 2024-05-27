@@ -12,7 +12,7 @@ export const ProductList = ({ products }: { products: Product[] }) => {
 
   return (
     <div className='p-6'>
-      <ul className='flex flex-wrap gap-5'>
+      <ul className='flex flex-wrap gap-5 max-lg:justify-center'>
         {products.map((product) => (
           <li
             key={product.id}

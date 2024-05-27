@@ -8,7 +8,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <section className='flex flex-row'>
+    <section className='flex flex-row max-lg:flex-col'>
       <ProductsMenu />
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </section>

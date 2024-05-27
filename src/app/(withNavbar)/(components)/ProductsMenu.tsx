@@ -41,8 +41,8 @@ export const ProductsMenu = () => {
   }, [param.categorySlug])
 
   return (
-    <div className='flex w-1/4 flex-col justify-start gap-5 border-r-2 bg-neutral-100 px-8 py-5'>
-      <div>
+    <div className='flex w-1/4 min-w-[300px] flex-col justify-start gap-5 border-r-2 bg-neutral-100 px-8 py-5 max-lg:w-full max-lg:border-r-0'>
+      <div className='max-lg:hidden'>
         <p className='py-2 text-3xl font-bold'>Categories</p>
         <ul>
           {categories &&
