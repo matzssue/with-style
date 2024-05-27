@@ -8,12 +8,13 @@ import {
 } from '@/components/ui/card'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import shoes from '../../../public/shoes1.jpg'
+import { Plus, Minus } from 'lucide-react'
 import Link from 'next/link'
-import { useCartStore } from '@/store/useCartStore'
+import { ProductInStore, useCartStore } from '@/store/useCartStore'
 
 export const CartItemsCard = () => {
-  const { cart, totalItems, totalPrice } = useCartStore((store) => store)
+  const { cart, totalItems, totalPrice, decreaseQuantity, addToCart } =
+    useCartStore((store) => store)
 
   return (
     <Card className={cn('border-0')}>
@@ -23,16 +24,30 @@ export const CartItemsCard = () => {
       </CardHeader>
       <CardContent>
         <ul className='max-h-60 overflow-y-scroll'>
-          {cart.map(({ imgUrl, quantity, name, id }) => (
-            <li key={id} className='flex gap-5 border-b-2 py-5'>
-              <Image height={50} width={50} alt={name} src={imgUrl} />
+          {cart.map((product: ProductInStore) => (
+            <li key={product.id} className='flex w-full gap-5 border-b-2 py-5'>
+              <Image
+                height={90}
+                width={90}
+                alt={product.name}
+                src={product.imgUrl}
+              />
               <div>
-                <p className='font-semibold'>{name}</p>
+                <p className='font-semibold'>{product.name}</p>
                 <p>
-                  <span className='font-semibold'>Size:</span> 25
+                  <span className='font-semibold'>Size:</span> {product.size}
                 </p>
-                <p>
-                  <span className='font-semibold'>Queantity:</span> {quantity}
+                <p className='flex '>
+                  <Minus
+                    className='cursor-pointer'
+                    onClick={() => decreaseQuantity(product)}
+                  />
+
+                  {product.quantity}
+                  <Plus
+                    onClick={() => addToCart(product)}
+                    className='cursor-pointer'
+                  />
                 </p>
               </div>
             </li>
