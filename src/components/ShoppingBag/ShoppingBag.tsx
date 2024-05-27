@@ -19,7 +19,7 @@ export const ShoppingBag = () => {
           <span>{totalItems}</span>
         </div>
       </PopoverTrigger>
-      <PopoverContent className={cn('w-full  p-0')}>
+      <PopoverContent className={cn('w-[300px]  p-0 max-md:w-screen')}>
         <CartItemsCard />
       </PopoverContent>
     </Popover>
