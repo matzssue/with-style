@@ -15,11 +15,11 @@ const Icons = [
 
 export const Footer = () => {
   return (
-    <footer className='mt-5 flex  w-full flex-wrap justify-around gap-5 bg-secondary p-5'>
+    <footer className='mt-5 flex w-full flex-wrap justify-around gap-5 bg-secondary p-4 '>
       <div>
         <Image alt='logo' src={Logo} height={90} />
       </div>
-      <div>
+      <div className='max-md:flex max-md:w-full max-md:flex-col max-md:items-center'>
         <p className='mb-5 text-lg font-bold'>Contact us</p>
         <ul className='flex gap-4'>
           {Icons.map((icon, i) => (

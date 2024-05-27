@@ -11,7 +11,7 @@ export const MotionCard = ({
 }) => {
   return (
     <motion.div
-      className='flex h-screen justify-center rounded-sm p-2'
+      className='flex h-screen justify-center rounded-sm  max-lg:h-auto'
       initial={{
         opacity: 0,
         // if odd index card,slide from right instead of left

@@ -11,9 +11,9 @@ export default function UserBar() {
   const { data: isLoggenIn } = useSession()
 
   return (
-    <div className='flex flex-row justify-between bg-neutral-100 p-5'>
+    <div className='flex flex-row justify-between bg-neutral-100 p-5 max-md:flex-col  max-md:gap-y-5'>
       <Searchbar />
-      <div className='flex items-center justify-between gap-8 align-middle '>
+      <div className='flex items-center justify-between gap-8 align-middle max-md:justify-center '>
         <ShoppingBag />
         {isLoggenIn ? (
           <UserMenu />
