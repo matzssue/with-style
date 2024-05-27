@@ -30,7 +30,7 @@ export default async function ProductPage({
   if (!product) return <div>error</div>
   return (
     <section className='flex w-full items-center justify-center  p-5'>
-      <div className=' flex w-1/2 justify-center gap-12 bg-neutral-100 p-5'>
+      <div className=' flex w-5/6 justify-center gap-12  bg-neutral-100 p-5 max-md:w-auto max-md:flex-col'>
         <ImageMagnifier altImage={product.name} imageUrl={product.imgUrl} />
 
         <div className='flex  w-full flex-col gap-10'>
@@ -39,7 +39,9 @@ export default async function ProductPage({
               {product.name}
             </h1>
             <p className='italic'>{product.type}</p>
-            <p>Price: {product.price} $</p>
+            <p>
+              <b> Price:</b> {product.price} $
+            </p>
           </div>
           <div className='flex flex-col gap-2'>
             <SelectSize />
