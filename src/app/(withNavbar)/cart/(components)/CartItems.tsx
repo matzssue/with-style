@@ -1,6 +1,7 @@
 import { useCartStore } from '@/store/useCartStore'
 import Image from 'next/image'
 import { Plus, Minus } from 'lucide-react'
+import { EmptyCart } from '../../../../../public/icons/EmptyCart'
 
 export const CartItems = () => {
   const {
@@ -47,6 +48,14 @@ export const CartItems = () => {
           </div>
         </li>
       ))}
+      {cartItems.length === 0 && (
+        <div>
+          <p className='py-5 text-center text-xl font-bold'>
+            Cart empty, add items to cart!
+          </p>
+          <EmptyCart />
+        </div>
+      )}
     </ul>
   )
 }
