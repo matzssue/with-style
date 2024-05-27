@@ -6,50 +6,62 @@ import { MotionCard } from '../Cards/MotionCard'
 import { ButtonLink } from '../Buttons/ButtonLink'
 import { getProductsBySubcategory } from '@/data/products'
 import { HomeProductList } from './HomeProductList'
+import { NewCollectionWrapper } from '../Wrapper/NewCollectionWrapper'
 
 export const NewProducts = async () => {
   const sportProducts = await getProductsBySubcategory('SPORT', 3)
   const summerProducts = await getProductsBySubcategory('SUMMER', 3)
 
   return (
-    <section className='flex w-full flex-col overflow-x-hidden'>
-      <div className='flex justify-around'>
-        <MotionCard index={1} key={1}>
-          <div className='flex flex-col items-center justify-center gap-y-32 bg-[#e4ebed]'>
-            <div className='flex flex-col items-center gap-y-5'>
-              <p className='text-4xl font-bold text-primary'>
-                New summer collection{' '}
-              </p>
-              <ButtonLink href='#'>Check collection</ButtonLink>
-            </div>
-            <div className='flex justify-center gap-8 p-6'>
-              <ul className='flex justify-center gap-8 p-6'>
-                {summerProducts.map((product) => (
-                  <HomeProductList {...product} />
-                ))}
-              </ul>
-            </div>
-          </div>
-          <Image src={womanNewProducts} width={700} alt='woman-model' />
-        </MotionCard>
-      </div>
-      <MotionCard index={2} key={2}>
-        <Image src={manNewProducts} alt='man-model' width={700} />
-        <div className='flex flex-col items-center justify-center gap-y-32 bg-[#e7e6e0]'>
-          <div className='flex flex-col items-center gap-y-5'>
-            <p className='text-4xl font-bold text-primary'>
-              New sports collection{' '}
+    <section className='flex h-full  w-5/6 flex-col gap-4 overflow-hidden max-xl:w-full'>
+      <MotionCard index={1} key={1}>
+        <NewCollectionWrapper className='bg-[#e4ebed]'>
+          <div className='flex flex-col items-center gap-y-5 max-lg:py-6'>
+            <p className='text-4xl font-bold text-primary '>
+              New summer collection
             </p>
             <ButtonLink href='#'>Check collection</ButtonLink>
           </div>
-          <div className='flex justify-center gap-8 p-6'>
-            <ul className='flex justify-center gap-8 p-6'>
-              {sportProducts.map((product) => (
-                <HomeProductList key={product.id} {...product} />
-              ))}
-            </ul>
-          </div>
+
+          <ul className='flex flex-wrap justify-center gap-5 px-6 '>
+            {summerProducts.map((product) => (
+              <HomeProductList {...product} />
+            ))}
+          </ul>
+        </NewCollectionWrapper>
+        <div className='relative h-full w-[650px] max-lg:hidden '>
+          <Image
+            src={womanNewProducts}
+            alt='woman-model'
+            layout='fill'
+            objectFit='cover'
+          />
         </div>
+      </MotionCard>
+
+      <MotionCard index={2} key={2}>
+        <div className='relative h-full w-[650px] max-lg:hidden'>
+          <Image
+            src={manNewProducts}
+            alt='man-model'
+            layout='fill'
+            objectFit='cover'
+          />
+        </div>
+        <NewCollectionWrapper className='bg-[#cdcbf0]'>
+          <div className='flex flex-col items-center gap-y-5 max-lg:py-6'>
+            <p className='text-4xl font-bold text-primary'>
+              New sports collection
+            </p>
+            <ButtonLink href='#'>Check collection</ButtonLink>
+          </div>
+
+          <ul className='flex flex-wrap justify-center gap-5 px-6 '>
+            {sportProducts.map((product) => (
+              <HomeProductList key={product.id} {...product} />
+            ))}
+          </ul>
+        </NewCollectionWrapper>
       </MotionCard>
     </section>
   )
