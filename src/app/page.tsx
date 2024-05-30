@@ -5,8 +5,6 @@ import { Benefits } from '@/components/Home/Benefits'
 import { NewProducts } from '@/components/Home/NewProducts'
 import Header from '@/components/Header/Header'
 import { Hero } from '@/components/Hero/Hero'
-import Wrapper from '@/components/Wrapper/Wrapper'
-import { NavBar } from '@/components/Navbar/NavBar'
 import { StaticNavigation } from '@/components/Navbar/StaticNavigation'
 import UserBar from '@/components/UserBar/UserBar'
 
@@ -14,7 +12,6 @@ export default function Home() {
   return (
     <>
       <Header staticNavigation={<StaticNavigation />} />
-
       <UserBar />
       <main className='flex w-full flex-col items-center justify-between'>
         <Hero />
@@ -23,7 +20,6 @@ export default function Home() {
         <Categories />
         <Benefits />
       </main>
-
       <Footer />
     </>
   )

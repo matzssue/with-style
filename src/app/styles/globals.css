@@ -16,8 +16,8 @@
     --popover-foreground: 0 0% 3.9%;
 
     --primary: 39.1 17.3% 26.1%;
-    --primary-white: 0 0% 96%;
     --primary-foreground: 0 0% 98%;
+    --primary-white: 0 0% 96%;
 
     --secondary: 39.7 88.5% 69.2%;
     --secondary-foreground: 0 0% 9%;
@@ -51,7 +51,7 @@
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 9%;
 
-    --secondary: 0 0% 14.9%;
+    --secondary: 39.7 88.5% 69.2%;
     --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 14.9%;
@@ -74,6 +74,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }

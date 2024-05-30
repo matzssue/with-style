@@ -6,14 +6,7 @@ import { paymentMethods } from '@/constants/payment-methods'
 import { CardWrapper } from './(components)/CardWrapper'
 import { CartItems } from './(components)/CartItems'
 export default function CartPage() {
-  const {
-    totalItems,
-    totalPrice,
-    addToCart,
-    removeFromCart,
-
-    cart: cartItems,
-  } = useCartStore((store) => store)
+  const { totalItems, totalPrice } = useCartStore((store) => store)
 
   const isItem = totalItems > 0
 
