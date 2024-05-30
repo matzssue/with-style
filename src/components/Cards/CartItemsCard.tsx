@@ -25,7 +25,10 @@ export const CartItemsCard = () => {
       <CardContent>
         <ul className='max-h-60 overflow-y-scroll'>
           {cart.map((product: ProductInStore) => (
-            <li key={product.id} className='flex w-full gap-5 border-b-2 py-5'>
+            <li
+              key={product.storeId}
+              className='flex w-full gap-5 border-b-2 py-5'
+            >
               <Image
                 height={90}
                 width={90}
