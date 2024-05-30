@@ -1,7 +1,6 @@
+import './styles/globals.css'
 import type { Metadata } from 'next'
 import { Advent_Pro } from 'next/font/google'
-import './globals.css'
-import 'tailwindcss/tailwind.css'
 import { cn } from '@/lib/utils'
 
 import { SessionProvider } from 'next-auth/react'
