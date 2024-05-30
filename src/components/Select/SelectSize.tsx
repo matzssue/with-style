@@ -7,8 +7,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Size } from '@prisma/client'
 
-export const SelectSize = () => {
+export const SelectSize = ({ sizes }: { sizes: Size[] }) => {
   return (
     <Select>
       <SelectTrigger className='w-full'>
@@ -17,11 +18,11 @@ export const SelectSize = () => {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Sizes</SelectLabel>
-          <SelectItem value='apple'>XS</SelectItem>
-          <SelectItem value='banana'>S</SelectItem>
-          <SelectItem value='blueberry'>M</SelectItem>
-          <SelectItem value='grapes'>L</SelectItem>
-          <SelectItem value='pineapple'>XL</SelectItem>
+          {sizes.map((size) => (
+            <SelectItem key={size} value={size}>
+              {size}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>
