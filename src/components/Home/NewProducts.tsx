@@ -25,7 +25,7 @@ export const NewProducts = async () => {
 
           <ul className='flex flex-wrap justify-center gap-5 px-6 '>
             {summerProducts.map((product) => (
-              <HomeProductList {...product} />
+              <HomeProductList key={product.id} {...product} />
             ))}
           </ul>
         </NewCollectionWrapper>
@@ -33,8 +33,8 @@ export const NewProducts = async () => {
           <Image
             src={womanNewProducts}
             alt='woman-model'
-            layout='fill'
-            objectFit='cover'
+            fill
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </MotionCard>
@@ -44,8 +44,8 @@ export const NewProducts = async () => {
           <Image
             src={manNewProducts}
             alt='man-model'
-            layout='fill'
-            objectFit='cover'
+            fill
+            style={{ objectFit: 'cover' }}
           />
         </div>
         <NewCollectionWrapper className='bg-[#cdcbf0]'>
