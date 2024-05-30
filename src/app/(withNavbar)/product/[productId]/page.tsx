@@ -1,18 +1,18 @@
 import { getProduct } from '@/data/products'
 import prisma from '@/lib/prisma'
 
-import { Heart, ShoppingBag } from 'lucide-react'
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
 
 import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
-import { SelectSize } from '@/components/Select/SelectSize'
+
+import { AddProductForm } from './(components)/AddProductForm'
+import { Button } from '@/components/ui/button'
+import { Heart } from 'lucide-react'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -44,14 +44,7 @@ export default async function ProductPage({
             </p>
           </div>
           <div className='flex flex-col gap-2'>
-            <SelectSize />
-
-            <Button>
-              Add product to Bag
-              <span className='ml-5'>
-                <ShoppingBag />
-              </span>
-            </Button>
+            <AddProductForm product={product} />
             <Button>
               Add to wishlist
               <span className='ml-5'>
