@@ -8,6 +8,7 @@ import {
   apiAuthPrefix,
   authRoutes,
   dynamicRoutes,
+  privateRoutes,
   publicRoutes,
 } from './routes'
 
@@ -22,10 +23,19 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || isDynamic
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
 
   if (isApiAuthRoute) {
     return
   }
+
+  if (isPrivateRoute) {
+    if (!isLoggedIn) {
+      return Response.redirect(new URL('/auth/login', nextUrl))
+    }
+    return
+  }
+
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
