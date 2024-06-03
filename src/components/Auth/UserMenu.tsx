@@ -43,8 +43,8 @@ export const UserMenu = () => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link className='underline' href='/wishlist'>
-            Wish list
+          <Link className='underline' href='/user/wishlist'>
+            Wishlist
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
