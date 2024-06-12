@@ -59,6 +59,7 @@ model User {
   image         String?
   role          UserRole  @default(USER)
   orders        Order[]
+  wishlist      Product[] @relation("WishlistProducts")
   accounts      Account[]
 }
 
@@ -85,15 +86,16 @@ model Account {
 // Optional for WebAuthn support
 
 model Product {
-  id          String           @id @default(cuid())
-  name        String
-  price       Float
-  category    ProductCategory
-  subcategory String?
-  type        ProductType
-  orders      ProductInOrder[]
-  imgUrl      String
-  size        Size[]
+  id           String           @id @default(cuid())
+  name         String
+  price        Float
+  category     ProductCategory
+  subcategory  String?
+  type         ProductType
+  orders       ProductInOrder[]
+  imgUrl       String
+  size         Size[]
+  wishlistedBy User[]           @relation("WishlistProducts")
 }
 
 model Order {
