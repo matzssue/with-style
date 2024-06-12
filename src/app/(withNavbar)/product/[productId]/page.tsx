@@ -13,6 +13,9 @@ import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 import { AddProductForm } from './(components)/AddProductForm'
 import { Button } from '@/components/ui/button'
 import { Heart } from 'lucide-react'
+import { WishlistToggleButton } from '../../(components)/WishlistToggleButton'
+import { getWishlistProductsId } from '@/actions/get-wishlist'
+import { auth } from '@/auth'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -26,7 +29,10 @@ export default async function ProductPage({
 }: {
   params: { productId: string }
 }) {
+  const session = await auth()
+  const userId = session?.user.id
   const product = await getProduct(productId)
+  const userWishlist = await getWishlistProductsId(userId)
   if (!product) return <div>error</div>
   return (
     <section className='flex w-full items-center justify-center  p-5'>
@@ -45,12 +51,11 @@ export default async function ProductPage({
           </div>
           <div className='flex flex-col gap-2'>
             <AddProductForm product={product} />
-            <Button>
-              Add to wishlist
-              <span className='ml-5'>
-                <Heart />
-              </span>
-            </Button>
+            <WishlistToggleButton
+              wishlisted={userWishlist}
+              withText
+              productId={product.id}
+            />
           </div>
           <div>
             <Accordion type='single' collapsible className='w-full'>

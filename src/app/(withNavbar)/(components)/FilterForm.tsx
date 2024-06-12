@@ -29,7 +29,7 @@ import { updateFilters } from '@/actions/filter-products'
 import { usePathname } from 'next/navigation'
 
 const FormSchema = z.object({
-  size: z.string(),
+  size: z.string().optional(),
   price: z.number().array(),
 })
 

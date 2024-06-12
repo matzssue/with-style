@@ -1,5 +1,6 @@
 'use server'
 
+import { Size } from '@prisma/client'
 import { redirect, usePathname } from 'next/navigation'
 
 type Filters = {
@@ -7,15 +8,22 @@ type Filters = {
   price: number[]
 }
 
+type QueryParams = {
+  maxPrice: string
+  minPrice: string
+  size?: string
+}
+
 export const updateFilters = async (filters: Filters, currentPath: string) => {
-  console.log('filters', filters)
+  const queryParams: QueryParams = {
+    minPrice: filters.price[0].toString(),
+    maxPrice: filters.price[1].toString(),
+  }
+  if (filters.size) queryParams.size = filters.size
+
   if (filters) {
-    const params = new URLSearchParams({
-      size: filters.size,
-      minPrice: filters.price[0].toString(),
-      maxPrice: filters.price[1].toString(),
-    })
+    const params = new URLSearchParams(queryParams)
     redirect(`${currentPath}?${params}`)
   }
-  redirect('/products/man')
+  redirect(currentPath)
 }

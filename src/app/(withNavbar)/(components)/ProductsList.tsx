@@ -5,7 +5,19 @@ import type { Product } from '@prisma/client'
 
 import { AddProduct } from './AddProduct'
 
-export const ProductList = ({ products }: { products: Product[] }) => {
+import { WishlistToggleButton } from './WishlistToggleButton'
+
+export type Wishlisted = {
+  productId: string
+}
+
+export const ProductList = ({
+  products,
+  wishlisted,
+}: {
+  products: Product[]
+  wishlisted: string[] | []
+}) => {
   return (
     <div className='p-6'>
       <ul className='flex flex-wrap gap-5 max-lg:justify-center'>
@@ -44,7 +56,10 @@ export const ProductList = ({ products }: { products: Product[] }) => {
                   Go to product
                 </Link>
                 <div className='flex items-center justify-center max-md:gap-5'>
-                  <Heart className='cursor-pointer hover:scale-125 hover:fill-red-500 ' />
+                  <WishlistToggleButton
+                    wishlisted={wishlisted}
+                    productId={product.id}
+                  />
                   <AddProduct {...product} />
                 </div>
               </div>
