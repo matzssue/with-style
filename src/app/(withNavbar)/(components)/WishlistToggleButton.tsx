@@ -14,12 +14,10 @@ import { useRouter } from 'next/navigation'
 export const WishlistToggleButton = ({
   productId,
   withText = false,
-  text,
   wishlisted,
 }: {
   productId: string
   withText?: boolean
-  text?: string
   wishlisted: string[]
 }) => {
   const session = useSession()
@@ -45,7 +43,7 @@ export const WishlistToggleButton = ({
     <>
       {withText ? (
         <Button className='flex gap-3' onClick={() => handleWishlistItem()}>
-          {text}
+          {isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
           <Heart
             className={`cursor-pointer hover:scale-125 hover:fill-red-500 ${isWishlisted ? 'fill-red-500' : ''}`}
           />
