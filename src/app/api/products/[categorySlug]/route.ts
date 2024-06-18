@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const maxPrice = searchParams.get('maxPrice') as string
 
     const categoryToUpper = categories?.toUpperCase() as ProductCategory
-    const pageNumber = Number(page)
+    const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
 
     const products = await prisma.product.findMany({
