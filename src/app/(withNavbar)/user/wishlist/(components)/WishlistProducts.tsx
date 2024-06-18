@@ -35,6 +35,7 @@ export const WishlistProducts = ({ products }: { products: Product[] }) => {
           </div>
         </li>
       ))}
+      {products.length === 0 && <p>No products in wishlist</p>}
     </ul>
   )
 }
