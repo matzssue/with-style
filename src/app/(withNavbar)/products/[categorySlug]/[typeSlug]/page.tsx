@@ -5,6 +5,8 @@ import { ReadonlyURLSearchParams } from 'next/navigation'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import { getWishlistProductsId } from '@/actions/get-wishlist'
 import { auth } from '@/auth'
+import { Paginator } from '@/app/(withNavbar)/(components)/Paginator'
+import { ProductsData } from '@/types/products'
 
 type ProductSearchParams = {
   [key: string]: string
@@ -25,12 +27,13 @@ export default async function TypeProducts({
 }) {
   const session = await auth()
   const userId = session?.user.id
+  const pageNumber = Number(searchParams.page || 1)
 
   const getProducts = async () => {
     const url = new URL(
       `http://localhost:3000/api/products/${params.categorySlug}/${params.typeSlug}`
     )
-    console
+
     const queryParams: QueryParams = {}
     if (params.categorySlug) queryParams.category = params.categorySlug
     if (params.typeSlug) queryParams.type = params.typeSlug
@@ -51,14 +54,20 @@ export default async function TypeProducts({
       throw new Error('Failed to fetch products')
     }
 
-    const data = await response.json()
+    const data: ProductsData = await response.json()
     return data
   }
-  console.log('session', session)
 
-  const products = await getProducts()
+  const { data, metadata }: ProductsData = await getProducts()
   const userWishlist = await getWishlistProductsId(userId)
   const wishlist = session ? userWishlist : []
 
-  return <ProductList wishlisted={wishlist} products={products} />
+  return (
+    <div className='flex w-full flex-col'>
+      <ProductList wishlisted={wishlist} products={data} />
+      <div className='flex w-full items-center'>
+        <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+      </div>
+    </div>
+  )
 }

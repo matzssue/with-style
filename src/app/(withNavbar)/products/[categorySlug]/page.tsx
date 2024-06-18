@@ -2,6 +2,10 @@ import { ProductList } from '../../(components)/ProductsList'
 import { getWishlistProductsId } from '@/actions/get-wishlist'
 import { auth } from '@/auth'
 
+import { Paginator } from '../../(components)/Paginator'
+
+import { ProductsData } from '@/types/products'
+
 type Params = {
   [key: string]: string
 }
@@ -10,6 +14,7 @@ type QueryParams = {
   size?: string
   minPrice?: string
   maxPrice?: string
+  page?: string
 }
 
 export default async function CategoryProducts({
@@ -21,6 +26,7 @@ export default async function CategoryProducts({
 }) {
   const session = await auth()
   const userId = session?.user.id
+  const pageNumber = Number(searchParams.page || 1)
 
   async function fetchProducts() {
     const url = new URL(
@@ -31,6 +37,8 @@ export default async function CategoryProducts({
     if (searchParams.minPrice) queryParams.minPrice = searchParams.minPrice
     if (searchParams.maxPrice) queryParams.maxPrice = searchParams.maxPrice
     if (searchParams.size) queryParams.size = searchParams.size
+    if (searchParams.page) queryParams.page = searchParams.page
+
     url.search = new URLSearchParams(queryParams).toString()
 
     const response = await fetch(url.toString(), {
@@ -45,12 +53,19 @@ export default async function CategoryProducts({
       throw new Error('Failed to fetch products')
     }
 
-    const data = await response.json()
+    const data: ProductsData = await response.json()
     return data
   }
 
-  const products = await fetchProducts()
+  const { data, metadata }: ProductsData = await fetchProducts()
   const userWishlist = await getWishlistProductsId(userId)
-
-  return <ProductList wishlisted={userWishlist} products={products} />
+  const wishlist = session ? userWishlist : []
+  return (
+    <div className='flex w-full flex-col'>
+      <ProductList wishlisted={wishlist} products={data} />
+      <div className='flex w-full items-center'>
+        <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+      </div>
+    </div>
+  )
 }
