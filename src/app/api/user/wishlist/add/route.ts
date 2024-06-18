@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import { useSession } from 'next-auth/react'
-import { auth } from '@/auth'
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 
 export async function POST(request: NextRequest) {
   try {

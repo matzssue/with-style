@@ -8,11 +8,11 @@
     "css": "styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
-    "prefix": "tw-"
+    "prefix": ""
   },
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
-    "ui": "@/app/ui"
+    "ui": "@/components/ui"
   }
 }
