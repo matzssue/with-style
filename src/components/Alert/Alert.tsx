@@ -8,7 +8,6 @@ type AlertProps = {
 export default function Alert({ type, children }: AlertProps) {
   let color
   let title
-  console.log(color)
 
   switch (type) {
     case 'success':
