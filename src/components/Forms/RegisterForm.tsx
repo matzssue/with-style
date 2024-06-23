@@ -59,7 +59,6 @@ export default function RegisterForm() {
               <FormControl>
                 <Input placeholder='shadcn' {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -99,7 +98,7 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn' {...field} />
+                <Input type='password' placeholder='shadcn' {...field} />
               </FormControl>
 
               <FormMessage />

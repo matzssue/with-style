@@ -26,6 +26,7 @@ import { GoogleButton } from '../Auth/GoogleButton'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -36,14 +37,13 @@ export default function LoginForm() {
   })
 
   const onSubmit = (values: LoginSchema) => {
-    console.log('submit')
     setError('')
     login(values).then((data) => {
-      console.log('data', data)
       setError(data?.error)
+      setSuccess(data?.success)
     })
-    console.log(values)
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -65,7 +65,7 @@ export default function LoginForm() {
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type='password' placeholder='shadcn' {...field} />
               </FormControl>
@@ -79,6 +79,7 @@ export default function LoginForm() {
         </Button>
         <GoogleButton />
         {error && <Alert type='error'>{error}</Alert>}
+        {success && <Alert type='success'>{success}</Alert>}
       </form>
     </Form>
   )

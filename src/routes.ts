@@ -1,4 +1,4 @@
-export const publicRoutes = ['/', '/cart']
+export const publicRoutes = ['/', '/cart', '/auth/new-verification']
 export const authRoutes = ['/auth/login', '/auth/register', '/auth/error', ,]
 export const privateRoutes = ['/user/wishlist']
 export const dynamicRoutes = [
