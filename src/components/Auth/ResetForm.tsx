@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,31 +13,27 @@ import {
 } from '@/components/ui/form'
 import Alert from '../Alert/Alert'
 import { Input } from '@/components/ui/input'
-import {
-  LoginSchema,
-  RegisterSchema,
-  loginSchema,
-  registerSchema,
-} from '@/lib/schemas/auth-schema'
-import { login } from '@/actions/login'
-import { useState } from 'react'
-import { GoogleButton } from '../Auth/GoogleButton'
+import { EmailSchema, emailSchema } from '@/lib/schemas/auth-schema'
 
-export default function LoginForm() {
+import { useState } from 'react'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { reset } from '@/actions/reset'
+
+export default function ResetForm() {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
 
-  const form = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<EmailSchema>({
+    resolver: zodResolver(emailSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   })
 
-  const onSubmit = (values: LoginSchema) => {
+  const onSubmit = (values: EmailSchema) => {
     setError('')
-    login(values).then((data) => {
+    reset(values).then((data) => {
       setError(data?.error)
       setSuccess(data?.success)
     })
@@ -47,6 +42,7 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+        <h1 className='text-center text-xl'>Forgot your password?</h1>
         <FormField
           control={form.control}
           name='email'
@@ -54,20 +50,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type='email' placeholder='shadcn' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type='password' placeholder='shadcn' {...field} />
+                <Input type='email' placeholder='email' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,11 +58,14 @@ export default function LoginForm() {
         />
 
         <Button className='w-full' type='submit'>
-          Submit
+          Send reset email
         </Button>
-        <GoogleButton />
+
         {error && <Alert type='error'>{error}</Alert>}
         {success && <Alert type='success'>{success}</Alert>}
+        <Button asChild variant='link' className={cn('bg-none')}>
+          <Link href={'/auth/login'}>Back to login</Link>
+        </Button>
       </form>
     </Form>
   )
