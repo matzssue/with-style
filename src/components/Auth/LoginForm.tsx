@@ -22,7 +22,9 @@ import {
 } from '@/lib/schemas/auth-schema'
 import { login } from '@/actions/login'
 import { useState } from 'react'
-import { GoogleButton } from '../Auth/GoogleButton'
+import { GoogleButton } from './GoogleButton'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
@@ -73,7 +75,9 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-
+        <Button asChild variant='link' className={cn('bg-none px-0')}>
+          <Link href={'#'}>Forgot password?</Link>
+        </Button>
         <Button className='w-full' type='submit'>
           Submit
         </Button>
