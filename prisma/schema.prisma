@@ -83,8 +83,6 @@ model Account {
   @@id([provider, providerAccountId])
 }
 
-// Optional for WebAuthn support
-
 model Product {
   id           String           @id @default(cuid())
   name         String
@@ -114,6 +112,15 @@ model ProductInOrder {
 }
 
 model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
   id      String   @id @default(cuid())
   email   String
   token   String   @unique
