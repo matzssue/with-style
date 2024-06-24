@@ -2,7 +2,8 @@ import authConfig from './auth.config'
 import { getuserById } from './data/user'
 import prisma from './lib/prisma'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import NextAuth, { type DefaultSession } from 'next-auth'
+import NextAuth from 'next-auth'
+import { getAccountByUserId } from './data/account'
 
 export const {
   handlers: { GET, POST },
@@ -24,11 +25,8 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
-      // MAIL VERIFICATION
-
       if (account?.provider !== 'credentials') return true
       if (!user.id) return false
-
       const existingUser = await getuserById(user.id)
 
       if (!existingUser?.emailVerified) return false
@@ -39,19 +37,30 @@ export const {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
-      if (token.role && session.user.role) {
+
+      if (session.user) {
+        if (token.email) {
+          session.user.email = token.email
+        }
+        session.user.name = token.name
         session.user.role = token.role
+        session.user.isOuath = token.isOauth as boolean
       }
+
       return session
     },
     async jwt({ token }) {
       if (!token.sub) return token
-
       const user = await getuserById(token.sub)
 
       if (!user) return token
-      token.role = user.role
 
+      const account = await getAccountByUserId(user.id)
+
+      token.isOauth = !!account
+      token.role = user.role
+      token.name = user.name
+      token.email = user.email
       return token
     },
   },
