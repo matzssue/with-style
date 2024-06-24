@@ -18,6 +18,8 @@ import { useState } from 'react'
 import { register } from '@/actions/register'
 import Alert from '../Alert/Alert'
 import { GoogleButton } from '../Auth/GoogleButton'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export default function RegisterForm() {
   const [error, setError] = useState<string | undefined>('')
@@ -111,6 +113,14 @@ export default function RegisterForm() {
         <GoogleButton />
         {error && <Alert type='error'>{error}</Alert>}
         {success && <Alert type='success'>{success}</Alert>}
+        <Button
+          asChild
+          className={cn(
+            'bg-transparent py-0 text-primary hover:bg-transparent hover:underline'
+          )}
+        >
+          <Link href={'/auth/login'}>Arleady registered? Login</Link>
+        </Button>
       </form>
     </Form>
   )

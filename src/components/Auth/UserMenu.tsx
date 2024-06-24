@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '../ui/button'
 import {
@@ -9,15 +11,16 @@ import {
   DropdownMenuItem,
 } from '../ui/dropdown-menu'
 import Link from 'next/link'
-import { useCurrentUser } from '@/hooks/use-current-user'
+
 import { CircleUserRound } from 'lucide-react'
 
-import { signOut } from 'next-auth/react'
 import { cn } from '@/lib/utils'
+import { currentUser } from '@/lib/auth'
+import { signOut } from 'next-auth/react'
+import { useCurrentUser } from '@/hooks/use-current-user'
+import { User } from 'next-auth'
 
-export const UserMenu = () => {
-  const user = useCurrentUser()
-
+export const UserMenu = ({ user }: { user: User | undefined }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -49,8 +52,8 @@ export const UserMenu = () => {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Button
-            className={cn('hover:bg-slate-50')}
             onClick={() => signOut()}
+            className={cn('hover:bg-slate-50')}
             variant='outline'
           >
             Logout

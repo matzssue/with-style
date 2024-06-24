@@ -48,7 +48,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
         <FormField
           control={form.control}
           name='email'
@@ -56,7 +56,11 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type='email' placeholder='shadcn' {...field} />
+                <Input
+                  type='email'
+                  placeholder='example@example.com'
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,14 +73,14 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type='password' placeholder='shadcn' {...field} />
+                <Input type='password' placeholder='******' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button asChild variant='link' className={cn('bg-none px-0')}>
-          <Link href={'#'}>Forgot password?</Link>
+          <Link href={'/auth/reset'}>Forgot password?</Link>
         </Button>
         <Button className='w-full' type='submit'>
           Submit
@@ -84,6 +88,14 @@ export default function LoginForm() {
         <GoogleButton />
         {error && <Alert type='error'>{error}</Alert>}
         {success && <Alert type='success'>{success}</Alert>}
+        <Button
+          asChild
+          className={cn(
+            'bg-transparent py-0 text-primary hover:bg-transparent hover:underline'
+          )}
+        >
+          <Link href={'/auth/register'}>New to our page? Register</Link>
+        </Button>
       </form>
     </Form>
   )

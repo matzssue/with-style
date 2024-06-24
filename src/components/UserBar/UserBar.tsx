@@ -1,22 +1,19 @@
-'use client'
-
 import Searchbar from '../Searchbar/Searchbar'
-
 import { UserMenu } from '../Auth/UserMenu'
 import { ShoppingBag } from '../ShoppingBag/ShoppingBag'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { currentUser } from '@/lib/auth'
+import { User } from 'next-auth'
 
-export default function UserBar() {
-  const { data: isLoggenIn } = useSession()
-
+export default async function UserBar() {
+  const user = await currentUser()
   return (
     <div className='flex flex-row justify-between bg-neutral-100 p-5 max-md:flex-col  max-md:gap-y-5'>
       <Searchbar />
       <div className='flex items-center justify-between gap-8 align-middle max-md:justify-center '>
         <ShoppingBag />
-        {isLoggenIn ? (
-          <UserMenu />
+        {user ? (
+          <UserMenu user={user} />
         ) : (
           <Link
             href={'/auth/login'}

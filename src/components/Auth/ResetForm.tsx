@@ -50,7 +50,11 @@ export default function ResetForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type='email' placeholder='email' {...field} />
+                <Input
+                  type='email'
+                  placeholder='example@example.com'
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
