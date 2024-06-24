@@ -12,17 +12,16 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useCurrentUser } from '@/hooks/use-current-user'
 import { SettingsSchema, settingsSchema } from '@/lib/schemas/auth-schema'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signOut, useSession } from 'next-auth/react'
-import { use, useEffect, useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function SettingsPage() {
-  const user = useCurrentUser()
-
+  const { data, status } = useSession()
+  const user = data?.user
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | undefined>()
   const [success, setSuccess] = useState<string | undefined>()
@@ -52,7 +51,12 @@ export default function SettingsPage() {
         .catch(() => setError('Something went wrong!'))
     })
   }
-
+  if (status === 'loading')
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
   return (
     <div className='flex  flex-col items-center  py-5 '>
       <div className='flex h-[600px] w-[600px] flex-col  justify-around gap-2 rounded-sm  bg-neutral-100 px-4 py-6 shadow-md'>
@@ -78,7 +82,7 @@ export default function SettingsPage() {
                   </FormItem>
                 )}
               />
-              {user?.isOuath === false && (
+              {user?.isOauth === false && (
                 <>
                   <FormField
                     control={form.control}
