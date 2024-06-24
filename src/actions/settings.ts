@@ -22,7 +22,7 @@ export const settings = async (values: SettingsSchema) => {
     return { error: 'Unauthorized' }
   }
 
-  if (user.isOuath) {
+  if (user.isOauth) {
     values.email = undefined
     values.password = undefined
     values.newPassword = undefined

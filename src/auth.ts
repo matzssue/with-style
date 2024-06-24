@@ -44,7 +44,7 @@ export const {
         }
         session.user.name = token.name
         session.user.role = token.role
-        session.user.isOuath = token.isOauth as boolean
+        session.user.isOauth = token.isOauth as boolean
       }
 
       return session
