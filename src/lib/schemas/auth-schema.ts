@@ -6,6 +6,8 @@ export type LoginSchema = z.infer<typeof loginSchema>
 export type EmailSchema = z.infer<typeof emailSchema>
 export type PasswordSchema = z.infer<typeof passwordSchema>
 export type SettingsSchema = z.infer<typeof settingsSchema>
+export type AddressSchema = z.infer<typeof addressSchema>
+
 export const registerSchema = z
   .object({
     username: z.string().min(4, {
@@ -49,6 +51,21 @@ export const passwordSchema = z.object({
     message: 'Minimum of 6 characters required',
   }),
 })
+
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+)
+
+export const addressSchema = z.object({
+  name: z.string().min(3).max(15),
+  surname: z.string().min(3).max(15),
+  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!'),
+  street: z.string().min(3).max(50),
+  number: z.string(),
+  city: z.string().min(3).max(50),
+  zip: z.string().min(3).max(6),
+})
+
 export const settingsSchema = z
   .object({
     name: z.optional(z.string()),
