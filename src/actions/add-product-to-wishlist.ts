@@ -23,7 +23,11 @@ export const addToWishlist = async (userId: string, productId: string) => {
     revalidateTag('typeProducts')
     const data: UserWishlist = await response.json()
     return data
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    let message = 'Unknown Error'
+    if (error instanceof Error) {
+      message = error.message
+    }
+    return { error: message }
   }
 }

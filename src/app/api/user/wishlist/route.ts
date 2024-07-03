@@ -48,7 +48,11 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(wishlistData)
   } catch (error) {
-    console.log(error)
-    return NextResponse.error()
+    return NextResponse.json(
+      {
+        error: `Internal Server Error: ${error}`,
+      },
+      { status: 500 }
+    )
   }
 }
