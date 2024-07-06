@@ -2,7 +2,7 @@
 
 export const removeOrder = async (orderId: string) => {
   try {
-    const response = await fetch('http://localhost:3000/api/order/delete', {
+    const response = await fetch('http://localhost:3000/api/orders/delete', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
