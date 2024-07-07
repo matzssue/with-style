@@ -97,10 +97,20 @@ model Product {
 }
 
 model Order {
-  id       String           @id @default(cuid())
-  user     User             @relation(fields: [userId], references: [id])
-  userId   String
-  products ProductInOrder[]
+  id           String           @id @default(cuid())
+  orderNumber  Int              @unique @default(autoincrement())
+  createdAt    DateTime         @default(now()) @map(name: "created_at")
+  user         User             @relation(fields: [userId], references: [id])
+  userId       String
+  products     ProductInOrder[]
+  totalPrice   Float
+  totalItems   Float
+  shippingName String
+  phoneNumber  String
+  city         String
+  zip          String
+  street       String
+  number       String
 }
 
 model ProductInOrder {
@@ -109,6 +119,7 @@ model ProductInOrder {
   orderId   String
   product   Product @relation(fields: [productId], references: [id])
   productId String
+  size      Size?
 }
 
 model VerificationToken {
