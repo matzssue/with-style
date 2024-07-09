@@ -1,7 +1,7 @@
 'use server'
 
 import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
-import bcrypr from 'bcrypt'
+import bcrypr from 'bcryptjs'
 import prisma from '@/lib/prisma'
 import { generateVerificationToken } from '@/lib/tokens'
 import { sendVerificationEmail } from '@/lib/mail'
