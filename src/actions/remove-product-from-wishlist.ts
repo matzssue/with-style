@@ -21,7 +21,11 @@ export async function removeFromWishlist(userId: string, productId: string) {
     revalidateTag('categoryProducts')
     revalidateTag('typeProducts')
     await response.json()
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    let message = 'Unknown Error'
+    if (error instanceof Error) {
+      message = error.message
+    }
+    return { error: message }
   }
 }

@@ -15,19 +15,28 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  AddressSchema,
-  addressSchema,
-  loginSchema,
-} from '@/lib/schemas/auth-schema'
+import { AddressSchema, addressSchema } from '@/lib/schemas/auth-schema'
 import { Button } from '@/components/ui/button'
+import { addOrder } from '@/actions/add-order'
 
-export const CheckoutPage = ({ amount }: { amount: number }) => {
+import { ProductsInCheckout } from '@/types/products'
+import { removeOrder } from '@/actions/remove-order'
+import { useCartStore } from '@/store/useCartStore'
+
+export const CheckoutPage = ({
+  amount,
+  productsData,
+}: {
+  amount: number
+  productsData: ProductsInCheckout
+}) => {
   const stripe = useStripe()
   const elements = useElements()
   const [errorMessage, setErrorMessage] = useState<string>()
   const [clientSecret, setClientSecret] = useState<string>()
   const [loading, setLoading] = useState(false)
+
+  const resetCart = useCartStore((store) => store.resetCart)
 
   useEffect(() => {
     fetch('http://localhost:3000/api/create-payment', {
@@ -43,7 +52,15 @@ export const CheckoutPage = ({ amount }: { amount: number }) => {
 
   const form = useForm<AddressSchema>({
     resolver: zodResolver(addressSchema),
-    defaultValues: {},
+    defaultValues: {
+      city: '',
+      name: '',
+      number: '',
+      phoneNumber: '',
+      street: '',
+      surname: '',
+      zip: '',
+    },
   })
 
   const onSubmit = async (values: AddressSchema) => {
@@ -58,20 +75,21 @@ export const CheckoutPage = ({ amount }: { amount: number }) => {
       return
     }
 
+    const order = await addOrder({ ...values, amount, productsData })
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `http://localhost:3000/payment-success?amount=${amount}`,
       },
     })
     if (error) {
       setErrorMessage(error.message)
+      await removeOrder(order.id)
     }
+
     setLoading(false)
-    if (error || submitError) {
-      return
-    }
   }
 
   if (!clientSecret || !stripe || !elements) {

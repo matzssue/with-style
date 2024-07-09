@@ -1,3 +1,5 @@
+import { AddressSchema } from '@/lib/schemas/auth-schema'
+import { ProductInStore } from '@/store/useCartStore'
 import { Product } from '@prisma/client'
 
 export type ProductsData = {
@@ -5,4 +7,11 @@ export type ProductsData = {
   metadata: {
     totalPages: number
   }
+}
+export type ProductsInCheckout = {
+  totalItems: number
+  cart: ProductInStore[]
+}
+export type AddOrderData = AddressSchema & { amount: number } & {
+  productsData: ProductsInCheckout
 }

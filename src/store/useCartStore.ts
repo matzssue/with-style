@@ -25,6 +25,7 @@ type Actions = {
   addToCart: (Item: ProductInStore) => void
   removeFromCart: (Item: ProductInStore) => void
   decreaseQuantity: (Item: ProductInStore) => void
+  resetCart: () => void
 }
 
 const INITIAL_STATE = {
@@ -92,6 +93,13 @@ export const useCartStore = create(
           cart: state.cart.filter((item) => item.storeId !== product.storeId),
           totalItems: 0,
           totalPrice: +(state.totalPrice - product.price).toFixed(2),
+        }))
+      },
+      resetCart: () => {
+        set(() => ({
+          cart: INITIAL_STATE.cart,
+          totalItems: INITIAL_STATE.totalItems,
+          totalPrice: INITIAL_STATE.totalPrice,
         }))
       },
     }),
