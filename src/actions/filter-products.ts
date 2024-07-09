@@ -4,7 +4,7 @@ import { Size } from '@prisma/client'
 import { redirect, usePathname } from 'next/navigation'
 
 type Filters = {
-  size: string
+  size?: string
   price: number[]
 }
 
