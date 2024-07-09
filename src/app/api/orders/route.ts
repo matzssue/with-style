@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
       where: {
         userId: userId,
       },
+
       include: { products: { include: { product: true } } },
     })
 
@@ -43,19 +44,25 @@ export async function GET(request: NextRequest) {
         orderId: order.id,
         totalPrice: order.totalPrice,
         totalItems: order.totalItems,
-        products: order.products.map(({ product }) => {
+        createdAt: order.createdAt,
+        orderNumber: order.orderNumber,
+        shippingName: order.shippingName,
+        address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
+        products: order.products.map((productInStore) => {
           return {
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            type: product.type,
-            category: product.category,
+            productId: productInStore.product.id,
+            name: productInStore.product.name,
+            price: productInStore.product.price,
+            type: productInStore.product.type,
+            category: productInStore.product.category,
+            size: productInStore.size,
+            imgUrl: productInStore.product.imgUrl,
           }
         }),
       }
     })
 
-    const ordersData = {
+    const ordersData: OrdersData = {
       data: ordersMapped || [],
       metadata: {
         totalPages,
