@@ -16,12 +16,13 @@ export async function POST(request: NextRequest) {
         totalPrice: orderData.amount,
         city: orderData.city,
         phoneNumber: orderData.phoneNumber,
-        shippingName: orderData.name + '' + orderData.surname,
+        shippingName: `${orderData.name} ${orderData.surname}`,
         street: orderData.street,
         number: orderData.number,
         zip: orderData.zip,
         products: {
           create: orderData.productsData.cart.map((product) => ({
+            size: product.size,
             product: {
               connect: { id: product.id },
             },
