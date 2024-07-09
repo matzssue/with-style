@@ -18,7 +18,7 @@ export const OrdersList = async ({
   }
 
   if (ordersData.length === 0) {
-    return <div>Hey! You don't have any orders</div>
+    return <div>Hey! You don&apos;t have any orders</div>
   }
 
   return (

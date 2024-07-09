@@ -21,7 +21,7 @@ export default async function Orders({
 
   return (
     <section className='mx-[10%]'>
-      <h1 className='py-5 text-center text-3xl'>You'r orders</h1>
+      <h1 className='py-5 text-center text-3xl'>You&apos;r orders</h1>
       <OrdersList ordersData={data} />
       <div className='flex w-full items-center'>
         <Paginator page={pageNumber} totalPages={metadata.totalPages} />
