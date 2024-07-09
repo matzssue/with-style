@@ -1,6 +1,7 @@
 import { getVerificationTokenByEmail } from '@/data/verification-token'
+// @ts-ignore
 import { v4 as uuidv4 } from 'uuid'
-import { date } from 'zod'
+
 import prisma from './prisma'
 import { getPasswordResetTokenByEmail } from '@/data/password-reset-token'
 
