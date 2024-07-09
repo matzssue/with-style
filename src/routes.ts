@@ -6,7 +6,12 @@ export const authRoutes = [
   '/auth/reset',
   '/auth/new-password',
 ]
-export const privateRoutes = ['/user/wishlist', '/settings']
+export const privateRoutes = [
+  '/user/wishlist',
+  '/settings',
+  '/payment',
+  '/user/orders',
+]
 export const dynamicRoutes = [
   '/products',
   '/man',
