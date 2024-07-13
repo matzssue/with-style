@@ -7,7 +7,9 @@ type QueryParams = {
 }
 
 export async function getOrder(orderId: string) {
-  const url = new URL(`http://localhost:3000/api/order-details/${orderId}`)
+  const url = new URL(
+    `${process.env.VERCEL_DOMAIN}/api/order-details/${orderId}`
+  )
   const queryParams: QueryParams = {}
 
   if (orderId) queryParams.orderId = orderId

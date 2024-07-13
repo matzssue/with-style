@@ -2,15 +2,18 @@
 
 export const removeOrder = async (orderId: string) => {
   try {
-    const response = await fetch('http://localhost:3000/api/orders/delete', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        orderId,
-      }),
-    })
+    const response = await fetch(
+      `${process.env.VERCEL_DOMAIN}/api/orders/delete`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId,
+        }),
+      }
+    )
 
     const data = await response.json()
 

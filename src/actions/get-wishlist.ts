@@ -33,7 +33,7 @@ export async function getWishlistProductsId(userId: string | undefined) {
   if (!userId) return []
 
   const response = await fetch(
-    `http://localhost:3000/api/user/wishlist?userId=${userId}`,
+    `${process.env.VERCEL_DOMAIN}/api/user/wishlist?userId=${userId}`,
     {
       method: 'GET',
       headers: {
