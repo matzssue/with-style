@@ -5,7 +5,7 @@ import { revalidateTag } from 'next/cache'
 export async function removeFromWishlist(userId: string, productId: string) {
   try {
     const response = await fetch(
-      `${process.env.VERCEL_DOMAIN}/api/user/wishlist/delete`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist/delete`,
       {
         method: 'DELETE',
         headers: {

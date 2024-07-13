@@ -3,7 +3,7 @@
 export const removeOrder = async (orderId: string) => {
   try {
     const response = await fetch(
-      `${process.env.VERCEL_DOMAIN}/api/orders/delete`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/orders/delete`,
       {
         method: 'DELETE',
         headers: {

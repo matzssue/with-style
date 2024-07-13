@@ -6,7 +6,7 @@ import { revalidateTag } from 'next/cache'
 export const addToWishlist = async (userId: string, productId: string) => {
   try {
     const response = await fetch(
-      `${process.env.VERCEL_DOMAIN}/api/user/wishlist/add`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist/add`,
       {
         method: 'POST',
         headers: {

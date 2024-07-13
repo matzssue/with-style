@@ -8,7 +8,7 @@ type QueryParams = {
 }
 
 export async function getOrders(userId: string | undefined, page: number) {
-  const url = new URL(`${process.env.VERCEL_DOMAIN}/api/orders`)
+  const url = new URL(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/orders`)
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page.toString()

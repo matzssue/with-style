@@ -30,7 +30,7 @@ export default async function CategoryProducts({
 
   async function fetchProducts() {
     const url = new URL(
-      `${process.env.VERCEL_DOMAIN}/api/products/${params.categorySlug}`
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/${params.categorySlug}`
     )
     const queryParams: QueryParams = {}
     if (params.categorySlug) queryParams.category = params.categorySlug

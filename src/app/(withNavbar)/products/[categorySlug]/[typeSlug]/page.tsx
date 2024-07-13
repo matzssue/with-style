@@ -31,7 +31,7 @@ export default async function TypeProducts({
 
   const getProducts = async () => {
     const url = new URL(
-      `http://localhost:3000/api/products/${params.categorySlug}/${params.typeSlug}`
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/${params.categorySlug}/${params.typeSlug}`
     )
 
     const queryParams: QueryParams = {}
