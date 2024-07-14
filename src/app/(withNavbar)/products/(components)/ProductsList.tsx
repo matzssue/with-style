@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { Heart } from 'lucide-react'
 import type { Product } from '@prisma/client'
 
-import { AddProduct } from './AddProduct'
+import { AddProduct } from '../../product/[productId]/(components)/AddProduct'
 
-import { WishlistToggleButton } from './WishlistToggleButton'
+import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
 
 export type Wishlisted = {
   productId: string
