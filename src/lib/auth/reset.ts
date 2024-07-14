@@ -1,8 +1,8 @@
 'use server'
-import { getuserByEmail } from '@/data/user'
-import { sendPasswordResetEmail } from '@/lib/mail'
+import { getuserByEmail } from '@/data/user/user'
+import { sendPasswordResetEmail } from '@/lib/auth/mail'
 import { EmailSchema, emailSchema } from '@/lib/schemas/auth-schema'
-import { generateResetPasswordToken } from '@/lib/tokens'
+import { generateResetPasswordToken } from '@/lib/auth/tokens'
 
 export const reset = async (values: EmailSchema) => {
   const validatedFields = emailSchema.safeParse(values)

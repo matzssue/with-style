@@ -1,10 +1,10 @@
 'use server'
 
-import { getPasswordResetTokenByToken } from '@/data/password-reset-token'
-import { getuserByEmail } from '@/data/user'
+import { getuserByEmail } from '@/data/user/user'
 import prisma from '@/lib/prisma'
 import { PasswordSchema, passwordSchema } from '@/lib/schemas/auth-schema'
 import bcrypt from 'bcryptjs'
+import { getPasswordResetTokenByToken } from './password-reset-token'
 export const newPassword = async (
   values: PasswordSchema,
   token: string | null
