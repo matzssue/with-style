@@ -34,7 +34,7 @@ export function NavBar() {
       <NavigationMenu className='hidden lg:flex '>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href='/home' legacyBehavior passHref>
+            <Link href='/' legacyBehavior passHref>
               <NavigationMenuLink
                 style={{ fontSize: '24px' }}
                 className={navigationMenuTriggerStyle()}
