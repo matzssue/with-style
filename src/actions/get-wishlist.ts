@@ -10,7 +10,9 @@ type QueryParams = {
 }
 
 export async function getWishlist(userId: string | undefined, page: string) {
-  const url = new URL(`http://localhost:3000/api/user/wishlist`)
+  const url = new URL(
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`
+  )
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page
