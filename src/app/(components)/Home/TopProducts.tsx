@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import ProductCard from '@/components/Cards/ProductCard'
-import { getProductsBySubcategory } from '@/data/products'
+import { getProductsBySubcategory } from '@/data/products/get-products'
 
 export const TopProducts = async () => {
   const topProducts = await getProductsBySubcategory('TOP', 9)
