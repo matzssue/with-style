@@ -1,8 +1,6 @@
-import { getOrders } from '@/actions/get-orders'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { currentUser } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 import { OrderData, OrdersData } from '@/types/orders'
 import Image from 'next/image'

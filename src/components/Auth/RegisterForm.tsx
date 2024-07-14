@@ -15,11 +15,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
 import { useState } from 'react'
-import { register } from '@/actions/register'
+
 import Alert from '../Alert/Alert'
 import { GoogleButton } from '../Auth/GoogleButton'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { register } from '@/actions/auth/register'
 
 export default function RegisterForm() {
   const [error, setError] = useState<string | undefined>('')

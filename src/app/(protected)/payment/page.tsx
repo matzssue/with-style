@@ -1,7 +1,7 @@
 'use client'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import { convertToSubcurrency } from '@/lib/convertToSubcurrency'
+import { convertToSubcurrency } from '@/lib/helplers/convertToSubcurrency'
 import { CheckoutPage } from './(components)/CheckoutPage'
 import { useCartStore } from '@/store/useCartStore'
 

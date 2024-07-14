@@ -1,12 +1,13 @@
 import axios from 'axios'
-import { ProductList } from '@/app/(withNavbar)/(components)/ProductsList'
-import { ProductsMenu } from '@/app/(withNavbar)/(components)/ProductsMenu'
+
 import { ReadonlyURLSearchParams } from 'next/navigation'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
-import { getWishlistProductsId } from '@/actions/get-wishlist'
+import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
-import { Paginator } from '@/app/(withNavbar)/(components)/Paginator'
+
 import { ProductsData } from '@/types/products'
+import { ProductList } from '../../(components)/ProductsList'
+import { Paginator } from '@/components/Paginator/Paginator'
 
 type ProductSearchParams = {
   [key: string]: string

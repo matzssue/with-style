@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
-import { ProductsMenu } from '../../(components)/ProductsMenu'
+
 import { Loading } from '@/components/Loading/Loading'
+import { ProductsMenu } from '../(components)/ProductsMenu'
 
 export default async function RootLayout({
   children,

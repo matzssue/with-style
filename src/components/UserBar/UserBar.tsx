@@ -2,8 +2,8 @@ import Searchbar from '../Searchbar/Searchbar'
 import { UserMenu } from '../Auth/UserMenu'
 import { ShoppingBag } from '../ShoppingBag/ShoppingBag'
 import Link from 'next/link'
-import { currentUser } from '@/lib/auth'
 import { User } from 'next-auth'
+import { currentUser } from '@/lib/auth/auth'
 
 export default async function UserBar() {
   const user = await currentUser()

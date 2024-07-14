@@ -23,9 +23,9 @@ import {
 import { useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { reset } from '@/actions/reset'
+import { reset } from '@/lib/auth/reset'
 import { useSearchParams } from 'next/navigation'
-import { newPassword } from '@/actions/new-password'
+import { newPassword } from '@/lib/auth/new-password'
 
 export default function NewPasswordForm() {
   const searchParams = useSearchParams()

@@ -1,8 +1,9 @@
-import { currentUser } from '@/lib/auth'
-import { Paginator } from '../../(components)/Paginator'
+import { currentUser } from '@/lib/auth/auth'
+import { Paginator } from '../../../../components/Paginator/Paginator'
 import { OrdersList } from './(components)/OrdersList'
-import { getOrders } from '@/actions/get-orders'
+
 import { OrdersData } from '@/types/orders'
+import { getOrders } from '@/data/orders/get-orders'
 
 type WishlistSearchParams = {
   page: string
