@@ -5,9 +5,9 @@ import { LoginSchema, loginSchema } from '@/lib/schemas/auth-schema'
 import { signIn } from '@/auth'
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 import { AuthError } from 'next-auth'
-import { getuserByEmail } from '@/data/user'
-import { generateVerificationToken } from '@/lib/tokens'
-import { sendVerificationEmail } from '@/lib/mail'
+import { getuserByEmail } from '@/data/user/user'
+import { generateVerificationToken } from '@/lib/auth/tokens'
+import { sendVerificationEmail } from '@/lib/auth/mail'
 
 export const login = async (values: LoginSchema) => {
   console.log(values)

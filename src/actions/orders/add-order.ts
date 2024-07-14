@@ -1,6 +1,6 @@
 'use server'
 
-import { currentUser } from '@/lib/auth'
+import { currentUser } from '@/lib/auth/auth'
 import { AddOrderData } from '@/types/products'
 import { revalidateTag } from 'next/cache'
 

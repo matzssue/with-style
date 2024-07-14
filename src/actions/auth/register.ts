@@ -3,8 +3,8 @@
 import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
 import bcrypr from 'bcryptjs'
 import prisma from '@/lib/prisma'
-import { generateVerificationToken } from '@/lib/tokens'
-import { sendVerificationEmail } from '@/lib/mail'
+import { generateVerificationToken } from '@/lib/auth/tokens'
+import { sendVerificationEmail } from '@/lib/auth/mail'
 
 export const register = async (values: RegisterSchema) => {
   const validatedFields = registerSchema.safeParse(values)
