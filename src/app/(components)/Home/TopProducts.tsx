@@ -9,7 +9,7 @@ import ProductCard from '@/components/Cards/ProductCard'
 import { getProductsBySubcategory } from '@/data/products/get-products'
 
 export const TopProducts = async () => {
-  const topProducts = await getProductsBySubcategory('TOP', 9)
+  const { data: topProducts } = await getProductsBySubcategory('TOP', 9)
 
   return (
     <section className='flex w-5/6 flex-col items-center justify-center pb-10 max-md:w-4/6'>
