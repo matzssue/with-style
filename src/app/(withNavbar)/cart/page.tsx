@@ -16,6 +16,7 @@ export default function CartPage() {
         <CardWrapper>
           <h1 className='border-b-2 border-b-secondary py-2 pb-3 text-center text-2xl font-bold'>
             {isItem && `Your bag : ${totalItems} items`}
+            {!isItem && `No items in your bag`}
           </h1>
           <CartItems />
         </CardWrapper>

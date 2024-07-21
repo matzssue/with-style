@@ -1,12 +1,10 @@
-import { getOrder } from '@/actions/get-order'
-import { getOrders } from '@/actions/get-orders'
-import { auth } from '@/auth'
+import { getOrder } from '@/data/orders/get-order'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { currentUser } from '@/lib/auth'
+
 import { cn } from '@/lib/utils'
-import { OrdersData } from '@/types/orders'
+
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 
 export default async function Page({
   params,
@@ -66,6 +64,7 @@ export default async function Page({
                       <span>
                         <p className=' text-lg font-semibold'>{name}</p>
                         <p className='italic'>{category}</p>
+                        <p className='italic'>{type}</p>
                       </span>
                       <span>
                         <p>

@@ -1,4 +1,3 @@
-import { getProduct } from '@/data/products'
 import prisma from '@/lib/prisma'
 
 import {
@@ -11,11 +10,11 @@ import {
 import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 
 import { AddProductForm } from './(components)/AddProductForm'
-import { Button } from '@/components/ui/button'
-import { Heart } from 'lucide-react'
-import { WishlistToggleButton } from '../../(components)/WishlistToggleButton'
-import { getWishlistProductsId } from '@/actions/get-wishlist'
+
+import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
+import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
+import { getProduct } from '@/data/products/get-product'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -33,7 +32,7 @@ export default async function ProductPage({
   const userId = session?.user.id
   const product = await getProduct(productId)
   const userWishlist = await getWishlistProductsId(userId)
-  if (!product) return <div>error</div>
+  if (!product) return <div>Error while loading a product.</div>
   return (
     <section className='flex w-full items-center justify-center  p-5'>
       <div className=' flex w-5/6 justify-center gap-12  bg-neutral-100 p-5 max-md:w-auto max-md:flex-col'>

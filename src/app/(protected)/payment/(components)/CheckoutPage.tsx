@@ -1,7 +1,7 @@
 'use client'
 
 import { Loading } from '@/components/Loading/Loading'
-import { convertToSubcurrency } from '@/lib/convertToSubcurrency'
+import { convertToSubcurrency } from '@/lib/helplers/convertToSubcurrency'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useEffect, useState } from 'react'
@@ -17,11 +17,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { AddressSchema, addressSchema } from '@/lib/schemas/auth-schema'
 import { Button } from '@/components/ui/button'
-import { addOrder } from '@/actions/add-order'
+import { addOrder } from '@/actions/orders/add-order'
 
 import { ProductsInCheckout } from '@/types/products'
-import { removeOrder } from '@/actions/remove-order'
+
 import { useCartStore } from '@/store/useCartStore'
+import { removeOrder } from '@/actions/orders/remove-order'
 
 export const CheckoutPage = ({
   amount,
@@ -39,7 +40,7 @@ export const CheckoutPage = ({
   const resetCart = useCartStore((store) => store.resetCart)
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/create-payment', {
+    fetch(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/create-payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ export const CheckoutPage = ({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://localhost:3000/payment-success?amount=${amount}`,
+        return_url: `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/payment-success?amount=${amount}`,
       },
     })
     if (error) {

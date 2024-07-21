@@ -1,5 +1,5 @@
 import { useCartStore } from '@/store/useCartStore'
-import { ProductInStore } from '@/store/useCartStore'
+
 import { Product, Size } from '@prisma/client'
 
 export const useCartActions = () => {

@@ -18,7 +18,7 @@ import { EmailSchema, emailSchema } from '@/lib/schemas/auth-schema'
 import { useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { reset } from '@/actions/reset'
+import { reset } from '@/lib/auth/reset'
 
 export default function ResetForm() {
   const [error, setError] = useState<string | undefined>('')

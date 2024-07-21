@@ -1,9 +1,9 @@
 import authConfig from './auth.config'
-import { getuserById } from './data/user'
+import { getuserById } from './data/user/user'
 import prisma from './lib/prisma'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth from 'next-auth'
-import { getAccountByUserId } from './data/account'
+import { getAccountByUserId } from './data/user/account'
 
 export const {
   handlers: { GET, POST },

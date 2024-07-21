@@ -1,5 +1,4 @@
 import RegisterForm from '@/components/Auth/RegisterForm'
-import Link from 'next/link'
 
 export default async function RegisterPage() {
   return (

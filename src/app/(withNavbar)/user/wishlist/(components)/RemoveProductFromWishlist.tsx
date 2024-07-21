@@ -1,7 +1,6 @@
 'use client'
 
-import { removeFromWishlist } from '@/actions/remove-product-from-wishlist'
-
+import { removeFromWishlist } from '@/actions/wishlist/remove-product-from-wishlist'
 import { Delete } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
