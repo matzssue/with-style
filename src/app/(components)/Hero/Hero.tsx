@@ -1,10 +1,3 @@
-import { Button } from '../../../components/ui/button'
-import Image from 'next/image'
-import mainImage from '../../../public/main_image.png'
-import secondImage from '../../../public/second_image.png'
-import bg from '../../../public/images/testbg1.jpg'
-import { cn } from '@/lib/utils'
-import { ButtonLink } from '../../../components/Buttons/ButtonLink'
 import Link from 'next/link'
 export const Hero = () => {
   return (
@@ -26,15 +19,6 @@ export const Hero = () => {
           >
             Sales
           </Link>
-        </div>
-      </div>
-
-      <div className='relative flex h-full w-2/5 items-center justify-center pr-5'>
-        <div className=''>
-          {/* <Image alt='first hero image' src={secondImage} /> */}
-        </div>
-        <div className='absolute'>
-          {/* <Image alt='second hero image' src={mainImage} /> */}
         </div>
       </div>
     </section>

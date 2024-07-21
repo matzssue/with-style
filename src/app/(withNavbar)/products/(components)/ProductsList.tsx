@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Heart } from 'lucide-react'
+
 import type { Product } from '@prisma/client'
 
 import { AddProduct } from '../../product/[productId]/(components)/AddProduct'

@@ -17,7 +17,7 @@ import { CircleUserRound } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 import { signOut } from 'next-auth/react'
-import { useCurrentUser } from '@/hooks/use-current-user'
+
 import { User } from 'next-auth'
 
 export const UserMenu = ({ user }: { user: User | undefined }) => {

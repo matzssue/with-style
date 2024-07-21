@@ -10,8 +10,7 @@ import {
 import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 
 import { AddProductForm } from './(components)/AddProductForm'
-import { Button } from '@/components/ui/button'
-import { Heart } from 'lucide-react'
+
 import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'

@@ -1,7 +1,6 @@
 'use server'
 
-import { Size } from '@prisma/client'
-import { redirect, usePathname } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 type Filters = {
   size?: string
