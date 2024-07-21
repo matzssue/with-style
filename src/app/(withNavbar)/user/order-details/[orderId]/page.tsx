@@ -64,6 +64,7 @@ export default async function Page({
                       <span>
                         <p className=' text-lg font-semibold'>{name}</p>
                         <p className='italic'>{category}</p>
+                        <p className='italic'>{type}</p>
                       </span>
                       <span>
                         <p>
