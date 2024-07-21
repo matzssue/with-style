@@ -37,9 +37,12 @@ type PriceFilter = {
   max: number
 }
 
+const minPrice = 0
+const maxPrice = 1000
+
 const defaultFormValues = {
   size: undefined,
-  price: [0, 1000],
+  price: [minPrice, maxPrice],
 }
 
 export const FilterForm = () => {
