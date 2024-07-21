@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Logo from '../../../public/Logo.png'
+import Logo from '@images/Logo.png'
 
 export default function Header({
   staticNavigation,
