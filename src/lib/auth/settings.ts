@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs'
 
 import { generateVerificationToken } from '@/lib/auth/tokens'
 import { sendVerificationEmail } from '@/lib/auth/mail'
-import { error } from 'console'
+
 import { currentUser } from './auth'
 
 export const settings = async (values: SettingsSchema) => {

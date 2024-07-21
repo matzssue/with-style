@@ -36,7 +36,6 @@ export const ProductsMenu = () => {
       case 'accesories':
         setCategories(accessoriesNavLinks)
       default:
-      // code block
     }
   }, [param.categorySlug])
 
