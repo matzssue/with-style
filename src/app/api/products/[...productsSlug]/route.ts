@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { ProductCategory, ProductType, Size } from '@prisma/client'
 import { ProductsData } from '@/types/products'
 import { ITEMS_PER_PAGE } from '@/constants/pages'
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
@@ -15,6 +16,7 @@ export async function GET(request: NextRequest) {
     const categoryToUpper = categories?.toUpperCase() as ProductCategory
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
+
     const products = await prisma.product.findMany({
       take: ITEMS_PER_PAGE,
       skip: skip,
