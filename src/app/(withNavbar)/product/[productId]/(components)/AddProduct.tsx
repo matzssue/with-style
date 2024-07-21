@@ -8,7 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from '@/components/ui/select'
-import { ProductInStore, useCartStore } from '@/store/useCartStore'
+
 import { cn } from '@/lib/utils'
 import { useCartActions } from '@/hooks/use-add-product-to-cart'
 

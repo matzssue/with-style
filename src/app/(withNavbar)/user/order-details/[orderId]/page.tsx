@@ -1,12 +1,10 @@
 import { getOrder } from '@/data/orders/get-order'
 
-import { auth } from '@/auth'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 import { cn } from '@/lib/utils'
-import { OrdersData } from '@/types/orders'
+
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 
 export default async function Page({
   params,

@@ -1,4 +1,3 @@
-import { Paginator } from '../../../../components/Paginator/Paginator'
 import { WishlistMenu } from './(components)/WishlistMenu'
 
 type WishlistSearchParams = {

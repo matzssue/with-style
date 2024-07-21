@@ -1,6 +1,5 @@
 'use server'
 
-import { UserWishlist } from '@/app/api/user/wishlist/route'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
 

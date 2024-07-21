@@ -2,7 +2,6 @@ import { currentUser } from '@/lib/auth/auth'
 import { Paginator } from '../../../../components/Paginator/Paginator'
 import { OrdersList } from './(components)/OrdersList'
 
-import { OrdersData } from '@/types/orders'
 import { getOrders } from '@/data/orders/get-orders'
 
 type WishlistSearchParams = {

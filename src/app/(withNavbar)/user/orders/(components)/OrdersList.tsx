@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
 import { cn } from '@/lib/utils'
-import { OrderData, OrdersData } from '@/types/orders'
+import { OrderData } from '@/types/orders'
 import Image from 'next/image'
 import Link from 'next/link'
 

@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,12 +13,7 @@ import {
 } from '@/components/ui/form'
 import Alert from '../Alert/Alert'
 import { Input } from '@/components/ui/input'
-import {
-  LoginSchema,
-  RegisterSchema,
-  loginSchema,
-  registerSchema,
-} from '@/lib/schemas/auth-schema'
+import { LoginSchema, loginSchema } from '@/lib/schemas/auth-schema'
 
 import { useState } from 'react'
 import { GoogleButton } from './GoogleButton'

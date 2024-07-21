@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+
 import {
   Accordion,
   AccordionContent,
@@ -9,20 +9,13 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import Link from 'next/link'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
-import { manNavLinks, womanNavLinks, shoesNavLinks } from '@/constants/navlist'
+
+import { manNavLinks, shoesNavLinks } from '@/constants/navlist'
 import { useSidebarStore } from '@/store/useSidebarStore'
 
 export default function SideBar() {
+  // ADD WOMAN CLOTHES
+
   const isOpen = useSidebarStore((state) => state.isOpen)
 
   return (

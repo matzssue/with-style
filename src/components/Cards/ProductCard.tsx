@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import shoes from '../../../public/shoes1.jpg'
+
 import { Product } from '@prisma/client'
 import Link from 'next/link'
 export default function ProductCard({

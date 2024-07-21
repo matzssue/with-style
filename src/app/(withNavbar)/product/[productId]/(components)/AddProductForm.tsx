@@ -1,25 +1,22 @@
 'use client'
 
-import { Heart, ShoppingBag } from 'lucide-react'
+import { ShoppingBag } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { SelectSize } from '@/components/Select/SelectSize'
+
 import { useState } from 'react'
 
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,7 +24,6 @@ import {
 } from '@/components/ui/form'
 import { Product, Size } from '@prisma/client'
 import { useCartActions } from '@/hooks/use-add-product-to-cart'
-import { error } from 'console'
 
 interface SizeFormInput {
   size: Size | null
@@ -92,13 +88,6 @@ export const AddProductForm = ({ product }: { product: Product }) => {
             <ShoppingBag />
           </span>
         </Button>
-
-        {/* <Button>
-        Add to wishlist
-        <span className='ml-5'>
-          <Heart />
-        </span>
-      </Button> */}
       </form>
     </Form>
   )

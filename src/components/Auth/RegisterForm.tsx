@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,11 +43,7 @@ export default function RegisterForm() {
       setError(data.error)
       setSuccess(data.success)
     })
-
-    console.log(values)
   }
-
-  console.log('error', error, 'success', success)
 
   return (
     <Form {...form}>
