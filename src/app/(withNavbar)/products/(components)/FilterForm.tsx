@@ -27,20 +27,22 @@ import { useState } from 'react'
 
 import { usePathname } from 'next/navigation'
 import { updateFilters } from '@/actions/products/filter-products'
-
-const FormSchema = z.object({
-  size: z.string().optional(),
-  price: z.number().array(),
-})
+import {
+  FilterProductsSchema,
+  filterProductsSchema,
+} from '@/lib/schemas/filter-schema'
 
 type PriceFilter = {
   min: number
   max: number
 }
 
+const minPrice = 0
+const maxPrice = 1000
+
 const defaultFormValues = {
   size: undefined,
-  price: [0, 1000],
+  price: [minPrice, maxPrice],
 }
 
 export const FilterForm = () => {
@@ -50,12 +52,12 @@ export const FilterForm = () => {
     max: defaultFormValues.price[1],
   })
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<FilterProductsSchema>({
+    resolver: zodResolver(filterProductsSchema),
     defaultValues: defaultFormValues,
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: FilterProductsSchema) {
     updateFilters(data, pathname)
   }
 

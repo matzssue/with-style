@@ -15,3 +15,10 @@ export type ProductsInCheckout = {
 export type AddOrderData = AddressSchema & { amount: number } & {
   productsData: ProductsInCheckout
 }
+export type ProductsQueryParams = {
+  category?: string
+  type?: string
+  size?: string
+  minPrice?: string
+  maxPrice?: string
+}

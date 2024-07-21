@@ -10,8 +10,9 @@ import { NewCollectionWrapper } from '../../../components/Wrapper/NewCollectionW
 import { getProductsBySubcategory } from '@/data/products/get-products'
 
 export const NewProducts = async () => {
-  const sportProducts = await getProductsBySubcategory('SPORT', 3)
-  const summerProducts = await getProductsBySubcategory('SUMMER', 3)
+  const { data: sportProducts } = await getProductsBySubcategory('SPORT', 3)
+
+  const { data: summerProducts } = await getProductsBySubcategory('SUMMER', 3)
 
   return (
     <section className='flex h-full  w-5/6 flex-col gap-4 overflow-hidden max-xl:w-full'>

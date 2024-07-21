@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Logo from '../../../public/Logo.png'
 
+import Logo from '@images/Logo.png'
 import { FaInstagram } from 'react-icons/fa6'
 import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa'
 import Link from 'next/link'

@@ -1,53 +1,81 @@
-import prisma from '@/lib/prisma'
-import { ProductCategory, ProductType } from '@prisma/client'
+import { ProductsData, ProductsQueryParams } from '@/types/products'
 
-export const getAllProducts = async () => {
-  try {
-    const products = await prisma.product.findMany()
-    return products
-  } catch (err) {
-    throw new Error('Error getting products')
+export const getProducts = async (filters: ProductsQueryParams) => {
+  const url = new URL(
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/subcategory`
+  )
+  url.search = new URLSearchParams(filters).toString()
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    next: { tags: ['categoryProducts'] },
+  })
+
+  if (response.status !== 200) {
+    throw new Error('Failed to fetch products')
   }
-}
 
-export const getProductsByCategory = async (category: ProductCategory) => {
-  try {
-    const categoryUppercase = category.toUpperCase() as ProductCategory
-
-    const products = await prisma.product.findMany({
-      where: { category: categoryUppercase },
-    })
-    return products
-  } catch (err) {
-    throw new Error('Error getting products')
-  }
-}
-export const getProductsByType = async (type: ProductType) => {
-  try {
-    const categoryUppercase = type.toUpperCase() as ProductType
-    const products = await prisma.product.findMany({
-      where: { type: categoryUppercase },
-    })
-
-    return products
-  } catch {
-    throw new Error('Error getting products')
-  }
+  const data: ProductsData = await response.json()
+  return data
 }
 
 export const getProductsBySubcategory = async (
   subcategory: string,
   limit: number
 ) => {
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        subcategory: subcategory,
-      },
-      take: limit,
-    })
-    return products
-  } catch (err) {
-    throw new Error('Error getting products')
+  const url = new URL(
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/subcategory`
+  )
+
+  const searchParams = {
+    subcategory,
+    limit: limit.toString(),
   }
+
+  url.search = new URLSearchParams(searchParams).toString()
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (response.status !== 200) {
+    throw new Error('Failed to fetch products')
+  }
+
+  const data: ProductsData = await response.json()
+  return data
+}
+
+export const getProductsByCategory = async (
+  category: string,
+  limit: number
+) => {
+  const url = new URL(
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/category`
+  )
+
+  const searchParams = {
+    category,
+    limit: limit.toString(),
+  }
+  url.search = new URLSearchParams(searchParams).toString()
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (response.status !== 200) {
+    throw new Error('Failed to fetch products')
+  }
+
+  const data: ProductsData = await response.json()
+  return data
 }

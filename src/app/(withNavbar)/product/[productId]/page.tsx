@@ -32,7 +32,7 @@ export default async function ProductPage({
   const userId = session?.user.id
   const product = await getProduct(productId)
   const userWishlist = await getWishlistProductsId(userId)
-  if (!product) return <div>error</div>
+  if (!product) return <div>Error while loading a product.</div>
   return (
     <section className='flex w-full items-center justify-center  p-5'>
       <div className=' flex w-5/6 justify-center gap-12  bg-neutral-100 p-5 max-md:w-auto max-md:flex-col'>

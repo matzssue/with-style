@@ -10,8 +10,6 @@ import { generateVerificationToken } from '@/lib/auth/tokens'
 import { sendVerificationEmail } from '@/lib/auth/mail'
 
 export const login = async (values: LoginSchema) => {
-  console.log(values)
-
   const validatedFields = loginSchema.safeParse(values)
 
   if (!validatedFields.success) {
