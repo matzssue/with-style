@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 import type { NextAuthConfig } from 'next-auth'
 import prisma from './lib/prisma'
 import Google from 'next-auth/providers/google'
-import { getuserByEmail } from './data/user'
+import { getuserByEmail } from './data/user/user'
 export default {
   providers: [
     Google({

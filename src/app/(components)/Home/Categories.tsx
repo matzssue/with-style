@@ -5,7 +5,7 @@ import {
   manNavLinks,
   womanNavLinks,
   shoesNavLinks,
-} from '../../constants/navlist'
+} from '../../../constants/navlist'
 
 import { Fade } from 'react-awesome-reveal'
 

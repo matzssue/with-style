@@ -1,6 +1,5 @@
 'use client'
 
-import { settings } from '@/actions/settings'
 import Alert from '@/components/Alert/Alert'
 import { Loading } from '@/components/Loading/Loading'
 import { Button } from '@/components/ui/button'
@@ -12,6 +11,7 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { settings } from '@/lib/auth/settings'
 import { SettingsSchema, settingsSchema } from '@/lib/schemas/auth-schema'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'

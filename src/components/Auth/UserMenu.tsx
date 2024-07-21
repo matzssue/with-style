@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { CircleUserRound } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { currentUser } from '@/lib/auth'
+
 import { signOut } from 'next-auth/react'
 import { useCurrentUser } from '@/hooks/use-current-user'
 import { User } from 'next-auth'

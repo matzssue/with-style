@@ -1,10 +1,10 @@
-import { Button } from '../ui/button'
+import { Button } from '../../../components/ui/button'
 import Image from 'next/image'
 import mainImage from '../../../public/main_image.png'
 import secondImage from '../../../public/second_image.png'
 import bg from '../../../public/images/testbg1.jpg'
 import { cn } from '@/lib/utils'
-import { ButtonLink } from '../Buttons/ButtonLink'
+import { ButtonLink } from '../../../components/Buttons/ButtonLink'
 import Link from 'next/link'
 export const Hero = () => {
   return (

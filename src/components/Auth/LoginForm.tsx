@@ -20,11 +20,12 @@ import {
   loginSchema,
   registerSchema,
 } from '@/lib/schemas/auth-schema'
-import { login } from '@/actions/login'
+
 import { useState } from 'react'
 import { GoogleButton } from './GoogleButton'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { login } from '@/actions/auth/login'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')

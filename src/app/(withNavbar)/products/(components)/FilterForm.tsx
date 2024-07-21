@@ -25,8 +25,9 @@ import {
 } from '@/components/ui/select'
 import { sizes } from '@/constants/sizes'
 import { useState } from 'react'
-import { updateFilters } from '@/actions/filter-products'
+
 import { usePathname } from 'next/navigation'
+import { updateFilters } from '@/actions/products/filter-products'
 
 const FormSchema = z.object({
   size: z.string().optional(),

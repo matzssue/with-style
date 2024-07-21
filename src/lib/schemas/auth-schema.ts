@@ -1,4 +1,3 @@
-import { newPassword } from '@/actions/new-password'
 import { z } from 'zod'
 
 export type RegisterSchema = z.infer<typeof registerSchema>

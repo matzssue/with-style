@@ -1,6 +1,6 @@
 'use client'
 
-import { newVerification } from '@/actions/new-verification'
+import { newVerification } from '@/lib/auth/new-verification'
 import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import Alert from '../Alert/Alert'

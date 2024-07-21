@@ -1,13 +1,14 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { getuserByEmail, getuserById } from '@/data/user'
+import { getuserByEmail, getuserById } from '@/data/user/user'
 import { SettingsSchema } from '@/lib/schemas/auth-schema'
 import bcrypt from 'bcryptjs'
-import { currentUser } from '@/lib/auth'
-import { generateVerificationToken } from '@/lib/tokens'
-import { sendVerificationEmail } from '@/lib/mail'
+
+import { generateVerificationToken } from '@/lib/auth/tokens'
+import { sendVerificationEmail } from '@/lib/auth/mail'
 import { error } from 'console'
+import { currentUser } from './auth'
 
 export const settings = async (values: SettingsSchema) => {
   const user = await currentUser()

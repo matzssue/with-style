@@ -1,15 +1,14 @@
 'use client'
 
-import { removeFromWishlist } from '@/actions/remove-product-from-wishlist'
-
 import { Button } from '@/components/ui/button'
 
-import { addToWishlist } from '@/actions/add-product-to-wishlist'
+import { addToWishlist } from '@/actions/wishlist/add-product-to-wishlist'
 
 import { Heart } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import { navigate } from '@/actions/navigate'
+
 import { useRouter } from 'next/navigation'
+import { removeFromWishlist } from '@/actions/wishlist/remove-product-from-wishlist'
 
 export const WishlistToggleButton = ({
   productId,

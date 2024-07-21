@@ -1,8 +1,8 @@
-import { ProductList } from '../../(components)/ProductsList'
-import { getWishlistProductsId } from '@/actions/get-wishlist'
+import { ProductList } from '../(components)/ProductsList'
+import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
 
-import { Paginator } from '../../(components)/Paginator'
+import { Paginator } from '../../../../components/Paginator/Paginator'
 
 import { ProductsData } from '@/types/products'
 

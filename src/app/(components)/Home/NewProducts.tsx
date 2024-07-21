@@ -1,12 +1,13 @@
-import manNewProducts from '../../../public/images/hero-man-sport.webp'
-import womanNewProducts from '../../../public/images/hero-women-summer.webp'
+import manNewProducts from '../../../../public/images/hero-man-sport.webp'
+import womanNewProducts from '../../../../public/images/hero-women-summer.webp'
 import Image from 'next/image'
-import { MotionCard } from '../Cards/MotionCard'
+import { MotionCard } from '../../../components/Cards/MotionCard'
 
-import { ButtonLink } from '../Buttons/ButtonLink'
-import { getProductsBySubcategory } from '@/data/products'
+import { ButtonLink } from '../../../components/Buttons/ButtonLink'
+
 import { HomeProductList } from './HomeProductList'
-import { NewCollectionWrapper } from '../Wrapper/NewCollectionWrapper'
+import { NewCollectionWrapper } from '../../../components/Wrapper/NewCollectionWrapper'
+import { getProductsBySubcategory } from '@/data/products/get-products'
 
 export const NewProducts = async () => {
   const sportProducts = await getProductsBySubcategory('SPORT', 3)
