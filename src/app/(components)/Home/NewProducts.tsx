@@ -11,7 +11,7 @@ import { getProductsBySubcategory } from '@/data/products/get-products'
 
 export const NewProducts = async () => {
   const { data: sportProducts } = await getProductsBySubcategory('SPORT', 3)
-  console.log(sportProducts, 'sportProducts')
+
   const { data: summerProducts } = await getProductsBySubcategory('SUMMER', 3)
 
   return (
