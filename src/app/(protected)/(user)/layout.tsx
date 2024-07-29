@@ -5,7 +5,7 @@ import UserBar from '@/components/UserBar/UserBar'
 import Wrapper from '@/components/Wrapper/Wrapper'
 import { SessionProvider } from 'next-auth/react'
 
-export default async function ProtectedLayout({
+export default async function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
