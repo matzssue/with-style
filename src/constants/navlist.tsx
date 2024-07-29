@@ -10,6 +10,7 @@ import {
 import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi'
 
 import { FaRedhat } from 'react-icons/fa6'
+import { LogOut } from 'lucide-react'
 
 export const manNavLinks = [
   {
@@ -139,4 +140,10 @@ export const accessoriesNavLinks = [
     icon: <FaRedhat />,
   },
   { title: 'All', link: 'all' },
+]
+
+export const adminNavList = [
+  { title: 'Exit', link: '/', icon: <LogOut /> },
+  { title: 'Products ', link: '/admin/products' },
+  { title: 'Orders', link: '/admin/orders' },
 ]
