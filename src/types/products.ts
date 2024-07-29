@@ -21,4 +21,5 @@ export type ProductsQueryParams = {
   size?: string
   minPrice?: string
   maxPrice?: string
+  page?: number
 }
