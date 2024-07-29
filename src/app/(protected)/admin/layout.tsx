@@ -1,16 +1,48 @@
-import Header from '@/components/Header/Header'
-import { NavBar } from '@/components/Navbar/NavBar'
-import Wrapper from '@/components/Wrapper/Wrapper'
-
+import { auth } from '@/auth'
+import { SessionProvider } from 'next-auth/react'
+import Image from 'next/image'
+import Logo from '@images/Logo.png'
+import { LogOut } from 'lucide-react'
+import Link from 'next/link'
+import { adminNavList } from '@/constants/navlist'
 export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
+    // <RoleGate allowedRole='ADMIN'>
+
     <>
-      <Header staticNavigation={<NavBar />} />
-      <Wrapper>{children}</Wrapper>
+      <header className='flex min-h-[100px] bg-neutral-100 '>
+        <Image
+          className='max-md:hidden'
+          alt='logo'
+          height={250}
+          width={350}
+          src={Logo}
+        />
+        <nav className='flex w-full items-center justify-start pl-5'>
+          <ul className='flex h-full items-center justify-center gap-10'>
+            {adminNavList.map(({ link, title, icon }) => (
+              <li
+                key={link + title}
+                className='flex gap-5 text-2xl font-bold max-md:text-lg'
+              >
+                <Link
+                  className=' flex gap-2 hover:text-secondary hover:underline'
+                  href={link}
+                >
+                  {icon} {title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+      <main className='flex flex-1 flex-col'>{children}</main>
     </>
+
+    // </RoleGate>
   )
 }
