@@ -19,6 +19,7 @@ export const dynamicRoutes = [
   '/accesories',
   '/shoes',
 ]
+export const adminRoute = ['/admin', '/api/admin']
 export const apiAuthPrefix = '/api/auth'
 
 export const DEFAULT_LOGIN_REDIRECT = '/'

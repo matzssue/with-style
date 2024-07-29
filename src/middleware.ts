@@ -5,6 +5,7 @@ const { auth } = NextAuth(authConfig)
 
 import {
   DEFAULT_LOGIN_REDIRECT,
+  adminRoute,
   apiAuthPrefix,
   authRoutes,
   dynamicRoutes,
@@ -18,12 +19,20 @@ export default auth((req) => {
   const isDynamic = dynamicRoutes.find((route) =>
     nextUrl.pathname.startsWith(route)
   )
-
+  const userRole = req.auth?.user.role
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || isDynamic
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  // const isAdminRoute = adminRoute.includes(nextUrl.pathname)
   const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
+
+  // if (isAdminRoute) {
+  //   if (userRole === 'ADMIN') return
+  //   else {
+  //     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+  //   }
+  // }
 
   if (isApiAuthRoute) {
     return
