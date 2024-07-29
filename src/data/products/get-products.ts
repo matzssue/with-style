@@ -1,17 +1,22 @@
 import { ProductsData, ProductsQueryParams } from '@/types/products'
 
-export const getProducts = async (filters: ProductsQueryParams) => {
+export const getProducts = async (filters?: ProductsQueryParams) => {
+  // const url = new URL(
+  //   `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/${filters?.category}/${filters?.type}`
+  // )
+
   const url = new URL(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/subcategory`
+    `${'http://localhost:3000'}/api/products/${filters?.category}/${filters?.type}`
   )
   url.search = new URLSearchParams(filters).toString()
+  console.log(url, 'testsearch')
 
   const response = await fetch(url.toString(), {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    next: { tags: ['categoryProducts'] },
+    cache: 'no-cache',
   })
 
   if (response.status !== 200) {
@@ -19,6 +24,7 @@ export const getProducts = async (filters: ProductsQueryParams) => {
   }
 
   const data: ProductsData = await response.json()
+
   return data
 }
 
