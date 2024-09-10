@@ -20,8 +20,8 @@ export const addProduct = async (product: AddProductData) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    const data = await response.json()
-    return data
+    await response.json()
+    return { success: 'Product added' }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {
