@@ -1,7 +1,7 @@
 'use client'
 
 import { addProduct } from '@/actions/products/add-product'
-import { editProduct } from '@/actions/products/edit-product'
+
 import Alert from '@/components/Alert/Alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -22,16 +22,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { RegisterSchema } from '@/lib/schemas/auth-schema'
+
 import {
   addProductSchema,
   AddProductSchema,
-  productSchema,
-  ProductSchema,
 } from '@/lib/schemas/product-schema'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Product, ProductCategory, ProductType } from '@prisma/client'
+import { ProductCategory, ProductType } from '@prisma/client'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -73,16 +71,16 @@ export const AddProductForm = () => {
       ...values,
       size: values.size ?? [],
     }
-    console.log(addProductData, 'addProductData')
-    // addProduct(addProductData).then((data) => {
-    //   console.log(data, 'responsedata')
-    // })
+    addProduct(addProductData).then((data) => {
+      setError(data.error)
+      setSuccess(data.success)
+    })
   }
 
   return (
     <Card
       className={cn(
-        ' mx-auto my-10  flex w-full max-w-[600px] flex-col items-center justify-center border-none bg-secondary'
+        ' my-10  flex w-full  max-w-[600px] flex-col items-center justify-center border-none bg-secondary'
       )}
     >
       <CardHeader>
@@ -243,13 +241,7 @@ export const AddProductForm = () => {
                 </FormItem>
               )}
             />
-            <Button
-              onClick={() => {
-                console.log('test')
-              }}
-              className='w-full'
-              type='submit'
-            >
+            <Button className='w-full' type='submit'>
               Submit
             </Button>
             {error && <Alert type='error'>{error}</Alert>}
@@ -260,7 +252,7 @@ export const AddProductForm = () => {
                 'bg-transparent py-0 text-primary hover:bg-transparent hover:underline'
               )}
             >
-              <Link href={'/admin/products'}>Back</Link>
+              <Link href={'/admin'}>Back</Link>
             </Button>
           </form>
         </Form>
