@@ -1,8 +1,6 @@
-import { auth } from '@/auth'
-import { SessionProvider } from 'next-auth/react'
 import Image from 'next/image'
 import Logo from '@images/Logo.png'
-import { LogOut } from 'lucide-react'
+
 import Link from 'next/link'
 import { adminNavList } from '@/constants/navlist'
 export default function AdminLayout({
@@ -40,7 +38,9 @@ export default function AdminLayout({
           </ul>
         </nav>
       </header>
-      <main className='flex flex-1 flex-col'>{children}</main>
+      <main className='mx-4 my-5 flex h-full flex-col items-center justify-center'>
+        {children}
+      </main>
     </>
 
     // </RoleGate>

@@ -2,41 +2,36 @@
 
 import { ProductCard } from '@/components/Cards/ProductCard'
 import { Product } from '@prisma/client'
-import { Input } from '@/components/ui/input'
 import Link from 'next/link'
-import { ChangeEvent, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-export const AdminProductList = ({ products }: { products: Product[] }) => {
-  const [searchValue, setSearchValue] = useState('')
-  const [productsData, setProductsData] = useState(products)
+import { SearchInput } from '@/components/Searchbar/SearchInput'
+import { useSelectList } from '@/hooks/use-select-list'
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchValue.toLowerCase())
-      )
-      const selectedProducts = searchValue === '' ? products : filteredProducts
-      setProductsData(selectedProducts)
-    }, 1000)
-    return () => clearTimeout(delayDebounceFn)
-  }, [searchValue, products])
+export const AdminProductList = ({ products }: { products: Product[] }) => {
+  const filterByName = (item: Product, searchValue: string) => {
+    return item.name
+      .toString()
+      .toLowerCase()
+      .includes(searchValue.toLowerCase())
+  }
+
+  const { listData, searchValueHandler, searchValue } = useSelectList<Product>(
+    products,
+    filterByName
+  )
 
   return (
     <div className='my-5 flex flex-col flex-wrap gap-5 px-5'>
       <div>
-        <label>Search product</label>
-        <Input
-          type='search'
-          value={searchValue ?? ''}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSearchValue(e.target.value)
-          }
-          id='searchInput'
-          placeholder='search '
+        <SearchInput
+          placeholder='search by product name'
+          title='Search product'
+          setSearchValue={searchValueHandler}
+          value={searchValue}
         />
       </div>
       <div className='flex flex-wrap gap-5'>
-        {productsData.map((product) => (
+        {listData.map((product) => (
           <ProductCard key={product.id} product={product}>
             <div className='flex gap-5 '>
               <Button asChild>
