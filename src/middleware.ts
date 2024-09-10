@@ -19,13 +19,17 @@ export default auth((req) => {
   const isDynamic = dynamicRoutes.find((route) =>
     nextUrl.pathname.startsWith(route)
   )
+
   const userRole = req.auth?.user.role
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || isDynamic
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
   // const isAdminRoute = adminRoute.includes(nextUrl.pathname)
-  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
+  // const isPrivateRoute = privateRoutes.includes(nextUrl.pathname)
+  const isPrivateRoute = privateRoutes.some((path) =>
+    nextUrl.pathname.startsWith(path)
+  )
 
   // if (isAdminRoute) {
   //   if (userRole === 'ADMIN') return
