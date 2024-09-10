@@ -143,7 +143,8 @@ export const accessoriesNavLinks = [
 ]
 
 export const adminNavList = [
-  { title: 'Exit', link: '/', icon: <LogOut /> },
+  { title: 'Statistics', link: '/admin' },
   { title: 'Products ', link: '/admin/products' },
   { title: 'Orders', link: '/admin/orders' },
+  { title: 'Exit', link: '/', icon: <LogOut /> },
 ]
