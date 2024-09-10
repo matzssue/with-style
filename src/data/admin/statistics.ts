@@ -1,7 +1,6 @@
 type StatisticsData = {
-  numberOfOrders: number
-  numberOfProducts: number
-  numberOfUsers: number
+  title: string
+  quantity: number
 }
 
 export const getStatistics = async () => {
@@ -15,7 +14,7 @@ export const getStatistics = async () => {
     throw new Error(`HTTP error! Status: ${response.status}`)
   }
 
-  const data: StatisticsData = await response.json()
+  const data: StatisticsData[] = await response.json()
 
   return data
 }
