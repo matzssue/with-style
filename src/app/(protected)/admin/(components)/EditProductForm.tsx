@@ -53,9 +53,9 @@ export const EditProductForm = ({ product }: { product: Product }) => {
   const onSubmit = (values: ProductSchema) => {
     setError('')
     setSuccess('')
-
     editProduct(values).then((data) => {
-      console.log(data, 'responsedata')
+      setSuccess(data.success)
+      setError(data.error)
     })
   }
 
