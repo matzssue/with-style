@@ -8,10 +8,9 @@ type QueryParams = {
 }
 
 export async function getAllOrders(page: number) {
-  // const url = new URL(
-  //   `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/all`
-  // )
-  const url = new URL(`${'http://localhost:3000'}/api/admin/orders/all`)
+  const url = new URL(
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/all`
+  )
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page.toString()
