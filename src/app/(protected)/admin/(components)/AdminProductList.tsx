@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/Searchbar/SearchInput'
 import { useSelectList } from '@/hooks/use-select-list'
+import { DeleteProductButton } from './DeleteProduct'
 
 export const AdminProductList = ({ products }: { products: Product[] }) => {
   const filterByName = (item: Product, searchValue: string) => {
@@ -37,9 +38,7 @@ export const AdminProductList = ({ products }: { products: Product[] }) => {
               <Button asChild>
                 <Link href={`/admin/products/edit/${product.id}`}>Edit</Link>
               </Button>
-              <Button asChild>
-                <Link href='delete'>Delete</Link>
-              </Button>
+              <DeleteProductButton productId={product.id} />
             </div>
           </ProductCard>
         ))}
