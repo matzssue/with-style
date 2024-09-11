@@ -5,7 +5,7 @@ import { Product } from '@prisma/client'
 export const editProduct = async (updatedProduct: Partial<Product>) => {
   try {
     const response = await fetch(
-      `${'http://localhost:3000'}/api/admin/product/edit`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/product/edit`,
       {
         method: 'PUT',
         headers: {
@@ -18,8 +18,8 @@ export const editProduct = async (updatedProduct: Partial<Product>) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    const data = await response.json()
-    return data
+
+    return { success: 'Product successfully added' }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {
