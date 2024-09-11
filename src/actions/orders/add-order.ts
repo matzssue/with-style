@@ -9,7 +9,7 @@ export const addOrder = async (orderData: AddOrderData) => {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/orders/add`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/add`,
       {
         method: 'POST',
         headers: {

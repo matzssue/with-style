@@ -5,8 +5,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import ProductCard from '@/components/Cards/ProductCard'
+
 import { getProductsBySubcategory } from '@/data/products/get-products'
+import TopProduct from './TopProduct'
 
 export const TopProducts = async () => {
   const { data: topProducts } = await getProductsBySubcategory('TOP', 9)
@@ -21,7 +22,7 @@ export const TopProducts = async () => {
               key={product.id}
               className='md:basis-1/2 lg:basis-1/4'
             >
-              <ProductCard {...product} />
+              <TopProduct {...product} />
             </CarouselItem>
           ))}
         </CarouselContent>

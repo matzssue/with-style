@@ -6,11 +6,7 @@ import { OrderData } from '@/types/orders'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const OrdersList = async ({
-  ordersData,
-}: {
-  ordersData: OrderData[]
-}) => {
+export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
   if (!ordersData) {
     return <div>Loading...</div>
   }
@@ -24,7 +20,10 @@ export const OrdersList = async ({
       <ul className='flex  w-auto flex-col gap-2 rounded-sm  px-4 py-6 shadow-sm'>
         {ordersData.map(
           ({ orderNumber, totalItems, totalPrice, orderId, products }) => (
-            <Card className={cn('w-auto border-2 border-secondary')}>
+            <Card
+              key={orderId}
+              className={cn('w-auto border-2 border-secondary')}
+            >
               <CardContent className={cn('flex gap-4 py-5')}>
                 <div className='flex flex-col gap-2'>
                   <p className='rounded-md bg-secondary px-4 py-2 text-lg shadow-sm'>

@@ -1,21 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+
+import { auth } from '@/auth'
 import { OrderData } from '@/types/orders'
 
-export async function GET(request: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams
+    const session = await auth()
+    const userRole = session?.user.role
+    const userId = session?.user.id
+    const searchParams = req.nextUrl.searchParams
     const orderId = searchParams.get('orderId')
 
-    if (!orderId) return
+    if (!orderId) {
+      return NextResponse.json(
+        { error: 'Order ID is required' },
+        { status: 400 }
+      )
+    }
 
     const order = await prisma.order.findFirst({
       where: { id: orderId },
       include: { products: { include: { product: true } } },
     })
 
+    if (userRole !== 'ADMIN' && userId !== order?.userId) {
+      return NextResponse.json(
+        { error: `Sorry you'r not allowed to see this page` },
+        { status: 403 }
+      )
+    }
+
     if (!order) {
-      return
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
 
     const orderMapped: OrderData = {
@@ -42,9 +59,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(orderMapped)
   } catch (error) {
     return NextResponse.json(
-      {
-        error: `Internal Server Error: ${error}`,
-      },
+      { error: 'Internal Server Error' },
       { status: 500 }
     )
   }
