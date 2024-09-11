@@ -23,7 +23,7 @@ export const ProductList = ({
     <div className='p-6'>
       <ul className='flex flex-wrap gap-5 max-lg:justify-center'>
         {products.map((product) => (
-          <ProductCard product={product}>
+          <ProductCard key={product.id} product={product}>
             <div className='flex items-center gap-4 max-md:flex-col'>
               <Link
                 className='rounded-sm bg-white px-4 py-2 shadow-sm hover:scale-105 max-md:w-full'

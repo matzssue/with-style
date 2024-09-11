@@ -3,8 +3,7 @@ import { Product } from '@prisma/client'
 
 export const getProduct = async (id: string) => {
   try {
-    // const url = new URL(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/product`)
-    const url = new URL(`http://localhost:3000/api/product`)
+    const url = new URL(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/product`)
     const querySearch = {
       productId: id,
     }

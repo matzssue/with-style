@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-export const useSelectList = <T,>(
+export const useSelectList = <T>(
   list: T[],
   filterFn: (item: T, searchValue: string) => boolean
 ) => {
@@ -19,7 +19,7 @@ export const useSelectList = <T,>(
       setListData(selectedProducts)
     }, 1000)
     return () => clearTimeout(delayDebounceFn)
-  }, [searchValue, list])
+  }, [searchValue, list, filterFn])
 
   return { searchValueHandler, listData, searchValue }
 }

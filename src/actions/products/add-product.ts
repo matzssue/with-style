@@ -7,7 +7,7 @@ type AddProductData = Omit<Product, 'id'>
 export const addProduct = async (product: AddProductData) => {
   try {
     const response = await fetch(
-      `${'http://localhost:3000'}/api/admin/product/add`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/product/add`,
       {
         method: 'PUT',
         headers: {

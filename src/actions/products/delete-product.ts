@@ -1,25 +1,23 @@
 'use server'
 
-import { Product } from '@prisma/client'
-
-export const editProduct = async (updatedProduct: Partial<Product>) => {
+export const deleteProduct = async (productId: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/product/edit`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/product/delete`,
       {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedProduct),
+        body: JSON.stringify(productId),
       }
     )
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-
-    return { success: 'Product successfully added' }
+    await response.json()
+    return { success: 'Product deleted' }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {
