@@ -9,7 +9,7 @@ export default async function ProductsAdmin({
 }) {
   const pageNumber = Number(searchParams.page || 1)
   const queryParams = {
-    page: pageNumber,
+    page: pageNumber.toString(),
   }
 
   const { data, metadata } = await getProducts(queryParams)
