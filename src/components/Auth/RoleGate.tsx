@@ -12,7 +12,7 @@ interface RoleGateProps {
 export const RoleGate = ({ children, allowedRole }: RoleGateProps) => {
   const role = useCurrentRole()
   if (role !== allowedRole) {
-    return <Alert type='error'>You'r not allowed to view this page</Alert>
+    return <Alert type='error'>You&apos;r not allowed to view this page</Alert>
   }
   return <>{children}</>
 }
