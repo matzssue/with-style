@@ -10,7 +10,6 @@ export default async function RootLayout({
   return (
     <>
       <Header staticNavigation={<StaticNavigation />} />
-      <UserBar />
       <main>{children}</main>
       <Footer />
     </>

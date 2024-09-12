@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <>
       <Header staticNavigation={<StaticNavigation />} />
-      <UserBar />
       <main className='flex w-full flex-col items-center justify-between'>
         <Hero />
         <TopProducts />
