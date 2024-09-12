@@ -21,8 +21,8 @@ export async function GET(request: NextRequest) {
       take: ITEMS_PER_PAGE,
       skip: skip,
       where: {
-        category: categoryToUpper,
-        type: type,
+        ...(categoryToUpper !== null && { category: categoryToUpper }),
+        ...(type !== null && { type: type }),
         ...(size !== null && { size: { has: size } }),
         ...(maxPrice &&
           minPrice !== null && {

@@ -8,135 +8,150 @@ import {
 } from 'react-icons/pi'
 
 import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi'
-
 import { FaRedhat } from 'react-icons/fa6'
+import { LogOut } from 'lucide-react'
+import { ProductCategory, ProductType } from '@prisma/client'
+import { ReactNode } from 'react'
 
-export const manNavLinks = [
+type LinksToProducts = {
+  title: string
+  link: ProductType | '/'
+  icon?: ReactNode
+}
+
+export const manNavLinks: LinksToProducts[] = [
   {
     title: 'T-shirt',
-    link: 'tshirt',
+    link: 'TSHIRT',
     icon: <PiTShirtLight />,
   },
   {
     title: 'Hoodie',
-    link: 'hoodie',
+    link: 'HOODIE',
     icon: <PiHoodieLight />,
   },
   {
     title: 'Sweater',
-    link: 'sweater',
+    link: 'SWEATER',
     icon: <PiHoodieLight />,
   },
   {
     title: 'Coat',
-    link: 'coat',
+    link: 'COAT',
     icon: <GiLabCoat />,
   },
   {
     title: 'Jeans',
-    link: 'jeans',
+    link: 'JEANS',
     icon: <PiPantsLight />,
   },
   {
     title: 'Sweatpants',
-    link: 'sweatpants',
+    link: 'SWEATPANTS',
     icon: <PiPantsLight />,
   },
   {
     title: 'Trousers',
-    link: 'trousers',
+    link: 'TROUSERS',
     icon: <PiPantsLight />,
   },
   { title: 'All', link: '/' },
 ]
 
-export const womanNavLinks = [
+export const womanNavLinks: LinksToProducts[] = [
   {
     title: 'T-shirt',
-    link: 'tshirt',
+    link: 'TSHIRT',
     icon: <PiTShirtLight />,
   },
   {
     title: 'Hoodie',
-    link: 'hoodie',
+    link: 'HOODIE',
     icon: <PiHoodieLight />,
   },
   {
     title: 'Sweater',
-    link: 'sweater',
+    link: 'SWEATER',
     icon: <PiHoodieLight />,
   },
   {
     title: 'Coat',
-    link: 'coat',
+    link: 'COAT',
     icon: <GiLabCoat />,
   },
   {
     title: 'Dress',
-    link: 'dress',
+    link: 'DRESS',
     icon: <PiDressLight />,
   },
   {
     title: 'Jeans',
-    link: 'jeans',
+    link: 'JEANS',
     icon: <PiPantsLight />,
   },
   {
     title: 'Sweatpants',
-    link: 'sweatpants',
+    link: 'SWEATPANTS',
     icon: <PiPantsLight />,
   },
   {
     title: 'Trousers',
-    link: 'trousers',
+    link: 'TROUSERS',
     icon: <PiPantsLight />,
   },
   { title: 'All', link: '/' },
 ]
 
-export const shoesNavLinks = [
+export const shoesNavLinks: LinksToProducts[] = [
   {
     title: 'Sneakers',
-    link: 'sneakers',
+    link: 'SNEAKERS',
     icon: <GiBoots />,
   },
   {
     title: 'Pumps',
-    link: 'pumps',
+    link: 'PUMPS',
     icon: <GiBoots />,
   },
   {
     title: 'Flat shoes',
-    link: 'flatshoes',
+    link: 'FLATSHOES',
     icon: <GiBoots />,
   },
   {
     title: 'Sport shoes',
-    link: 'sportshoes',
+    link: 'SPORTSHOES',
     icon: <GiBoots />,
   },
   { title: 'All', link: '/' },
 ]
-export const accessoriesNavLinks = [
+export const accessoriesNavLinks: LinksToProducts[] = [
   {
     title: 'Watches',
-    link: 'watches',
+    link: 'WATCH',
     icon: <PiWatchLight />,
   },
   {
     title: 'Belts',
-    link: 'belts',
+    link: 'BELT',
     icon: <GiBelt />,
   },
   {
     title: 'Bags',
-    link: 'bags',
+    link: 'BAG',
     icon: <PiHandbagSimpleLight />,
   },
   {
     title: 'Caps',
-    link: 'caps',
+    link: 'CAP',
     icon: <FaRedhat />,
   },
-  { title: 'All', link: 'all' },
+  { title: 'All', link: '/' },
+]
+
+export const adminNavList = [
+  { title: 'Statistics', link: '/admin' },
+  { title: 'Products ', link: '/admin/products' },
+  { title: 'Orders', link: '/admin/orders' },
+  { title: 'Exit', link: '/', icon: <LogOut /> },
 ]

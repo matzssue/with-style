@@ -35,6 +35,7 @@ export default async function TypeProducts({
   if (searchParams.minPrice) queryParams.minPrice = searchParams.minPrice
   if (searchParams.maxPrice) queryParams.maxPrice = searchParams.maxPrice
   if (searchParams.size) queryParams.size = searchParams.size
+  queryParams.page = pageNumber.toString()
 
   const { data, metadata }: ProductsData = await getProducts(queryParams)
 

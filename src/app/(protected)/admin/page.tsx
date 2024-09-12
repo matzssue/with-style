@@ -1,3 +1,9 @@
-export default function AdminDashboard() {
-  return <h1>Hello</h1>
+import { currentRole } from '@/lib/auth/auth'
+
+import { Statistics } from './(components)/Statistics'
+
+export default async function AdminDashboard() {
+  const role = await currentRole()
+
+  return <Statistics />
 }

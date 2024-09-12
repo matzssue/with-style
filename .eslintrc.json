@@ -4,7 +4,7 @@
     "prettier" // Enables eslint-plugin-prettier
   ],
   "rules": {
-    "prettier/prettier": "warn", // Or "error" if you prefer
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "react/jsx-key": "off"
   }
 }

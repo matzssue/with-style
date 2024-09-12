@@ -20,10 +20,10 @@ type NavigationLinks = {
 export const ProductsMenu = () => {
   const param = useParams()
   const pathname = usePathname()
+  const categorySlug = param.productsSlug[0]
   const [categories, setCategories] = useState<NavigationLinks[] | ''>('')
-
   useEffect(() => {
-    switch (param.categorySlug) {
+    switch (categorySlug) {
       case 'man':
         setCategories(manNavLinks)
         break
@@ -37,8 +37,7 @@ export const ProductsMenu = () => {
         setCategories(accessoriesNavLinks)
       default:
     }
-  }, [param.categorySlug])
-
+  }, [categorySlug])
   return (
     <div className='flex w-1/4 min-w-[300px] flex-col justify-start gap-5 border-r-2 bg-neutral-100 px-8 py-5 max-lg:w-full max-lg:border-r-0'>
       <div className='max-lg:hidden'>
@@ -49,12 +48,12 @@ export const ProductsMenu = () => {
               <li key={title}>
                 <Link
                   className={
-                    pathname === `/products/${param.categorySlug}/${link}` ||
-                    pathname === `/products/${param.categorySlug}`
+                    pathname === `/products/${categorySlug}/${link}` ||
+                    pathname === `/products/${categorySlug}`
                       ? 'font-bold'
                       : ''
                   }
-                  href={`/products/${param.categorySlug}/${link}`}
+                  href={`/products/${categorySlug}/${link}`}
                 >
                   {title}
                 </Link>
@@ -63,7 +62,6 @@ export const ProductsMenu = () => {
         </ul>
       </div>
       <hr />
-
       <FilterForm />
       <hr />
     </div>

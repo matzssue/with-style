@@ -31,6 +31,7 @@ const config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         bgNavButton: 'hsl(var(--bg-nav-button))',
+        textHover: 'hsl(var(--text-hover))',
         primary: {
           white: 'hsl(var(--primary-white))',
           DEFAULT: 'hsl(var(--primary))',
