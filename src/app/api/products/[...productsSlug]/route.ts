@@ -7,17 +7,20 @@ import { ITEMS_PER_PAGE } from '@/constants/pages'
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
+
     const categories = searchParams.get('category')
     const type = searchParams.get('type')?.toUpperCase() as ProductType
     const size = searchParams.get('size') as Size
     const minPrice = searchParams.get('minPrice') as string
     const page = searchParams.get('page')
     const maxPrice = searchParams.get('maxPrice') as string
+    const sortByPrice = searchParams.get('sortByPrice') as 'asc' | 'desc' | null
     const categoryToUpper = categories?.toUpperCase() as ProductCategory
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
 
     const products = await prisma.product.findMany({
+      ...(sortByPrice !== null && { orderBy: [{ price: sortByPrice }] }),
       take: ITEMS_PER_PAGE,
       skip: skip,
       where: {

@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { Slider } from '@/components/ui/slider'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,7 +24,7 @@ import {
 import { sizes } from '@/constants/sizes'
 import { useState } from 'react'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { updateFilters } from '@/actions/products/filter-products'
 import {
   FilterProductsSchema,
@@ -47,6 +46,7 @@ const defaultFormValues = {
 
 export const FilterForm = () => {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const [priceFilter, setPriceFilter] = useState<PriceFilter | null>({
     min: defaultFormValues.price[0],
     max: defaultFormValues.price[1],
@@ -58,7 +58,17 @@ export const FilterForm = () => {
   })
 
   function onSubmit(data: FilterProductsSchema) {
-    updateFilters(data, pathname)
+    const minPrice = data.price[0].toString()
+    const maxPrice = data.price[1].toString()
+    const size = data.size
+    const sortByPrice = searchParams.get('sortByPrice')
+    const fitlerData = {
+      minPrice,
+      maxPrice,
+      size,
+      sortByPrice,
+    }
+    updateFilters(fitlerData, pathname)
   }
 
   return (
