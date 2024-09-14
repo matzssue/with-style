@@ -20,6 +20,7 @@ import {
   sortProductsSchema,
   SortProductsSchema,
 } from '@/lib/schemas/sort-schema'
+import { cn } from '@/lib/utils'
 
 const priceSortTypes = [
   { title: 'Default', value: '' },
@@ -56,44 +57,49 @@ export const SortingMenu = () => {
     updateFilters(filterData, pathname)
   }
   return (
-    <div className='flex gap-5'>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='flex space-y-6 px-2'
-        >
-          <FormField
-            control={form.control}
-            name='sortByPrice'
-            render={({ field }) => (
-              <FormItem className='space-y-3'>
-                <FormLabel>Price</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className='flex flex-col space-y-1'
-                  >
-                    {priceSortTypes.map(({ title, value }) => (
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
-                        <FormControl>
-                          <RadioGroupItem value={value} />
-                        </FormControl>
-                        <FormLabel className='font-normal'>{title}</FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='flex gap-x-5 bg-neutral-100 px-3 py-2'
+      >
+        <FormField
+          control={form.control}
+          name='sortByPrice'
+          render={({ field }) => (
+            <FormItem className='flex items-center justify-center gap-5 space-y-0 '>
+              <FormLabel className='flex  text-lg font-semibold'>
+                Sort by price
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className='flex'
+                >
+                  {priceSortTypes.map(({ title, value }) => (
+                    <FormItem
+                      className={cn('flex items-center space-x-3 space-y-0')}
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={value} />
+                      </FormControl>
+                      <FormLabel className='font-normal'>{title}</FormLabel>
+                    </FormItem>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-          <Button className='m-auto w-1/2' type='submit'>
-            Submit
-          </Button>
-        </form>
-      </Form>
-    </div>
+        <button
+          className='rounded-md px-2 py-2 font-bold text-primary underline'
+          type='submit'
+        >
+          Save
+        </button>
+      </form>
+    </Form>
   )
 }
