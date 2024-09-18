@@ -78,6 +78,7 @@ export const SortingMenu = () => {
                 >
                   {priceSortTypes.map(({ title, value }) => (
                     <FormItem
+                      key={value}
                       className={cn('flex items-center space-x-3 space-y-0')}
                     >
                       <FormControl>

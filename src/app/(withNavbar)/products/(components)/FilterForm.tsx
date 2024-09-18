@@ -21,8 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { sizes } from '@/constants/sizes'
-import { useState } from 'react'
+import { shoesSize, sizes } from '@/constants/sizes'
+import { useEffect, useState } from 'react'
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { updateFilters } from '@/actions/products/filter-products'
@@ -37,7 +37,7 @@ type PriceFilter = {
 }
 
 const minPrice = 0
-const maxPrice = 1000
+const maxPrice = 500
 
 const defaultFormValues = {
   size: undefined,
@@ -47,10 +47,23 @@ const defaultFormValues = {
 export const FilterForm = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const [productsType, setProductsType] = useState<string[] | null>(null)
   const [priceFilter, setPriceFilter] = useState<PriceFilter | null>({
     min: defaultFormValues.price[0],
     max: defaultFormValues.price[1],
   })
+  const shoesSizeData = shoesSize.map((size) => size.toString())
+
+  useEffect(() => {
+    if (pathname.includes('shoes')) {
+      setProductsType(shoesSizeData)
+    } else if (pathname.includes('accesories')) {
+      setProductsType(null)
+    } else {
+      setProductsType(sizes)
+    }
+  }, [pathname])
 
   const form = useForm<FilterProductsSchema>({
     resolver: zodResolver(filterProductsSchema),
@@ -97,11 +110,12 @@ export const FilterForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Sizes</SelectLabel>
-                      {sizes.map((size) => (
-                        <SelectItem key={size} value={size}>
-                          {size}
-                        </SelectItem>
-                      ))}
+                      {productsType &&
+                        productsType.map((size) => (
+                          <SelectItem key={size} value={size}>
+                            {size}
+                          </SelectItem>
+                        ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -122,9 +136,9 @@ export const FilterForm = () => {
                 </div>
                 <FormControl>
                   <Slider
-                    min={10}
-                    max={1000}
-                    step={50}
+                    min={minPrice}
+                    max={maxPrice}
+                    step={20}
                     defaultValue={field.value}
                     onValueChange={(value) => {
                       setPriceFilter({ min: value[0], max: value[1] })
