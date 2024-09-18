@@ -37,7 +37,7 @@ type PriceFilter = {
 }
 
 const minPrice = 0
-const maxPrice = 1000
+const maxPrice = 500
 
 const defaultFormValues = {
   size: undefined,
@@ -136,9 +136,9 @@ export const FilterForm = () => {
                 </div>
                 <FormControl>
                   <Slider
-                    min={10}
-                    max={1000}
-                    step={50}
+                    min={minPrice}
+                    max={maxPrice}
+                    step={20}
                     defaultValue={field.value}
                     onValueChange={(value) => {
                       setPriceFilter({ min: value[0], max: value[1] })
