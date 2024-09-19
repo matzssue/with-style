@@ -11,7 +11,7 @@ import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 
 import { AddProductForm } from './(components)/AddProductForm'
 
-import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
+import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
 import { getProduct } from '@/data/products/get-product'
