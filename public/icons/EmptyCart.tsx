@@ -2,8 +2,8 @@ export const EmptyCart = () => {
   return (
     <svg
       id='SvgjsSvg1047'
-      width='360'
-      height='360'
+      width='300'
+      height='300'
       xmlns='http://www.w3.org/2000/svg'
       version='1.1'
     >
@@ -13,8 +13,8 @@ export const EmptyCart = () => {
           xmlns='http://www.w3.org/2000/svg'
           data-name='Layer 1'
           viewBox='0 0 650 512'
-          width='360'
-          height='360'
+          width='300'
+          height='300'
         >
           <circle
             cx='337.969'
@@ -38,9 +38,9 @@ export const EmptyCart = () => {
           <path
             fill='none'
             stroke='#f9ae2b'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='4'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='4'
             d='M324.05253,138.77179q-.00092-.08715-.00092-.17432a16.62566,16.62566,0,1,1,16.86682,16.62391v15.09678'
             className='colorStrokef9ae2b svgStroke'
           ></path>
@@ -51,9 +51,9 @@ export const EmptyCart = () => {
             y2='116.939'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -63,9 +63,9 @@ export const EmptyCart = () => {
             y2='126.25'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -75,9 +75,9 @@ export const EmptyCart = () => {
             y2='135.56'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -87,9 +87,9 @@ export const EmptyCart = () => {
             y2='293.762'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -99,9 +99,9 @@ export const EmptyCart = () => {
             y2='303.072'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -111,9 +111,9 @@ export const EmptyCart = () => {
             y2='312.383'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -123,9 +123,9 @@ export const EmptyCart = () => {
             y2='360.156'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -135,9 +135,9 @@ export const EmptyCart = () => {
             y2='369.467'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <line
@@ -147,9 +147,9 @@ export const EmptyCart = () => {
             y2='378.777'
             fill='none'
             stroke='#3086a3'
-            stroke-linecap='round'
-            stroke-miterlimit='10'
-            stroke-width='3'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='3'
             className='colorStroke3086a3 svgStroke'
           ></line>
           <circle
