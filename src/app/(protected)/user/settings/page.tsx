@@ -58,8 +58,8 @@ export default function SettingsPage() {
       </div>
     )
   return (
-    <div className='flex  flex-col items-center  py-5 '>
-      <div className='flex h-[600px] w-[600px] flex-col  justify-around gap-2 rounded-sm  bg-neutral-100 px-4 py-6 shadow-md'>
+    <div className='flex  flex-col items-center px-2  py-5 max-md:py-8 '>
+      <div className='flex h-[800px] w-full max-w-[800px] flex-col  justify-around gap-2 rounded-sm  bg-neutral-100 px-4 py-6 shadow-md'>
         <p className='rounded-sm bg-secondary px-4 py-4 text-center text-2xl font-semibold shadow-sm'>
           Settings
         </p>

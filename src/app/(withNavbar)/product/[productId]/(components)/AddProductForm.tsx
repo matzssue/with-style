@@ -67,8 +67,8 @@ export const AddProductForm = ({ product }: { product: Product }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {product.size.map((size: Size) => (
-                      <SelectItem key={size} value={size}>
+                    {product.size.map((size: string | number) => (
+                      <SelectItem key={size} value={size.toString()}>
                         {size}
                       </SelectItem>
                     ))}

@@ -8,9 +8,8 @@ import { currentUser } from '@/lib/auth/auth'
 export default async function UserBar() {
   const user = await currentUser()
   return (
-    // <div className='flex w-full max-w-[150px] flex-row justify-end self-end rounded-bl-[60px] bg-neutral-100 p-5  max-md:flex-col max-md:gap-y-5'>
-    <div className=' absolute right-0 top-20 max-w-[150px] flex-row justify-end self-end rounded-bl-[60px] bg-neutral-100 p-5  max-md:flex-col max-md:gap-y-5'>
-      <div className='flex justify-end gap-8  align-middle max-md:justify-center '>
+    <div className=' absolute right-0 top-20 w-full max-w-[140px] flex-row justify-end self-end rounded-bl-[60px] bg-neutral-100 p-5  max-md:flex-col max-md:gap-y-5'>
+      <div className='flex justify-end gap-5  align-middle max-md:justify-center '>
         <ShoppingBag />
         {user ? (
           <UserMenu user={user} />

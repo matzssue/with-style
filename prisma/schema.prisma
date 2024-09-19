@@ -14,7 +14,7 @@ enum ProductCategory {
   MAN
   WOMAN
   SHOES
-  ACCESORIES
+  ACCESSORIES
 }
 
 enum ProductType {
@@ -87,7 +87,6 @@ model Product {
   orders       ProductInOrder[]
   imgUrl       String
   size         String[]
-
   wishlistedBy User[]           @relation("WishlistProducts")
 }
 

@@ -5,7 +5,7 @@ import type { Product } from '@prisma/client'
 
 import { AddProduct } from '../../product/[productId]/(components)/AddProduct'
 
-import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
+import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
 import { ProductCard } from '@/components/Cards/ProductCard'
 
 export type Wishlisted = {

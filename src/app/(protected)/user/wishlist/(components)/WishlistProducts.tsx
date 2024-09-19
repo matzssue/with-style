@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { RemoveProductFromWishlist } from './RemoveProductFromWishlist'
 export const WishlistProducts = ({ products }: { products: Product[] }) => {
   return (
-    <ul className='flex flex-wrap gap-5 max-lg:justify-center'>
+    <ul className='flex w-full flex-wrap gap-5 max-lg:justify-center'>
       {products.map((product) => (
         <li
           key={product.id}
-          className='relative flex w-[200px] flex-col justify-between gap-5 rounded-md bg-secondary p-5 shadow-md max-md:w-[150px]'
+          className='relative flex w-full max-w-[200px] flex-col justify-between gap-5 rounded-md bg-secondary p-5 shadow-md max-md:max-w-[250px]'
         >
           <RemoveProductFromWishlist productId={product.id} />
 
