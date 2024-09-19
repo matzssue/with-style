@@ -58,7 +58,7 @@ export const FilterForm = () => {
   useEffect(() => {
     if (pathname.includes('shoes')) {
       setProductsType(shoesSizeData)
-    } else if (pathname.includes('accesories')) {
+    } else if (pathname.includes('accessories')) {
       setProductsType(null)
     } else {
       setProductsType(sizes)
