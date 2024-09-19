@@ -24,7 +24,7 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
               key={orderId}
               className={cn('w-auto border-2 border-secondary')}
             >
-              <CardContent className={cn('flex gap-4 py-5')}>
+              <CardContent className={cn('flex gap-4 py-5 max-md:flex-col')}>
                 <div className='flex flex-col gap-2'>
                   <p className='rounded-md bg-secondary px-4 py-2 text-lg shadow-sm'>
                     Order number: <b>{orderNumber} </b>
@@ -41,7 +41,7 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                     </Link>
                   </Button>
                 </div>
-                <div className='flex items-center justify-center gap-5'>
+                <div className='flex items-center justify-center gap-5 max-md:flex-col'>
                   <p className='pb-2 text-xl'>Order Products: </p>
                   <div>
                     <ul className='flex gap-6'>

@@ -31,7 +31,7 @@ export const AdminProductList = ({ products }: { products: Product[] }) => {
           value={searchValue}
         />
       </div>
-      <div className='flex flex-wrap gap-5'>
+      <div className='flex flex-wrap gap-5 max-md:justify-center'>
         {listData.map((product) => (
           <ProductCard key={product.id} product={product}>
             <div className='flex gap-5 '>

@@ -20,8 +20,8 @@ export default function AdminLayout({
           width={350}
           src={Logo}
         />
-        <nav className='flex w-full items-center justify-start pl-5'>
-          <ul className='flex h-full items-center justify-center gap-10'>
+        <nav className='flex w-full items-center justify-start pl-5  max-md:pl-0'>
+          <ul className='flex h-full items-center justify-center gap-10 max-md:flex-wrap max-md:p-4 '>
             {adminNavList.map(({ link, title, icon }) => (
               <li
                 key={link + title}

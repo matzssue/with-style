@@ -56,7 +56,8 @@ export default async function Page({
             </span>
           </div>
           <div className='rounded-md bg-neutral-100 px-6 py-4'>
-            <ul className=' flex gap-5 '>
+            <p className='py-2 text-2xl'>Products:</p>
+            <ul className=' flex gap-5 max-md:flex-col '>
               {products.map(
                 ({ name, price, productId, size, imgUrl, type, category }) => (
                   <li className='flex  gap-5' key={productId}>
