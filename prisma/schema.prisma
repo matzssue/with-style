@@ -81,6 +81,7 @@ model Product {
   id           String           @id @default(cuid())
   name         String
   price        Float 
+  discountPercentage      Float?
   category     ProductCategory
   subcategory  String?
   type         ProductType
