@@ -15,6 +15,7 @@ import { WishlistToggleButton } from '../../../(protected)/user/(components)/Wis
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
 import { getProduct } from '@/data/products/get-product'
+import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDiscount'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -33,10 +34,18 @@ export default async function ProductPage({
   const product = await getProduct(productId)
   const userWishlist = await getWishlistProductsId(userId)
   if (!product) return <div>Error while loading a product.</div>
+
+  const discountPrice = calculatePriceWithDiscount(
+    product.price,
+    product.discountPercentage
+  )
+
   return (
     <section className='flex w-full items-center justify-center  p-5'>
-      <div className=' flex w-5/6 justify-center gap-12  bg-neutral-100 p-5 max-md:w-auto max-md:flex-col'>
-        <ImageMagnifier altImage={product.name} imageUrl={product.imgUrl} />
+      <div className=' flex w-1/2 min-w-[700px] justify-center  gap-12 bg-neutral-100 p-5 max-lg:w-full max-md:min-w-[100px] max-md:flex-col'>
+        <div>
+          <ImageMagnifier altImage={product.name} imageUrl={product.imgUrl} />
+        </div>
 
         <div className='flex  w-full flex-col gap-10'>
           <div className='flex flex-col gap-2'>
@@ -44,8 +53,20 @@ export default async function ProductPage({
               {product.name}
             </h1>
             <p className='italic'>{product.type}</p>
+
             <p>
-              <b> Price:</b> {product.price} $
+              Price:{' '}
+              <span
+                className={`font-semibold ${discountPrice ? 'line-through' : ''}`}
+              >
+                {product.price}$
+              </span>{' '}
+              {product.discountPercentage && (
+                <span className='font-semibold text-red-500'>
+                  {' '}
+                  -{product.discountPercentage}% {discountPrice}$
+                </span>
+              )}
             </p>
           </div>
           <div className='flex flex-col gap-2'>
