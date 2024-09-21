@@ -22,11 +22,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Product, Size } from '@prisma/client'
+import { Product } from '@prisma/client'
 import { useCartActions } from '@/hooks/use-add-product-to-cart'
 
 interface SizeFormInput {
-  size: Size | null
+  size: string | null
 }
 
 export const AddProductForm = ({ product }: { product: Product }) => {

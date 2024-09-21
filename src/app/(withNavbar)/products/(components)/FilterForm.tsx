@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,6 +31,7 @@ import {
   FilterProductsSchema,
   filterProductsSchema,
 } from '@/lib/schemas/filter-schema'
+import { Checkbox } from '@/components/ui/checkbox'
 
 type PriceFilter = {
   min: number
@@ -42,6 +44,7 @@ const maxPrice = 500
 const defaultFormValues = {
   size: undefined,
   price: [minPrice, maxPrice],
+  promotions: false,
 }
 
 export const FilterForm = () => {
@@ -75,11 +78,13 @@ export const FilterForm = () => {
     const maxPrice = data.price[1].toString()
     const size = data.size
     const sortByPrice = searchParams.get('sortByPrice')
+    const promotions = data.promotions ? 'true' : null
     const fitlerData = {
       minPrice,
       maxPrice,
       size,
       sortByPrice,
+      promotions,
     }
     updateFilters(fitlerData, pathname)
   }
@@ -151,7 +156,23 @@ export const FilterForm = () => {
               </FormItem>
             )}
           ></FormField>
-
+          <FormField
+            control={form.control}
+            name='promotions'
+            render={({ field }) => (
+              <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md py-4'>
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className='space-y-1 leading-none'>
+                  <FormLabel>Only promotions</FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
           <Button className='m-auto w-1/2' type='submit'>
             Submit
           </Button>

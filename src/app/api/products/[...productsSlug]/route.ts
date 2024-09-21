@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import { ProductCategory, ProductType, Size } from '@prisma/client'
+import { ProductCategory, ProductType } from '@prisma/client'
 import { ProductsData } from '@/types/products'
 import { ITEMS_PER_PAGE } from '@/constants/pages'
 
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
     const categories = searchParams.get('category')
     const type = searchParams.get('type')?.toUpperCase() as ProductType
-    const size = searchParams.get('size') as Size
+    const size = searchParams.get('size')
     const minPrice = searchParams.get('minPrice') as string
     const page = searchParams.get('page')
     const maxPrice = searchParams.get('maxPrice') as string
@@ -18,6 +18,8 @@ export async function GET(request: NextRequest) {
     const categoryToUpper = categories?.toUpperCase() as ProductCategory
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
+    const promotions = searchParams.get('promotions')
+    const subcategory = searchParams.get('subcategory')
 
     const products = await prisma.product.findMany({
       ...(sortByPrice !== null && { orderBy: [{ price: sortByPrice }] }),
@@ -26,7 +28,9 @@ export async function GET(request: NextRequest) {
       where: {
         ...(categoryToUpper !== null && { category: categoryToUpper }),
         ...(type !== null && { type: type }),
+        ...(subcategory !== null && { subcategory: subcategory }),
         ...(size !== null && { size: { has: size } }),
+        ...(promotions !== null && { discountPercentage: { not: null } }),
         ...(maxPrice &&
           minPrice !== null && {
             price: {

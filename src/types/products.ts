@@ -23,4 +23,5 @@ export type ProductsQueryParams = {
   maxPrice?: string
   page?: string
   sortByPrice?: string
+  promotions?: string
 }
