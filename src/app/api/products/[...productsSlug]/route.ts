@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
     const promotions = searchParams.get('promotions')
-    const subcategory = searchParams.get('subcategory')
+    const subcategory = searchParams.get('subcategory')?.toUpperCase()
 
     const products = await prisma.product.findMany({
       ...(sortByPrice !== null && { orderBy: [{ price: sortByPrice }] }),

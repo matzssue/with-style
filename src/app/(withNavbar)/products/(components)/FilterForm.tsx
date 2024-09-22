@@ -78,6 +78,7 @@ export const FilterForm = () => {
     const maxPrice = data.price[1].toString()
     const size = data.size
     const sortByPrice = searchParams.get('sortByPrice')
+    const subcategory = searchParams.get('subcategory')
     const promotions = data.promotions ? 'true' : null
     const fitlerData = {
       minPrice,
@@ -85,6 +86,7 @@ export const FilterForm = () => {
       size,
       sortByPrice,
       promotions,
+      subcategory,
     }
     updateFilters(fitlerData, pathname)
   }

@@ -55,6 +55,7 @@ export const SortingMenu = () => {
       maxPrice: searchParams.get('maxPrice'),
       size: searchParams.get('size'),
       promotions: searchParams.get('promotions'),
+      subcategory: searchParams.get('subcategory'),
     }
     updateFilters(filterData, pathname)
   }
