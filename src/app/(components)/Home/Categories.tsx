@@ -20,18 +20,31 @@ export const Categories = () => {
 
         <div className='flex w-5/6 justify-between gap-x-10 gap-y-5 bg-neutral-50 max-md:flex-col max-md:items-center max-md:justify-center'>
           <div className="max-w-[450px] bg-[url('/images/woman-category-image.jpg')] bg-cover bg-center 2xl:min-h-[800px]">
-            <CategoryCard categoryTitle='For woman' links={manNavLinks} />
+            <CategoryCard
+              categoryTitle='For woman'
+              category='woman'
+              links={manNavLinks}
+            />
           </div>
           <div className="max-w-[450px] bg-[url('/images/clothing.jpg')] bg-cover bg-center 2xl:min-h-[800px] ">
-            <CategoryCard categoryTitle='For man' links={womanNavLinks} />
+            <CategoryCard
+              categoryTitle='For man'
+              category='man'
+              links={womanNavLinks}
+            />
           </div>
           <div className='flex flex-col gap-y-5'>
             <div className="max-w-[450px] bg-[url('/images/shoes.jpg')] bg-cover bg-center  2xl:min-h-[400px] ">
-              <CategoryCard categoryTitle='Shoes' links={shoesNavLinks} />
+              <CategoryCard
+                categoryTitle='Shoes'
+                category='shoes'
+                links={shoesNavLinks}
+              />
             </div>
             <div className="max-w-[450px] bg-[url('/images/accessories.jpg')] bg-cover bg-center max-xl:min-w-[300px] max-md:min-w-[200px] 2xl:min-h-[400px]">
               <CategoryCard
                 categoryTitle='Accessories'
+                category='accessories'
                 links={accessoriesNavLinks}
               />
             </div>

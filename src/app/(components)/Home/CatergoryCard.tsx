@@ -3,6 +3,7 @@ import Link from 'next/link'
 type CategoryCard = {
   links: LinksProps[]
   categoryTitle: string
+  category: string
 }
 
 type LinksProps = {
@@ -10,7 +11,11 @@ type LinksProps = {
   link: string
 }
 
-export const CategoryCard = ({ links, categoryTitle }: CategoryCard) => {
+export const CategoryCard = ({
+  links,
+  categoryTitle,
+  category,
+}: CategoryCard) => {
   return (
     <div className='flex w-auto flex-col p-5'>
       <p className=' rounded-sm bg-primary p-5 text-3xl font-bold text-secondary shadow-lg'>
@@ -24,7 +29,7 @@ export const CategoryCard = ({ links, categoryTitle }: CategoryCard) => {
           >
             <Link
               className='block rounded-sm  text-xl text-primary'
-              href={link}
+              href={`products/${category}/${link}`}
             >
               {title}
             </Link>
