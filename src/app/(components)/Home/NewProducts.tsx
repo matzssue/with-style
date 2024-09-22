@@ -23,7 +23,7 @@ export const NewProducts = async () => {
               New summer collection
             </p>
             <div className='flex gap-2'>
-              <ButtonLink href='/products/woman?subcategory=summer'>
+              <ButtonLink href='/products/man?subcategory=summer'>
                 Man collection
               </ButtonLink>
               <ButtonLink href='/products/woman?subcategory=summer'>
