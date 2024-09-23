@@ -6,4 +6,5 @@ export const filterProductsSchema = z.object({
   size: z.string().optional(),
   price: z.number().array(),
   promotions: z.boolean().optional(),
+  subcategory: z.string().optional(),
 })

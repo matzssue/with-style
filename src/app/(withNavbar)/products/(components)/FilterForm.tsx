@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { shoesSize, sizes } from '@/constants/sizes'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { updateFilters } from '@/actions/products/filter-products'
@@ -32,6 +32,7 @@ import {
   filterProductsSchema,
 } from '@/lib/schemas/filter-schema'
 import { Checkbox } from '@/components/ui/checkbox'
+import { getSubcategoryTitles } from '@/data/products/get-subcategories'
 
 type PriceFilter = {
   min: number
@@ -40,23 +41,45 @@ type PriceFilter = {
 
 const minPrice = 0
 const maxPrice = 500
+const defaultSize = 'ALL'
+const defaultSubcategory = 'ALL'
+const defaultPromotions = false
 
 const defaultFormValues = {
-  size: undefined,
+  size: defaultSize,
   price: [minPrice, maxPrice],
-  promotions: false,
 }
 
 export const FilterForm = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
   const [productsType, setProductsType] = useState<string[] | null>(null)
+  const [subcategories, setSubcategories] = useState<string[]>([])
+  const [error, setError] = useState<string | null>()
+
   const [priceFilter, setPriceFilter] = useState<PriceFilter | null>({
     min: defaultFormValues.price[0],
     max: defaultFormValues.price[1],
   })
-  const shoesSizeData = shoesSize.map((size) => size.toString())
+
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      try {
+        const data: string[] = await getSubcategoryTitles()
+        setSubcategories([defaultSubcategory, ...data])
+      } catch (err) {
+        setError('Error fetching subcategory titles')
+      }
+    }
+
+    fetchSubcategories()
+  }, [])
+
+  const selectedSubcategory =
+    searchParams.get('subcategory')?.toUpperCase() || defaultSubcategory
+
+  const isPromotionsSelected =
+    !!searchParams.get('promotions') || defaultPromotions
 
   useEffect(() => {
     if (pathname.includes('shoes')) {
@@ -68,25 +91,40 @@ export const FilterForm = () => {
     }
   }, [pathname])
 
+  const shoesSizeData = useMemo(
+    () => shoesSize.map((size) => size.toString()),
+    [shoesSize]
+  )
   const form = useForm<FilterProductsSchema>({
     resolver: zodResolver(filterProductsSchema),
-    defaultValues: defaultFormValues,
+    defaultValues: {
+      ...defaultFormValues,
+      subcategory: selectedSubcategory,
+      promotions: isPromotionsSelected,
+    },
   })
 
   function onSubmit(data: FilterProductsSchema) {
-    const minPrice = data.price[0].toString()
-    const maxPrice = data.price[1].toString()
+    const minPrice =
+      data.price[0] !== defaultFormValues.price[0]
+        ? data.price[0].toString()
+        : null
+    const maxPrice =
+      data.price[1] !== defaultFormValues.price[1]
+        ? data.price[1].toString()
+        : null
     const size = data.size
     const sortByPrice = searchParams.get('sortByPrice')
-    const subcategory = searchParams.get('subcategory')
+    const subcategory = data.subcategory ?? searchParams.get('subcategory')
     const promotions = data.promotions ? 'true' : null
+
     const fitlerData = {
       minPrice,
       maxPrice,
-      size,
+      size: size !== defaultSize ? size : null,
       sortByPrice,
       promotions,
-      subcategory,
+      subcategory: subcategory !== defaultSubcategory ? subcategory : null,
     }
     updateFilters(fitlerData, pathname)
   }
@@ -99,6 +137,39 @@ export const FilterForm = () => {
           className='flex flex-col space-y-6 px-2'
         >
           <p className='py-2 text-3xl font-bold'>Filters</p>
+          <FormField
+            control={form.control}
+            name='subcategory'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Collection</FormLabel>
+
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className='w-[180px]'>
+                      <SelectValue placeholder='Select collection' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Collections</SelectLabel>
+                      {subcategories &&
+                        subcategories.map((size) => (
+                          <SelectItem key={size} value={size}>
+                            {size}
+                          </SelectItem>
+                        ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          ></FormField>
           <FormField
             control={form.control}
             name='size'
@@ -117,6 +188,9 @@ export const FilterForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Sizes</SelectLabel>
+                      <SelectItem key={defaultSize} value={defaultSize}>
+                        {defaultSize}
+                      </SelectItem>
                       {productsType &&
                         productsType.map((size) => (
                           <SelectItem key={size} value={size}>
@@ -175,6 +249,8 @@ export const FilterForm = () => {
               </FormItem>
             )}
           />
+
+          {error && <p>{error}</p>}
           <Button className='m-auto w-1/2' type='submit'>
             Submit
           </Button>

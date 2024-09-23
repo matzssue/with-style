@@ -22,6 +22,7 @@ export const ProductsMenu = () => {
   const pathname = usePathname()
   const categorySlug = param.productsSlug[0]
   const [categories, setCategories] = useState<NavigationLinks[] | ''>('')
+
   useEffect(() => {
     switch (categorySlug) {
       case 'man':
@@ -38,6 +39,7 @@ export const ProductsMenu = () => {
       default:
     }
   }, [categorySlug])
+
   return (
     <div className='flex w-1/4 min-w-[300px] flex-col justify-start gap-5 border-r-2 bg-neutral-100 px-8 py-5 max-lg:w-full max-lg:border-r-0'>
       <div className='max-lg:hidden'>
@@ -49,7 +51,8 @@ export const ProductsMenu = () => {
                 <Link
                   className={
                     pathname === `/products/${categorySlug}/${link}` ||
-                    pathname === `/products/${categorySlug}`
+                    (pathname === `/products/${categorySlug}` &&
+                      title.toLowerCase() === 'all')
                       ? 'font-bold'
                       : ''
                   }
