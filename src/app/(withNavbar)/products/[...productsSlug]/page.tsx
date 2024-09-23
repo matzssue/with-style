@@ -25,7 +25,7 @@ export default async function TypeProducts({
   const pageNumber = Number(searchParams.page || 1)
   const categorySlug = params.productsSlug[0]
   const typeSlug = params.productsSlug[1]
-  console.log(categorySlug, typeSlug, 'slugs')
+
   const queryParams: ProductsQueryParams = {}
   if (categorySlug) queryParams.category = categorySlug
   if (typeSlug) queryParams.type = typeSlug
