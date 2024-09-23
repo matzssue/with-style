@@ -31,13 +31,14 @@ export async function GET(request: NextRequest) {
         ...(subcategory !== null && { subcategory: subcategory }),
         ...(size !== null && { size: { has: size } }),
         ...(promotions !== null && { discountPercentage: { not: null } }),
-        ...(maxPrice &&
-          minPrice !== null && {
-            price: {
-              gte: +minPrice,
-              lte: +maxPrice,
-            },
-          }),
+        ...(maxPrice !== null && {
+          price: {
+            lte: +maxPrice,
+          },
+        }),
+        ...(minPrice !== null && {
+          price: { gte: +minPrice },
+        }),
       },
     })
 
