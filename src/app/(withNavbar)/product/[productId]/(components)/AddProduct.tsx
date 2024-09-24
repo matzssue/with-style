@@ -33,7 +33,7 @@ export const AddProduct = (product: Product) => {
           </SelectTrigger>
           <SelectContent>
             {product.size.map((size) => (
-              <SelectItem key={size} value={size}>
+              <SelectItem showCheck={false} key={size} value={size}>
                 {size}
               </SelectItem>
             ))}
