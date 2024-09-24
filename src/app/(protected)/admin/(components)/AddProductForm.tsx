@@ -42,7 +42,8 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from '@/components/Select/Multiselect'
-import { sizes } from '@/constants/sizes'
+import { shoesSize, sizes } from '@/constants/sizes'
+import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
 const types = Object.values(ProductType)
@@ -61,6 +62,7 @@ export const AddProductForm = () => {
       subcategory: null,
       type: undefined,
       size: [],
+      discountPercentage: null,
     },
   })
 
@@ -71,9 +73,13 @@ export const AddProductForm = () => {
       ...values,
       size: values.size ?? [],
     }
+    console.log(addProductData, 'addData')
     addProduct(addProductData).then((data) => {
       setError(data.error)
       setSuccess(data.success)
+      if (data.success) {
+        toast('Product successfully added')
+      }
     })
   }
 
@@ -164,7 +170,7 @@ export const AddProductForm = () => {
                 control={form.control}
                 name='subcategory'
                 render={({ field }) => (
-                  <FormItem className='w-3/6'>
+                  <FormItem className='w-2/6'>
                     <FormLabel>Subcategory</FormLabel>
                     <FormControl>
                       <Input type='text' {...field} value={field.value ?? ''} />
@@ -173,12 +179,28 @@ export const AddProductForm = () => {
                   </FormItem>
                 )}
               />
-
+              <FormField
+                control={form.control}
+                name='discountPercentage'
+                render={({ field }) => (
+                  <FormItem className='w-2/6'>
+                    <FormLabel>Discount percentage</FormLabel>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        {...field}
+                        value={field.value ?? ''}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name='price'
                 render={({ field }) => (
-                  <FormItem className='w-2/6'>
+                  <FormItem className='w-1/6'>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
@@ -228,9 +250,12 @@ export const AddProductForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {sizes.map((size) => (
-                            <MultiSelectorItem key={size} value={size}>
-                              <span>{size}</span>
+                          {shoesSize.map((size) => (
+                            <MultiSelectorItem
+                              key={size}
+                              value={size.toString()}
+                            >
+                              <span>{size.toString()}</span>
                             </MultiSelectorItem>
                           ))}
                         </MultiSelectorList>

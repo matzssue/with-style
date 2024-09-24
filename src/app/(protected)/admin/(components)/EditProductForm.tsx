@@ -25,10 +25,12 @@ import { productSchema, ProductSchema } from '@/lib/schemas/product-schema'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Product, ProductCategory, ProductType } from '@prisma/client'
+
 import Link from 'next/link'
 import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
 const types = Object.values(ProductType)
@@ -56,6 +58,9 @@ export const EditProductForm = ({ product }: { product: Product }) => {
     editProduct(values).then((data) => {
       setSuccess(data.success)
       setError(data.error)
+      if (data.success) {
+        toast('Product successfully edited')
+      }
     })
   }
 

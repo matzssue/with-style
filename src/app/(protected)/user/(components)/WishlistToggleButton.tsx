@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 
 import { useRouter } from 'next/navigation'
 import { removeFromWishlist } from '@/actions/wishlist/remove-product-from-wishlist'
+import { toast } from 'sonner'
 
 export const WishlistToggleButton = ({
   productId,
@@ -32,9 +33,11 @@ export const WishlistToggleButton = ({
     }
     if (isWishlisted && userId) {
       removeFromWishlist(userId, productId)
+      toast('Product removed from wishlist')
     }
     if (!isWishlisted && userId) {
       addToWishlist(userId, productId)
+      toast('Product added to wishlist')
     }
   }
 

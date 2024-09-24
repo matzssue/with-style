@@ -2,6 +2,7 @@ import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDis
 import { useCartStore } from '@/store/useCartStore'
 
 import { Product } from '@prisma/client'
+import { toast } from 'sonner'
 
 export const useCartActions = () => {
   const addToCart = useCartStore((state) => state.addToCart)
@@ -23,6 +24,7 @@ export const useCartActions = () => {
       price,
     }
     addToCart(productToAdd)
+    toast('Product added to cart')
   }
   return {
     addProductToCart,
