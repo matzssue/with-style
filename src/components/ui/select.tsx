@@ -9,7 +9,9 @@ import { cn } from '@/lib/utils'
 type AdditionalProps = {
   showIcon?: boolean
 }
-
+type AdditionalPropsSelect = {
+  showCheck?: boolean
+}
 const Select = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
@@ -120,8 +122,9 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> &
+    AdditionalPropsSelect
+>(({ className, showCheck = true, children, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
@@ -132,7 +135,7 @@ const SelectItem = React.forwardRef<
   >
     <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
       <SelectPrimitive.ItemIndicator>
-        <Check className='h-4 w-4' />
+        {showCheck && <Check className='h-4 w-4' />}
       </SelectPrimitive.ItemIndicator>
     </span>
 
