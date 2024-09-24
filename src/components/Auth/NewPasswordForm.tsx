@@ -23,9 +23,9 @@ import {
 import { useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { reset } from '@/lib/auth/reset'
 import { useSearchParams } from 'next/navigation'
 import { newPassword } from '@/lib/auth/new-password'
+import { toast } from 'sonner'
 
 export default function NewPasswordForm() {
   const searchParams = useSearchParams()
@@ -46,6 +46,7 @@ export default function NewPasswordForm() {
     newPassword(values, token).then((data) => {
       setError(data?.error)
       setSuccess(data?.success)
+      toast('Password successfully changed')
     })
   }
 
