@@ -6,15 +6,17 @@ export const SearchInput = ({
   setSearchValue,
   title,
   placeholder,
+  direction = 'flex-row',
 }: {
   value: string
   setSearchValue: (value: string) => void
   title: string
   placeholder: string
+  direction?: 'flex-col' | 'flex-row'
 }) => {
   return (
-    <div className='flex flex-col gap-3'>
-      <label className='text-2xl font-bold'>{title}</label>
+    <div className={`flex ${direction} gap-3`}>
+      <label className='text-nowrap text-2xl font-bold'>{title}</label>
       <Input
         type='search'
         value={value ?? ''}
