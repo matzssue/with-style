@@ -31,7 +31,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductCategory, ProductType } from '@prisma/client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 import {
@@ -42,7 +42,7 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from '@/components/Select/Multiselect'
-import { shoesSize, sizes } from '@/constants/sizes'
+import { shoeSizeToString, shoesSize, sizes } from '@/constants/sizes'
 import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
@@ -51,6 +51,8 @@ const types = Object.values(ProductType)
 export const AddProductForm = () => {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([])
 
   const form = useForm<AddProductSchema>({
     resolver: zodResolver(addProductSchema),
@@ -82,6 +84,18 @@ export const AddProductForm = () => {
       }
     })
   }
+
+  useEffect(() => {
+    if (selectedCategory === 'SHOES') {
+      setSelectedSizes(shoeSizeToString)
+    } else if (selectedCategory === 'ACCESSORIES' || selectedCategory === '') {
+      setSelectedSizes([])
+    } else {
+      setSelectedSizes(sizes)
+    }
+  }, [selectedCategory])
+
+  console.log(selectedCategory)
 
   return (
     <Card
@@ -119,7 +133,10 @@ export const AddProductForm = () => {
                   <FormItem className='w-2/5 max-sm:w-full'>
                     <FormLabel>Category</FormLabel>
                     <Select
-                      onValueChange={field.onChange}
+                      onValueChange={(value) => {
+                        field.onChange()
+                        setSelectedCategory(value)
+                      }}
                       defaultValue={field.value}
                     >
                       <FormControl>
@@ -250,7 +267,7 @@ export const AddProductForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {shoesSize.map((size) => (
+                          {selectedSizes.map((size) => (
                             <MultiSelectorItem
                               key={size}
                               value={size.toString()}
