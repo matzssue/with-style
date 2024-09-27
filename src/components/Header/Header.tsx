@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Logo from '@images/Logo.png'
 import UserBar from '../UserBar/UserBar'
+import Link from 'next/link'
 
 export default function Header({
   staticNavigation,
@@ -10,15 +11,16 @@ export default function Header({
   return (
     <header className='sticky top-0 z-50  flex w-full flex-col'>
       <div className='top-0 flex  flex-row justify-between bg-white'>
-        <Image
-          className=''
-          src={Logo}
-          style={{ minHeight: '80px', zIndex: '100' }}
-          height={200}
-          width={300}
-          alt='logo'
-        />
-
+        <Link href='/'>
+          <Image
+            className=''
+            src={Logo}
+            style={{ minHeight: '70px', zIndex: '100', width: 'auto' }}
+            height={200}
+            width={300}
+            alt='logo'
+          />
+        </Link>
         {staticNavigation}
       </div>
       <UserBar />
