@@ -42,7 +42,7 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from '@/components/Select/Multiselect'
-import { shoeSizeToString, shoesSize, sizes } from '@/constants/sizes'
+import { shoeSizeToString, sizes } from '@/constants/sizes'
 import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
