@@ -3,15 +3,14 @@ import Logo from '@images/Logo.png'
 
 import Link from 'next/link'
 import { adminNavList } from '@/constants/navlist'
+import { RoleGate } from '@/components/Auth/RoleGate'
 export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    // <RoleGate allowedRole='ADMIN'>
-
-    <>
+    <RoleGate allowedRole={['ADMIN']}>
       <header className='flex min-h-[100px] bg-neutral-100 '>
         <Image
           className='max-md:hidden'
@@ -41,8 +40,6 @@ export default function AdminLayout({
       <main className='mx-4 my-5 flex h-full flex-col items-center justify-center'>
         {children}
       </main>
-    </>
-
-    // </RoleGate>
+    </RoleGate>
   )
 }
