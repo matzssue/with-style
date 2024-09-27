@@ -15,7 +15,7 @@ import { WishlistToggleButton } from '../../../(protected)/user/(components)/Wis
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
 import { auth } from '@/auth'
 import { getProduct } from '@/data/products/get-product'
-import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDiscount'
+import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -35,11 +35,6 @@ export default async function ProductPage({
   const userWishlist = await getWishlistProductsId(userId)
   if (!product) return <div>Error while loading a product.</div>
 
-  const discountPrice = calculatePriceWithDiscount(
-    product.price,
-    product.discountPercentage
-  )
-
   return (
     <section className='flex w-full items-center justify-center  p-5'>
       <div className=' flex w-1/2 min-w-[700px] justify-center  gap-12 bg-neutral-100 p-5 max-lg:w-full max-md:min-w-[100px] max-md:flex-col'>
@@ -54,20 +49,10 @@ export default async function ProductPage({
             </h1>
             <p className='italic'>{product.type}</p>
 
-            <p>
-              Price:{' '}
-              <span
-                className={`font-semibold ${discountPrice ? 'line-through' : ''}`}
-              >
-                {product.price}$
-              </span>{' '}
-              {product.discountPercentage && (
-                <span className='font-semibold text-red-500'>
-                  {' '}
-                  -{product.discountPercentage}% {discountPrice}$
-                </span>
-              )}
-            </p>
+            <ProductPrice
+              price={product.price}
+              discountPercentage={product.discountPercentage}
+            />
           </div>
           <div className='flex flex-col gap-2'>
             <AddProductForm product={product} />
