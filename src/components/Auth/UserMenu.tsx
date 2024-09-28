@@ -37,30 +37,41 @@ export const UserMenu = ({ user }: { user: User | undefined }) => {
           {user?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link className='underline max-md:text-lg' href='/user/settings'>
-            Settings
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link className='underline max-md:text-lg' href='/user/orders'>
-            My orders
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link className='underline max-md:text-lg' href='/user/wishlist'>
-            Wishlist
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Button
-            onClick={() => signOut()}
-            className={cn('text-lg hover:bg-slate-50')}
-            variant='outline'
-          >
-            Logout
-          </Button>
-        </DropdownMenuItem>
+        {user ? (
+          <>
+            {' '}
+            <DropdownMenuItem>
+              <Link className='underline max-md:text-lg' href='/user/settings'>
+                Settings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link className='underline max-md:text-lg' href='/user/orders'>
+                My orders
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link className='underline max-md:text-lg' href='/user/wishlist'>
+                Wishlist
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                onClick={() => signOut()}
+                className={cn('text-lg hover:bg-slate-50')}
+                variant='outline'
+              >
+                Logout
+              </Button>
+            </DropdownMenuItem>
+          </>
+        ) : (
+          <DropdownMenuItem>
+            <Button className='w-full' asChild>
+              <Link href={'/auth/login'}>Login </Link>
+            </Button>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )
