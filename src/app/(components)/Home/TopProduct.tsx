@@ -2,6 +2,8 @@ import Image from 'next/image'
 
 import { Product } from '@prisma/client'
 import Link from 'next/link'
+import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+
 export default function TopProduct({
   imgUrl,
   name,
@@ -9,6 +11,7 @@ export default function TopProduct({
   subcategory,
   id,
   type,
+  discountPercentage,
 }: Product) {
   return (
     <Link className='cursor-pointer' href={`/product/${id}`}>
@@ -26,9 +29,7 @@ export default function TopProduct({
           </div>
         </div>
         <div>
-          <p>
-            Price: <span className='font-semibold'> {price}$</span>
-          </p>
+          <ProductPrice discountPercentage={discountPercentage} price={price} />
         </div>
       </div>
     </Link>

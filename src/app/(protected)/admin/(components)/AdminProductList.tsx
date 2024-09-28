@@ -23,15 +23,18 @@ export const AdminProductList = ({ products }: { products: Product[] }) => {
 
   return (
     <div className='my-5 flex flex-col flex-wrap gap-5 px-5'>
-      <div>
+      <div className='flex w-full gap-4'>
         <SearchInput
           placeholder='search by product name'
           title='Search product'
           setSearchValue={searchValueHandler}
           value={searchValue}
         />
+        <Button asChild>
+          <Link href={'/admin/products/add'}>Add new product</Link>
+        </Button>
       </div>
-      <div className='flex flex-wrap gap-5'>
+      <div className='flex flex-wrap gap-5 max-md:justify-center'>
         {listData.map((product) => (
           <ProductCard key={product.id} product={product}>
             <div className='flex gap-5 '>

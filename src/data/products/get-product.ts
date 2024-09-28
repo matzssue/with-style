@@ -1,4 +1,3 @@
-import prisma from '@/lib/prisma'
 import { Product } from '@prisma/client'
 
 export const getProduct = async (id: string) => {

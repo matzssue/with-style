@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Logo from '@images/Logo.png'
+import UserBar from '../UserBar/UserBar'
+import Link from 'next/link'
 
 export default function Header({
   staticNavigation,
@@ -7,21 +9,21 @@ export default function Header({
   staticNavigation: React.ReactNode
 }) {
   return (
-    <>
-      <header className='sticky top-0 z-50 w-full bg-white'>
-        <div className='top-0 flex  flex-row justify-between px-5'>
+    <header className='sticky top-0 z-50 flex h-[85px] w-full   flex-col max-md:h-[70px]'>
+      <div className='top-0 flex h-full flex-row items-center justify-between  bg-white'>
+        <Link href='/'>
           <Image
-            className=''
+            layout='responsive'
             src={Logo}
-            style={{ minHeight: '80px', zIndex: '100' }}
-            height={200}
             width={300}
+            height={300}
+            style={{ minHeight: '60px' }}
             alt='logo'
           />
-
-          {staticNavigation}
-        </div>
-      </header>
-    </>
+        </Link>
+        {staticNavigation}
+      </div>
+      <UserBar />
+    </header>
   )
 }

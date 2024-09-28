@@ -1,7 +1,7 @@
 'use client'
 
 import { ShoppingBag } from 'lucide-react'
-import type { Product, Size } from '@prisma/client'
+import type { Product } from '@prisma/client'
 import {
   Select,
   SelectContent,
@@ -21,7 +21,7 @@ export const AddProduct = (product: Product) => {
     <>
       {product.size.length > 0 ? (
         <Select
-          onValueChange={(value: Size) => addProductToCart(value, product)}
+          onValueChange={(value: string) => addProductToCart(value, product)}
         >
           <SelectTrigger
             showIcon={false}
@@ -33,7 +33,7 @@ export const AddProduct = (product: Product) => {
           </SelectTrigger>
           <SelectContent>
             {product.size.map((size) => (
-              <SelectItem key={size} value={size}>
+              <SelectItem showCheck={false} key={size} value={size}>
                 {size}
               </SelectItem>
             ))}

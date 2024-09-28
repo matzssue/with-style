@@ -1,4 +1,3 @@
-export const publicRoutes = ['/', '/cart', '/auth/new-verification']
 export const authRoutes = [
   '/auth/login',
   '/auth/register',
@@ -6,15 +5,8 @@ export const authRoutes = [
   '/auth/reset',
   '/auth/new-password',
 ]
-export const privateRoutes = ['/user', '/settings', '/payment']
-export const dynamicRoutes = [
-  '/products',
-  '/man',
-  '/woman',
-  '/accesories',
-  '/shoes',
-  '/user',
-]
+export const privateRoutes = ['/user']
+
 export const adminRoute = ['/admin', '/api/admin']
 export const apiAuthPrefix = '/api/auth'
 

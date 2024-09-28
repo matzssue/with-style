@@ -22,4 +22,16 @@ export type ProductsQueryParams = {
   minPrice?: string
   maxPrice?: string
   page?: string
+  sortByPrice?: string
+  promotions?: string
+  subcategory?: string
+}
+export type ProductSearchParams = {
+  minPrice?: string
+  maxPrice?: string
+  size?: string
+  page?: string
+  sortByPrice?: string
+  promotions?: string
+  subcategory?: string
 }

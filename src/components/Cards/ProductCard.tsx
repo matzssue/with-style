@@ -2,6 +2,8 @@ import { Product } from '@prisma/client'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 
+import { ProductPrice } from '../ProductPrice/ProductPrice'
+
 export const ProductCard = ({
   children,
   product,
@@ -9,7 +11,8 @@ export const ProductCard = ({
   children: ReactNode
   product: Product
 }) => {
-  const { id, imgUrl, name, price, subcategory, type } = product
+  const { id, imgUrl, name, price, subcategory, type, discountPercentage } =
+    product
 
   return (
     <li
@@ -34,12 +37,14 @@ export const ProductCard = ({
         src={imgUrl}
       />
       <div className='flex flex-col gap-x-5 py-1'>
-        <p className='py-2 text-lg'>
-          Price: <span className='font-semibold'> {price} $</span>
-        </p>
-
-        {children}
+        <ProductPrice
+          discountPercentage={discountPercentage}
+          direction='column'
+          price={price}
+        />
       </div>
+
+      {children}
     </li>
   )
 }

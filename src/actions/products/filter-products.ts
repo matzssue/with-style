@@ -3,23 +3,35 @@
 import { redirect } from 'next/navigation'
 
 type Filters = {
-  size?: string
-  price: number[]
+  size?: string | null
+  maxPrice?: string | null
+  minPrice?: string | null
+  sortByPrice?: string | null
+  promotions?: string | null
+  subcategory?: string | null
 }
 
 type QueryParams = {
-  maxPrice: string
-  minPrice: string
+  maxPrice?: string
+  minPrice?: string
   size?: string
+  sortByPrice?: string
+  promotions?: string
+  subcategory?: string
 }
 
 export const updateFilters = async (filters: Filters, currentPath: string) => {
-  const queryParams: QueryParams = {
-    minPrice: filters.price[0].toString(),
-    maxPrice: filters.price[1].toString(),
-  }
-  if (filters.size) queryParams.size = filters.size
+  const queryParams: QueryParams = {}
 
+  const { maxPrice, minPrice, promotions, size, sortByPrice, subcategory } =
+    filters
+
+  if (minPrice) queryParams.minPrice = minPrice.toString()
+  if (maxPrice) queryParams.maxPrice = maxPrice.toString()
+  if (size) queryParams.size = size
+  if (sortByPrice) queryParams.sortByPrice = sortByPrice
+  if (promotions) queryParams.promotions = 'true'
+  if (subcategory) queryParams.subcategory = subcategory
   if (filters) {
     const params = new URLSearchParams(queryParams)
     redirect(`${currentPath}?${params}`)

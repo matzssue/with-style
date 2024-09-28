@@ -1,4 +1,3 @@
-import UserBar from '../UserBar/UserBar'
 import { NavBar } from './NavBar'
 import SideBar from './SideBar'
 

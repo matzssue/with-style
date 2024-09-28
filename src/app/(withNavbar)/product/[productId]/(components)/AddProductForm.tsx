@@ -22,11 +22,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Product, Size } from '@prisma/client'
+import { Product } from '@prisma/client'
 import { useCartActions } from '@/hooks/use-add-product-to-cart'
 
 interface SizeFormInput {
-  size: Size | null
+  size: string | null
 }
 
 export const AddProductForm = ({ product }: { product: Product }) => {
@@ -67,8 +67,8 @@ export const AddProductForm = ({ product }: { product: Product }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {product.size.map((size: Size) => (
-                      <SelectItem key={size} value={size}>
+                    {product.size.map((size: string | number) => (
+                      <SelectItem key={size} value={size.toString()}>
                         {size}
                       </SelectItem>
                     ))}

@@ -22,7 +22,14 @@ export const NewProducts = async () => {
             <p className='text-4xl font-bold text-primary '>
               New summer collection
             </p>
-            <ButtonLink href='#'>Check collection</ButtonLink>
+            <div className='flex gap-2'>
+              <ButtonLink href='/products/man?subcategory=summer'>
+                Man collection
+              </ButtonLink>
+              <ButtonLink href='/products/woman?subcategory=summer'>
+                Woman collection
+              </ButtonLink>{' '}
+            </div>
           </div>
 
           <ul className='flex flex-wrap justify-center gap-5 px-6 '>
@@ -36,6 +43,7 @@ export const NewProducts = async () => {
             src={womanNewProducts}
             alt='woman-model'
             fill
+            sizes='(max-width: 768px) 100vw, 33vw'
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -47,6 +55,7 @@ export const NewProducts = async () => {
             src={manNewProducts}
             alt='man-model'
             fill
+            sizes='(max-width: 768px) 100vw, 33vw'
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -55,7 +64,14 @@ export const NewProducts = async () => {
             <p className='text-4xl font-bold text-primary'>
               New sports collection
             </p>
-            <ButtonLink href='#'>Check collection</ButtonLink>
+            <div className='flex gap-2'>
+              <ButtonLink href='/products/man?subcategory=sport'>
+                Man collection
+              </ButtonLink>
+              <ButtonLink href='/products/woman?subcategory=sport'>
+                Woman collection
+              </ButtonLink>{' '}
+            </div>
           </div>
 
           <ul className='flex flex-wrap justify-center gap-5 px-6 '>

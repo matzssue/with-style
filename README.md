@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Logo](https://i.ibb.co/G9ffXns/Logo.png)
 
-## Getting Started
+# With-style e-commerce
 
-First, run the development server:
+With-style is an e-commerce platform for fashion enthusiasts, offering clothing, shoes, and accessories. The project is built with Next.js, utilizing Prisma for database management.
+
+## Live
+
+[FreightEx Platform Vercel](https://with-style.vercel.app)
+
+_Test Account_
+
+Login: testaccount@withstyle.com
+Password: test12345
+
+## Installation
+
+Install my-project with npm or arn
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  npm run dev
+  # or
+  yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project is currently using Stripe's test mode. You can use test card numbers and data for payments. No real transactions will be processed, ensuring a safe testing environment.
 
-## Learn More
+Card number : 4242 4242 4242 4242
+CVC : Any 3 digits
+Date : Any future date
 
-To learn more about Next.js, take a look at the following resources:
+for more informations or test cards check : https://docs.stripe.com/testing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Typescript,
+- Prisma + Vercel Postgres,
+- Node.js,
+- HTML,
+- CSS
 
-## Deploy on Vercel
+## Frameworks/Libraries
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js 14 - React framework for building fast, scalable web applications
+- Shadcn - Customizable React component library built with Radix UI and Tailwind CSS,
+- Tailwind CSS - Utility-first CSS framework for building custom, responsive designs quickly.
+- React-hook-form - Forms with easy-to-use validation,
+- Zod - Form validation,
+- Stripe - Payment processing platform that enables businesses to accept online payments securely and efficiently.
+- Sendgrid - Cloud-based service for reliable email delivery.
+- Sooner - Customizable notification library for React,
+- Next-auth - Authentication library for Next.js that simplifies user authentication and management.
+- Zustand - Lightweight state management library for React.

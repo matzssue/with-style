@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { ProductCategory, ProductType, Size } from '@prisma/client'
+import type { ProductCategory, ProductType } from '@prisma/client'
 import { persist } from 'zustand/middleware'
 
 export type ProductInStore = {
@@ -11,7 +11,7 @@ export type ProductInStore = {
   subcategory: string | null
   type: ProductType
   imgUrl: string
-  size: Size | null
+  size: string | null
   quantity: number
 }
 

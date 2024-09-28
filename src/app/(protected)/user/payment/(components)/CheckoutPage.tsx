@@ -85,6 +85,7 @@ export const CheckoutPage = ({
         return_url: `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/payment-success?amount=${amount}`,
       },
     })
+    resetCart()
     if (error) {
       setErrorMessage(error.message)
       await removeOrder(order.id)

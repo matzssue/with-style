@@ -7,9 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Size } from '@prisma/client'
 
-export const SelectSize = ({ sizes }: { sizes: Size[] }) => {
+export const SelectSize = ({ sizes }: { sizes: string[] }) => {
   return (
     <Select>
       <SelectTrigger className='w-full'>

@@ -20,14 +20,15 @@ import {
 } from '@/constants/navlist'
 import { NavigationList } from '../NavigationList/NavigationList'
 import { useSidebarStore } from '@/store/useSidebarStore'
+import { Menu } from 'lucide-react'
 
 export function NavBar() {
   const toggleSidebar = useSidebarStore((state) => state.toggleNavigation)
 
   return (
     <>
-      <button className='lg:hidden' onClick={() => toggleSidebar()}>
-        XXXXXXX
+      <button className='pr-2 lg:hidden' onClick={() => toggleSidebar()}>
+        <Menu />
       </button>
       <NavigationMenu className='hidden lg:flex '>
         <NavigationMenuList>
@@ -78,22 +79,11 @@ export function NavBar() {
             <NavigationMenuContent>
               <ul className='grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]'>
                 <NavigationList
-                  category='accesories'
+                  category='accessories'
                   list={accessoriesNavLinks}
                 />
               </ul>
             </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <Link href='/about-us' legacyBehavior passHref>
-              <NavigationMenuLink
-                style={{ fontSize: '24px' }}
-                className={navigationMenuTriggerStyle()}
-              >
-                About Us
-              </NavigationMenuLink>
-            </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

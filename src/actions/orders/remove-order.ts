@@ -1,5 +1,7 @@
 'use server'
 
+import { revalidateTag } from 'next/cache'
+
 export const removeOrder = async (orderId: string) => {
   try {
     const response = await fetch(
@@ -16,7 +18,7 @@ export const removeOrder = async (orderId: string) => {
     )
 
     const data = await response.json()
-
+    revalidateTag('orders')
     return data
   } catch (error) {
     let message = 'Unknown Error'

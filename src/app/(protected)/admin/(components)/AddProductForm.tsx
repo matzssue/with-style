@@ -31,7 +31,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductCategory, ProductType } from '@prisma/client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 import {
@@ -42,7 +42,8 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from '@/components/Select/Multiselect'
-import { sizes } from '@/constants/sizes'
+import { shoeSizeToString, sizes } from '@/constants/sizes'
+import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
 const types = Object.values(ProductType)
@@ -50,6 +51,8 @@ const types = Object.values(ProductType)
 export const AddProductForm = () => {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([])
 
   const form = useForm<AddProductSchema>({
     resolver: zodResolver(addProductSchema),
@@ -61,8 +64,19 @@ export const AddProductForm = () => {
       subcategory: null,
       type: undefined,
       size: [],
+      discountPercentage: null,
     },
   })
+
+  useEffect(() => {
+    if (selectedCategory === 'SHOES') {
+      setSelectedSizes(shoeSizeToString)
+    } else if (selectedCategory === 'ACCESSORIES' || selectedCategory === '') {
+      setSelectedSizes([])
+    } else {
+      setSelectedSizes(sizes)
+    }
+  }, [selectedCategory])
 
   const onSubmit = (values: AddProductSchema) => {
     setError('')
@@ -71,9 +85,13 @@ export const AddProductForm = () => {
       ...values,
       size: values.size ?? [],
     }
+
     addProduct(addProductData).then((data) => {
       setError(data.error)
       setSuccess(data.success)
+      if (data.success) {
+        toast('Product successfully added')
+      }
     })
   }
 
@@ -113,7 +131,10 @@ export const AddProductForm = () => {
                   <FormItem className='w-2/5 max-sm:w-full'>
                     <FormLabel>Category</FormLabel>
                     <Select
-                      onValueChange={field.onChange}
+                      onValueChange={(value) => {
+                        field.onChange()
+                        setSelectedCategory(value)
+                      }}
                       defaultValue={field.value}
                     >
                       <FormControl>
@@ -164,7 +185,7 @@ export const AddProductForm = () => {
                 control={form.control}
                 name='subcategory'
                 render={({ field }) => (
-                  <FormItem className='w-3/6'>
+                  <FormItem className='w-2/6'>
                     <FormLabel>Subcategory</FormLabel>
                     <FormControl>
                       <Input type='text' {...field} value={field.value ?? ''} />
@@ -173,12 +194,28 @@ export const AddProductForm = () => {
                   </FormItem>
                 )}
               />
-
+              <FormField
+                control={form.control}
+                name='discountPercentage'
+                render={({ field }) => (
+                  <FormItem className='w-2/6'>
+                    <FormLabel>Discount percentage</FormLabel>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        {...field}
+                        value={field.value ?? ''}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name='price'
                 render={({ field }) => (
-                  <FormItem className='w-2/6'>
+                  <FormItem className='w-1/6'>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
@@ -228,9 +265,12 @@ export const AddProductForm = () => {
                       </MultiSelectorTrigger>
                       <MultiSelectorContent>
                         <MultiSelectorList>
-                          {sizes.map((size) => (
-                            <MultiSelectorItem key={size} value={size}>
-                              <span>{size}</span>
+                          {selectedSizes.map((size) => (
+                            <MultiSelectorItem
+                              key={size}
+                              value={size.toString()}
+                            >
+                              <span>{size.toString()}</span>
                             </MultiSelectorItem>
                           ))}
                         </MultiSelectorList>

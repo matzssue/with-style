@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Product } from '@prisma/client'
 
 import { AddProduct } from '../../product/[productId]/(components)/AddProduct'
 
-import { WishlistToggleButton } from '../../user/(components)/WishlistToggleButton'
+import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
 import { ProductCard } from '@/components/Cards/ProductCard'
 
 export type Wishlisted = {
@@ -21,6 +20,9 @@ export const ProductList = ({
 }) => {
   return (
     <div className='p-6'>
+      {products.length === 0 && (
+        <p className='text-center text-2xl'>No products found</p>
+      )}
       <ul className='flex flex-wrap gap-5 max-lg:justify-center'>
         {products.map((product) => (
           <ProductCard key={product.id} product={product}>
@@ -31,7 +33,7 @@ export const ProductList = ({
               >
                 Go to product
               </Link>
-              <div className='flex items-center justify-center max-md:gap-5'>
+              <div className='flex items-center justify-center gap-4 '>
                 <WishlistToggleButton
                   wishlisted={wishlisted}
                   productId={product.id}

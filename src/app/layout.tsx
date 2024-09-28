@@ -2,7 +2,7 @@ import './styles/globals.css'
 import type { Metadata } from 'next'
 import { Advent_Pro } from 'next/font/google'
 import { cn } from '@/lib/utils'
-
+import { Toaster } from 'sonner'
 import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/auth'
 
@@ -24,11 +24,12 @@ export default async function RootLayout({
       <html lang='en'>
         <body
           className={cn(
-            'flex min-h-screen flex-col bg-background font-sans text-primary antialiased',
+            'flex min-h-screen  flex-col overflow-x-hidden bg-background font-sans text-primary antialiased',
             inter.variable
           )}
         >
           {children}
+          <Toaster position='top-right' />
         </body>
       </html>
     </SessionProvider>
