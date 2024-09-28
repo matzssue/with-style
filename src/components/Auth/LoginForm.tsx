@@ -20,10 +20,16 @@ import { GoogleButton } from './GoogleButton'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { login } from '@/actions/auth/login'
+import { useSearchParams } from 'next/navigation'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
+  const params = useSearchParams()
+  const urlError =
+    params.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email arleady in use with different provider'
+      : ''
 
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -83,6 +89,7 @@ export default function LoginForm() {
         <GoogleButton />
         {error && <Alert type='error'>{error}</Alert>}
         {success && <Alert type='success'>{success}</Alert>}
+        {urlError && <Alert type='error'>{urlError}</Alert>}
         <Button
           asChild
           className={cn(

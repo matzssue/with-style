@@ -10,7 +10,7 @@ export const GoogleButton = () => {
   }
 
   return (
-    <div className='w-full px-6 sm:px-0'>
+    <div className='w-full '>
       <button
         onClick={() => onClick()}
         type='button'
