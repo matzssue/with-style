@@ -43,6 +43,7 @@ export const NewProducts = async () => {
             src={womanNewProducts}
             alt='woman-model'
             fill
+            sizes='(max-width: 768px) 100vw, 33vw'
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -54,6 +55,7 @@ export const NewProducts = async () => {
             src={manNewProducts}
             alt='man-model'
             fill
+            sizes='(max-width: 768px) 100vw, 33vw'
             style={{ objectFit: 'cover' }}
           />
         </div>
