@@ -6,7 +6,11 @@ export const getVerificationTokenByToken = async (token: string) => {
       where: { token },
     })
     return verticationToken
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 export const getVerificationTokenByEmail = async (email: string) => {
@@ -15,5 +19,9 @@ export const getVerificationTokenByEmail = async (email: string) => {
       where: { email },
     })
     return verticationToken
-  } catch (error) {}
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    }
+  }
 }
