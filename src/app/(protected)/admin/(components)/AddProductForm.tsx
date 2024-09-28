@@ -42,7 +42,7 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from '@/components/Select/Multiselect'
-import { shoeSizeToString, shoesSize, sizes } from '@/constants/sizes'
+import { shoeSizeToString, sizes } from '@/constants/sizes'
 import { toast } from 'sonner'
 
 const categories = Object.values(ProductCategory)
@@ -68,23 +68,6 @@ export const AddProductForm = () => {
     },
   })
 
-  const onSubmit = (values: AddProductSchema) => {
-    setError('')
-    setSuccess('')
-    const addProductData = {
-      ...values,
-      size: values.size ?? [],
-    }
-    console.log(addProductData, 'addData')
-    addProduct(addProductData).then((data) => {
-      setError(data.error)
-      setSuccess(data.success)
-      if (data.success) {
-        toast('Product successfully added')
-      }
-    })
-  }
-
   useEffect(() => {
     if (selectedCategory === 'SHOES') {
       setSelectedSizes(shoeSizeToString)
@@ -95,7 +78,22 @@ export const AddProductForm = () => {
     }
   }, [selectedCategory])
 
-  console.log(selectedCategory)
+  const onSubmit = (values: AddProductSchema) => {
+    setError('')
+    setSuccess('')
+    const addProductData = {
+      ...values,
+      size: values.size ?? [],
+    }
+
+    addProduct(addProductData).then((data) => {
+      setError(data.error)
+      setSuccess(data.success)
+      if (data.success) {
+        toast('Product successfully added')
+      }
+    })
+  }
 
   return (
     <Card

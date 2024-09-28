@@ -1,5 +1,7 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
+
 export const deleteProduct = async (productId: string) => {
   try {
     const response = await fetch(
@@ -16,6 +18,7 @@ export const deleteProduct = async (productId: string) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
+    revalidatePath('/admin/products')
     await response.json()
     return { success: 'Product deleted' }
   } catch (error) {

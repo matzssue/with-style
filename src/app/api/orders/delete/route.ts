@@ -5,7 +5,7 @@ export async function DELETE(request: NextRequest) {
   try {
     const { orderId }: { orderId: string } = await request.json()
 
-    const deleteOrder = await prisma.order.delete({
+    await prisma.order.delete({
       where: { id: orderId },
     })
 

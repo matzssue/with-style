@@ -85,17 +85,6 @@ export function NavBar() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <Link href='/about-us' legacyBehavior passHref>
-              <NavigationMenuLink
-                style={{ fontSize: '24px' }}
-                className={navigationMenuTriggerStyle()}
-              >
-                About Us
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </>

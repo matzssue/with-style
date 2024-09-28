@@ -25,7 +25,7 @@ export default function CartPage() {
             <p className='text-2xl font-bold'>Total</p>
             <p className='font-semibold'>Total price: {totalPrice}</p>
             <p className='font-semibold'>Total items: {totalItems}</p>
-            <ButtonLink href='/payment'>GO TO CHECKOUT</ButtonLink>
+            <ButtonLink href='/user/payment'>GO TO CHECKOUT</ButtonLink>
           </CardWrapper>
           <CardWrapper>
             <p className='text-2xl font-bold'>Payment methods</p>

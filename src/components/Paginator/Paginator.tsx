@@ -51,7 +51,7 @@ export const Paginator = ({ page, totalPages }: PaginationProps) => {
         <PaginationItem>
           <PaginationPrevious href={`?page=${prevPage}`} />
         </PaginationItem>
-        {pages.map((p, i) => (
+        {pages.map((p) => (
           <PaginationItem key={p}>
             <PaginationLink isActive={p === currPage} href={`?page=${p}`}>
               {p}

@@ -22,7 +22,7 @@ export async function getAllOrders(page: number) {
     headers: {
       'Content-Type': 'application/json',
     },
-    cache: 'no-cache',
+    next: { tags: ['orders'] },
   })
 
   if (!response.ok) {

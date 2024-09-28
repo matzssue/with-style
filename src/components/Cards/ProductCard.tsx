@@ -1,7 +1,8 @@
 import { Product } from '@prisma/client'
 import { ReactNode } from 'react'
 import Image from 'next/image'
-import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDiscount'
+
+import { ProductPrice } from '../ProductPrice/ProductPrice'
 
 export const ProductCard = ({
   children,
@@ -12,8 +13,6 @@ export const ProductCard = ({
 }) => {
   const { id, imgUrl, name, price, subcategory, type, discountPercentage } =
     product
-
-  const discountedPrice = calculatePriceWithDiscount(price, discountPercentage)
 
   return (
     <li
@@ -38,23 +37,11 @@ export const ProductCard = ({
         src={imgUrl}
       />
       <div className='flex flex-col gap-x-5 py-1'>
-        <span className={`font-semibold`}>
-          {' '}
-          Price : {''}
-          <span className={`${discountedPrice ? 'text-sm line-through' : ''}`}>
-            {price}$
-          </span>
-          {discountPercentage ? (
-            <span className='text-red-500'> -{discountPercentage}% </span>
-          ) : (
-            ''
-          )}
-        </span>
-        {discountedPrice && (
-          <span className='text-lg font-bold text-red-500'>
-            {discountedPrice} $
-          </span>
-        )}
+        <ProductPrice
+          discountPercentage={discountPercentage}
+          direction='column'
+          price={price}
+        />
       </div>
 
       {children}

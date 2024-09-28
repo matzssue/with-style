@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -81,6 +80,11 @@ export const FilterForm = () => {
   const isPromotionsSelected =
     !!searchParams.get('promotions') || defaultPromotions
 
+  const shoesSizeData = useMemo(
+    () => shoesSize.map((size) => size.toString()),
+    []
+  )
+
   useEffect(() => {
     if (pathname.includes('shoes')) {
       setProductsType(shoesSizeData)
@@ -91,10 +95,6 @@ export const FilterForm = () => {
     }
   }, [pathname])
 
-  const shoesSizeData = useMemo(
-    () => shoesSize.map((size) => size.toString()),
-    [shoesSize]
-  )
   const form = useForm<FilterProductsSchema>({
     resolver: zodResolver(filterProductsSchema),
     defaultValues: {
