@@ -4,5 +4,5 @@ export const categories: ProductCategory[] = [
   'SHOES',
   'MAN',
   'WOMAN',
-  'ACCESORIES',
+  'ACCESSORIES',
 ]
