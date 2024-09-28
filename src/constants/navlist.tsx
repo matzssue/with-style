@@ -10,7 +10,7 @@ import {
 import { GiLabCoat, GiBoots, GiBelt } from 'react-icons/gi'
 import { FaRedhat } from 'react-icons/fa6'
 import { LogOut } from 'lucide-react'
-import { ProductCategory, ProductType } from '@prisma/client'
+import { ProductType } from '@prisma/client'
 import { ReactNode } from 'react'
 
 type LinksToProducts = {

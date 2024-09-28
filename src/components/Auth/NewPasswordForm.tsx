@@ -13,12 +13,7 @@ import {
 } from '@/components/ui/form'
 import Alert from '../Alert/Alert'
 import { Input } from '@/components/ui/input'
-import {
-  EmailSchema,
-  PasswordSchema,
-  emailSchema,
-  passwordSchema,
-} from '@/lib/schemas/auth-schema'
+import { PasswordSchema, passwordSchema } from '@/lib/schemas/auth-schema'
 
 import { useState } from 'react'
 import Link from 'next/link'

@@ -1,7 +1,7 @@
 import { Product } from '@prisma/client'
 import { ReactNode } from 'react'
 import Image from 'next/image'
-import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDiscount'
+
 import { ProductPrice } from '../ProductPrice/ProductPrice'
 
 export const ProductCard = ({
