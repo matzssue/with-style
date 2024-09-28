@@ -11,7 +11,7 @@ export type ProductInStore = {
   subcategory: string | null
   type: ProductType
   imgUrl: string
-  size: String | null
+  size: string | null
   quantity: number
 }
 
