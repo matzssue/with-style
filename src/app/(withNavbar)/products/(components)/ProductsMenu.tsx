@@ -34,9 +34,11 @@ export const ProductsMenu = () => {
       case 'shoes':
         setCategories(shoesNavLinks)
         break
-      case 'accesories':
+      case 'accessories':
         setCategories(accessoriesNavLinks)
+        break
       default:
+        setCategories([])
     }
   }, [categorySlug])
 
