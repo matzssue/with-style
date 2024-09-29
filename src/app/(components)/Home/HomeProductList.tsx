@@ -12,11 +12,11 @@ export const HomeProductList = ({
 }: Product) => {
   return (
     <li key={id} className='flex flex-col gap-2'>
-      <div className='relative h-[300px] w-[200px]  max-2xl:h-[250px] max-2xl:w-[150px]'>
+      <div className='relative flex h-[350px] w-[250px] items-center max-sm:h-[400px] max-sm:w-[300px]'>
         <Image
           alt='summer clothes'
           src={imgUrl}
-          sizes='(max-width: 768px) 100vw, 33vw'
+          sizes='(max-width: 768px) 100vw, 100vw'
           fill
         />
       </div>
