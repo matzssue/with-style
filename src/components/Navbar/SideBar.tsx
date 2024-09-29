@@ -20,20 +20,24 @@ import { useSidebarStore } from '@/store/useSidebarStore'
 
 export default function SideBar() {
   const isOpen = useSidebarStore((state) => state.isOpen)
-
+  const controlSiebar = useSidebarStore((state) => state.toggleNavigation)
   return (
     <Accordion
       type='single'
       collapsible
       className={`fixed left-0  z-[100] flex h-screen w-full max-w-64 flex-col gap-4 bg-accent p-6 shadow-md transition-all duration-200 ease-in-out lg:hidden ${
-        isOpen ? 'fixed left-0 top-0 translate-x-0' : '-translate-x-full'
+        isOpen
+          ? 'fixed left-0 top-0 translate-x-0'
+          : 'left-0 top-0 -translate-x-full'
       }`}
     >
       <AccordionItem
         className='border-b-0 px-2 py-5 text-3xl font-bold'
         value='item-1'
       >
-        <Link href={'/'}>Home</Link>
+        <button onClick={() => controlSiebar()}>
+          <Link href={'/'}>Home</Link>
+        </button>
       </AccordionItem>
       <AccordionItem className='border-b-0' value='item-1'>
         <AccordionTrigger
@@ -49,9 +53,9 @@ export default function SideBar() {
           )}
         >
           {manNavLinks.map(({ link, title }) => (
-            <Link key={title} href={`/products/man/${link}`}>
-              {title}
-            </Link>
+            <button key={title} onClick={() => controlSiebar()}>
+              <Link href={`/products/man/${link}`}>{title}</Link>
+            </button>
           ))}
         </AccordionContent>
       </AccordionItem>
@@ -69,9 +73,9 @@ export default function SideBar() {
           )}
         >
           {womanNavLinks.map(({ link, title }) => (
-            <Link key={title} href={`/products/woman/${link}`}>
-              {title}
-            </Link>
+            <button key={title} onClick={() => controlSiebar()}>
+              <Link href={`/products/woman/${link}`}>{title}</Link>
+            </button>
           ))}
         </AccordionContent>
       </AccordionItem>
@@ -89,9 +93,9 @@ export default function SideBar() {
           )}
         >
           {shoesNavLinks.map(({ link, title }) => (
-            <Link key={title} href={`/products/shoes/${link}`}>
-              {title}
-            </Link>
+            <button key={title} onClick={() => controlSiebar()}>
+              <Link href={`/products/shoes/${link}`}>{title}</Link>
+            </button>
           ))}
         </AccordionContent>
       </AccordionItem>
@@ -109,9 +113,9 @@ export default function SideBar() {
           )}
         >
           {accessoriesNavLinks.map(({ link, title }) => (
-            <Link key={title} href={`/products/accessories/${link}`}>
-              {title}
-            </Link>
+            <button key={title} onClick={() => controlSiebar()}>
+              <Link href={`/products/accessories/${link}`}>{title}</Link>
+            </button>
           ))}
         </AccordionContent>
       </AccordionItem>
