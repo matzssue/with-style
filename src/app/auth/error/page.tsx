@@ -1,3 +1,3 @@
 export default function AuthErrorPage() {
-  return <div>Error</div>;
+  return <div>Error</div>
 }

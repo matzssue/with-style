@@ -1,8 +1,9 @@
-import authConfig from './auth.config';
-import { getuserById } from './data/user';
-import prisma from './lib/prisma';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import NextAuth, { type DefaultSession } from 'next-auth';
+import authConfig from './auth.config'
+import { getuserById } from './data/user/user'
+import prisma from './lib/prisma'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth from 'next-auth'
+import { getAccountByUserId } from './data/user/account'
 
 export const {
   handlers: { GET, POST },
@@ -11,7 +12,7 @@ export const {
   signOut,
 } = NextAuth({
   pages: {
-    signIn: '/auth/logn',
+    signIn: '/auth/login',
     error: '/auth/error',
   },
   events: {
@@ -19,43 +20,51 @@ export const {
       await prisma.user.update({
         where: { id: user.id },
         data: { emailVerified: new Date() },
-      });
+      })
     },
   },
   callbacks: {
     async signIn({ user, account }) {
-      // MAIL VERIFICATION
+      if (account?.provider !== 'credentials') return true
+      if (!user.id) return false
+      const existingUser = await getuserById(user.id)
 
-      // if (account?.provider !== 'credentials') return true;
-      // if (!user.id) return false;
+      if (!existingUser?.emailVerified) return false
 
-      // const existingUser = await getuserById(user.id);
-
-      // if (!existingUser?.emailVerified) return false;
-
-      return true;
+      return true
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
-        session.user.id = token.sub;
+        session.user.id = token.sub
       }
-      if (token.role && session.user.role) {
-        session.user.role = token.role;
+
+      if (session.user) {
+        if (token.email) {
+          session.user.email = token.email
+        }
+        session.user.name = token.name
+        session.user.role = token.role
+        session.user.isOauth = token.isOauth as boolean
       }
-      return session;
+
+      return session
     },
     async jwt({ token }) {
-      if (!token.sub) return token;
+      if (!token.sub) return token
+      const user = await getuserById(token.sub)
 
-      const user = await getuserById(token.sub);
+      if (!user) return token
 
-      if (!user) return token;
-      token.role = user.role;
+      const account = await getAccountByUserId(user.id)
 
-      return token;
+      token.isOauth = !!account
+      token.role = user.role
+      token.name = user.name
+      token.email = user.email
+      return token
     },
   },
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   ...authConfig,
-});
+})

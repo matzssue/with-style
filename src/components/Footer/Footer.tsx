@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import Logo from '../../../public/Logo.png';
-import { TshirtIcon } from '../../../public/icons/TshirtIcon';
-import { FaInstagram } from 'react-icons/fa6';
-import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
-import Link from 'next/link';
+import Image from 'next/image'
+
+import Logo from '@images/Logo.png'
+import { FaInstagram } from 'react-icons/fa6'
+import { FaFacebook, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa'
+import Link from 'next/link'
 
 const Icons = [
   <FaFacebook size='1.5em' />,
@@ -11,15 +11,15 @@ const Icons = [
   <FaTwitter size='1.5em' />,
   <FaYoutube size='1.5em' />,
   <FaInstagram size='1.5em' />,
-];
+]
 
 export const Footer = () => {
   return (
-    <footer className='mt-5 flex  w-full flex-wrap justify-around gap-5 bg-secondary p-5'>
+    <footer className='mt-5 flex w-full flex-wrap justify-around gap-5 bg-secondary p-4 '>
       <div>
         <Image alt='logo' src={Logo} height={90} />
       </div>
-      <div>
+      <div className='max-md:flex max-md:w-full max-md:flex-col max-md:items-center'>
         <p className='mb-5 text-lg font-bold'>Contact us</p>
         <ul className='flex gap-4'>
           {Icons.map((icon, i) => (
@@ -61,5 +61,5 @@ export const Footer = () => {
         <p className='text-lg'>@ 2024 Created by: Mateusz K</p>
       </div>
     </footer>
-  );
-};
+  )
+}

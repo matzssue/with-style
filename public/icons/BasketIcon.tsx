@@ -14,5 +14,5 @@ export const BasketIcon = () => {
         fill='#293644'
       ></path>
     </svg>
-  );
-};
+  )
+}

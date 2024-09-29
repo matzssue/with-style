@@ -1,25 +1,24 @@
-import { TopProducts } from '@/components/Home/TopProducts';
-import { Categories } from '@/components/Home/Categories';
-import { Footer } from '@/components/Footer/Footer';
-import { Benefits } from '@/components/Home/Benefits';
-import { NewProducts } from '@/components/Home/NewProducts';
-import Header from '@/components/Header/Header';
-import { Hero } from '@/components/Hero/Hero';
-import Wrapper from '@/components/Wrapper/Wrapper';
+import { TopProducts } from '@/app/(components)/Home/TopProducts'
+import { Categories } from '@/app/(components)/Home/Categories'
+import { Footer } from '@/components/Footer/Footer'
+import { Benefits } from '@/app/(components)/Home/Benefits'
+import { NewProducts } from '@/app/(components)/Home/NewProducts'
+import Header from '@/components/Header/Header'
+import { Hero } from '@/app/(components)/Hero/Hero'
+import { StaticNavigation } from '@/components/Navbar/StaticNavigation'
+
 export default function Home() {
   return (
     <>
-      <Header />
-      <Hero />
-      <Wrapper>
-        <main className='flex w-full flex-col items-center justify-between'>
-          <TopProducts />
-          <NewProducts />
-          <Categories />
-          <Benefits />
-        </main>
-      </Wrapper>
+      <Header staticNavigation={<StaticNavigation />} />
+      <main className='flex w-full flex-col items-center justify-between overflow-x-hidden'>
+        <Hero />
+        <TopProducts />
+        <NewProducts />
+        <Categories />
+        <Benefits />
+      </main>
       <Footer />
     </>
-  );
+  )
 }

@@ -1,6 +1,13 @@
-export const publicRoutes = ['/', '/product'];
-export const authRoutes = ['/auth/login', '/auth/register', '/auth/error'];
+export const authRoutes = [
+  '/auth/login',
+  '/auth/register',
+  '/auth/error',
+  '/auth/reset',
+  '/auth/new-password',
+]
+export const privateRoutes = ['/user']
 
-export const apiAuthPrefix = '/api/auth';
+export const adminRoute = ['/admin', '/api/admin']
+export const apiAuthPrefix = '/api/auth'
 
-export const DEFAULT_LOGIN_REDIRECT = '/';
+export const DEFAULT_LOGIN_REDIRECT = '/'
