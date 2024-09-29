@@ -32,7 +32,7 @@ export const NewProducts = async () => {
             </div>
           </div>
 
-          <ul className='flex flex-wrap justify-center gap-5 px-6 '>
+          <ul className='flex w-full flex-wrap items-center justify-center gap-5 px-6 '>
             {summerProducts.map((product) => (
               <HomeProductList key={product.id} {...product} />
             ))}
