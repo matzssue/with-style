@@ -9,15 +9,14 @@ export default function Header({
   staticNavigation: React.ReactNode
 }) {
   return (
-    <header className='sticky top-0 z-50 flex h-[85px] w-full   flex-col max-md:h-[70px]'>
-      <div className='top-0 flex h-full flex-row items-center justify-between  bg-white'>
-        <Link href='/'>
+    <header className='sticky top-0 z-50 flex h-[85px] w-full   flex-col max-md:h-[65px]'>
+      <div className='top-0 flex h-full flex-row items-center justify-between bg-white px-1  py-2'>
+        <Link className='flex h-full w-full' href='/'>
           <Image
-            layout='responsive'
             src={Logo}
             width={300}
+            className='max-md:max-h-[100px] max-md:w-auto'
             height={300}
-            style={{ minHeight: '60px' }}
             alt='logo'
           />
         </Link>

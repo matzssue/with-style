@@ -17,7 +17,7 @@ export const ShoppingBag = () => {
     <Popover>
       <PopoverTrigger className=' relative hover:scale-105'>
         <BasketIcon />
-        <div className='border-1 absolute -bottom-3 -right-3 m-0 flex h-6 w-6 items-center justify-center rounded-full bg-secondary font-bold text-primary'>
+        <div className='border-1 absolute -bottom-3 -right-3 m-0 flex h-6 w-6 items-center justify-center rounded-full bg-secondary font-bold text-primary max-md:-bottom-1 max-md:-right-2 max-md:h-5 max-md:w-5'>
           <span>{totalItems}</span>
         </div>
       </PopoverTrigger>
