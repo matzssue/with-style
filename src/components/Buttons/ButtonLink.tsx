@@ -16,7 +16,7 @@ export const ButtonLink = ({
       href={href}
       style={style}
     >
-      <span className='font-semibold'>{children}</span>
+      <span className='font-semibold max-md:text-xl'>{children}</span>
     </Link>
   )
 }
