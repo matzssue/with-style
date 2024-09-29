@@ -12,7 +12,7 @@ export const HomeProductList = ({
 }: Product) => {
   return (
     <li key={id} className='flex flex-col gap-2'>
-      <div className='relative flex h-[350px] w-[250px] items-center max-sm:h-[400px] max-sm:w-[300px]'>
+      <div className='relative flex h-[230px] w-[170px] items-center max-sm:h-[400px] max-sm:w-[300px]'>
         <Image
           alt='summer clothes'
           src={imgUrl}
