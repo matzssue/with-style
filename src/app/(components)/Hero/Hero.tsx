@@ -1,3 +1,4 @@
+import { heroLinks } from '@/constants/hero-links'
 import Link from 'next/link'
 export const Hero = () => {
   return (
@@ -16,18 +17,15 @@ export const Hero = () => {
             </p>
           </div>
           <div className='flex w-full gap-2 max-md:flex-col max-md:gap-1'>
-            <Link
-              className='w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
-              href={'/products/man?promotions=true'}
-            >
-              For Man
-            </Link>
-            <Link
-              className=' w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
-              href={'/products/woman?promotions=true'}
-            >
-              For Woman
-            </Link>
+            {heroLinks.map(({ link, title }) => (
+              <Link
+                className='w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
+                href={`/products/${link}?promotions=true`}
+                key={title}
+              >
+                {title}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
