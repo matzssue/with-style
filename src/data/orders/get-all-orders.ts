@@ -1,5 +1,6 @@
 'use server'
 
+import { orderTag } from '@/constants/revalidation-keys'
 import { OrdersData } from '@/types/orders'
 
 type QueryParams = {
@@ -22,7 +23,7 @@ export async function getAllOrders(page: number) {
     headers: {
       'Content-Type': 'application/json',
     },
-    next: { tags: ['orders'] },
+    next: { tags: [orderTag] },
   })
 
   if (!response.ok) {

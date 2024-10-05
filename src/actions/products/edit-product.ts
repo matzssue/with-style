@@ -1,5 +1,6 @@
 'use server'
 
+import { productPath } from '@/constants/revalidation-keys'
 import { Product } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
@@ -19,7 +20,7 @@ export const editProduct = async (updatedProduct: Partial<Product>) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    revalidatePath('/admin/products')
+    revalidatePath(productPath)
     return { success: 'Product successfully edited' }
   } catch (error) {
     let message = 'Unknown Error'

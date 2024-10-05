@@ -1,6 +1,11 @@
 'use server'
 
 import { UserWishlist } from '@/app/api/user/wishlist/route'
+import {
+  categoryTag,
+  typeTag,
+  wishlistTag,
+} from '@/constants/revalidation-keys'
 import { revalidateTag } from 'next/cache'
 
 export const addToWishlist = async (userId: string, productId: string) => {
@@ -18,9 +23,9 @@ export const addToWishlist = async (userId: string, productId: string) => {
         }),
       }
     )
-    revalidateTag('wishlist')
-    revalidateTag('categoryProducts')
-    revalidateTag('typeProducts')
+    revalidateTag(wishlistTag)
+    revalidateTag(categoryTag)
+    revalidateTag(typeTag)
     const data: UserWishlist = await response.json()
     return data
   } catch (error) {

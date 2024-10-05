@@ -1,5 +1,6 @@
 'use server'
 
+import { orderTag } from '@/constants/revalidation-keys'
 import { revalidateTag } from 'next/cache'
 
 export const removeOrder = async (orderId: string) => {
@@ -18,7 +19,7 @@ export const removeOrder = async (orderId: string) => {
     )
 
     const data = await response.json()
-    revalidateTag('orders')
+    revalidateTag(orderTag)
     return data
   } catch (error) {
     let message = 'Unknown Error'

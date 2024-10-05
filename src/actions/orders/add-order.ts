@@ -1,5 +1,6 @@
 'use server'
 
+import { orderTag } from '@/constants/revalidation-keys'
 import { currentUser } from '@/lib/auth/auth'
 import { AddOrderData } from '@/types/products'
 import { revalidateTag } from 'next/cache'
@@ -25,7 +26,7 @@ export const addOrder = async (orderData: AddOrderData) => {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
     const data = await response.json()
-    revalidateTag('orders')
+    revalidateTag(orderTag)
     return data
   } catch (error) {
     let message = 'Unknown Error'

@@ -1,5 +1,6 @@
 'use server'
 
+import { productPath } from '@/constants/revalidation-keys'
 import { Product } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
@@ -21,7 +22,7 @@ export const addProduct = async (product: AddProductData) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    revalidatePath('/admin/products')
+    revalidatePath(productPath)
     await response.json()
     return { success: 'Product added' }
   } catch (error) {

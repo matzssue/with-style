@@ -1,5 +1,6 @@
 'use server'
 
+import { productPath } from '@/constants/revalidation-keys'
 import { revalidatePath } from 'next/cache'
 
 export const deleteProduct = async (productId: string) => {
@@ -18,7 +19,7 @@ export const deleteProduct = async (productId: string) => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    revalidatePath('/admin/products')
+    revalidatePath(productPath)
     await response.json()
     return { success: 'Product deleted' }
   } catch (error) {

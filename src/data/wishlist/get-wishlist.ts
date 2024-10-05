@@ -1,5 +1,6 @@
 'use server'
 
+import { wishlistTag } from '@/constants/revalidation-keys'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
 
@@ -23,7 +24,7 @@ export async function getWishlist(userId: string | undefined, page: string) {
     headers: {
       'Content-Type': 'application/json',
     },
-    next: { tags: ['wishlist'] },
+    next: { tags: [wishlistTag] },
   })
   const data: WishlistData = await response.json()
 
@@ -40,7 +41,7 @@ export async function getWishlistProductsId(userId: string | undefined) {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { tags: ['wishlist'] },
+      next: { tags: [wishlistTag] },
     }
   )
 
