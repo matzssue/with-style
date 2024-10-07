@@ -1,4 +1,5 @@
 import { heroLinks } from '@/constants/hero-links'
+import { publicRoutes } from '@/routes'
 import Link from 'next/link'
 export const Hero = () => {
   return (
@@ -20,7 +21,7 @@ export const Hero = () => {
             {heroLinks.map(({ link, title }) => (
               <Link
                 className='w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
-                href={`/products/${link}?promotions=true`}
+                href={`/${publicRoutes.products}/${link}?promotions=true`}
                 key={title}
               >
                 {title}

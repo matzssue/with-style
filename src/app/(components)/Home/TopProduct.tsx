@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Product } from '@prisma/client'
 import Link from 'next/link'
 import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { publicRoutes } from '@/routes'
 
 export default function TopProduct({
   imgUrl,
@@ -14,7 +15,7 @@ export default function TopProduct({
   discountPercentage,
 }: Product) {
   return (
-    <Link className='cursor-pointer' href={`/product/${id}`}>
+    <Link className='cursor-pointer' href={`/${publicRoutes.product}/${id}`}>
       <div className='flex h-full flex-col justify-between bg-neutral-100 px-2 py-2 '>
         <div>
           <p className='text-xl font-semibold'>{name}</p>

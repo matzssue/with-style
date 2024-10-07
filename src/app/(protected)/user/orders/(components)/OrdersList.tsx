@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 import { cn } from '@/lib/utils'
+import { userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -36,7 +37,7 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                     Total items: <b>{totalItems}</b>
                   </p>
                   <Button className={cn('w-full')} asChild>
-                    <Link href={`/user/order-details/${orderId}`}>
+                    <Link href={`/${userRoutes.orderDetails}/${orderId}`}>
                       Go to details
                     </Link>
                   </Button>

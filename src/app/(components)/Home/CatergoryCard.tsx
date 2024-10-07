@@ -1,3 +1,4 @@
+import { publicRoutes } from '@/routes'
 import Link from 'next/link'
 
 type CategoryCard = {
@@ -29,7 +30,7 @@ export const CategoryCard = ({
           >
             <Link
               className='block rounded-sm  text-xl text-primary'
-              href={`products/${category}/${link}`}
+              href={`/${publicRoutes.products}/${category}/${link}`}
             >
               {title}
             </Link>

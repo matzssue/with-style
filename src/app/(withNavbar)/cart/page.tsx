@@ -5,6 +5,7 @@ import { ButtonLink } from '@/components/Buttons/ButtonLink'
 import { paymentMethods } from '@/constants/payment-methods'
 import { CardWrapper } from './(components)/CardWrapper'
 import { CartItems } from './(components)/CartItems'
+import { userRoutes } from '@/routes'
 export default function CartPage() {
   const { totalItems, totalPrice } = useCartStore((store) => store)
 
@@ -25,7 +26,9 @@ export default function CartPage() {
             <p className='text-2xl font-bold'>Total</p>
             <p className='font-semibold'>Total price: {totalPrice}</p>
             <p className='font-semibold'>Total items: {totalItems}</p>
-            <ButtonLink href='/user/payment'>GO TO CHECKOUT</ButtonLink>
+            <ButtonLink href={`/${userRoutes.payment}`}>
+              GO TO CHECKOUT
+            </ButtonLink>
           </CardWrapper>
           <CardWrapper>
             <p className='text-2xl font-bold'>Payment methods</p>

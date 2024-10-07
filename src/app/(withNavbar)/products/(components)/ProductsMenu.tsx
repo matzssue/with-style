@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { ReactNode, useEffect, useState } from 'react'
 import { FilterForm } from './FilterForm'
+import { publicRoutes } from '@/routes'
 
 type NavigationLinks = {
   title: string
@@ -52,13 +53,14 @@ export const ProductsMenu = () => {
               <li key={title}>
                 <Link
                   className={
-                    pathname === `/products/${categorySlug}/${link}` ||
-                    (pathname === `/products/${categorySlug}` &&
+                    pathname ===
+                      `/${publicRoutes.products}/${categorySlug}/${link}` ||
+                    (pathname === `/${publicRoutes.products}/${categorySlug}` &&
                       title.toLowerCase() === 'all')
                       ? 'font-bold'
                       : ''
                   }
-                  href={`/products/${categorySlug}/${link}`}
+                  href={`/${publicRoutes.products}/${categorySlug}/${link}`}
                 >
                   {title}
                 </Link>

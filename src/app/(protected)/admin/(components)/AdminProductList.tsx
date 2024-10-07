@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/Searchbar/SearchInput'
 import { useSelectList } from '@/hooks/use-select-list'
 import { DeleteProductButton } from './DeleteProduct'
+import { adminRoutes } from '@/routes'
 
 export const AdminProductList = ({ products }: { products: Product[] }) => {
   const filterByName = (item: Product, searchValue: string) => {
@@ -31,7 +32,7 @@ export const AdminProductList = ({ products }: { products: Product[] }) => {
           value={searchValue}
         />
         <Button asChild>
-          <Link href={'/admin/products/add'}>Add new product</Link>
+          <Link href={`/${adminRoutes.products}/add`}>Add new product</Link>
         </Button>
       </div>
       <div className='flex flex-wrap gap-5 max-md:justify-center'>
@@ -39,7 +40,9 @@ export const AdminProductList = ({ products }: { products: Product[] }) => {
           <ProductCard key={product.id} product={product}>
             <div className='flex gap-5 '>
               <Button asChild>
-                <Link href={`/admin/products/edit/${product.id}`}>Edit</Link>
+                <Link href={`/${adminRoutes.products}/edit/${product.id}`}>
+                  Edit
+                </Link>
               </Button>
               <DeleteProductButton productId={product.id} />
             </div>

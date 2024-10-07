@@ -6,6 +6,7 @@ import { AddProduct } from '../../product/[productId]/(components)/AddProduct'
 
 import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
 import { ProductCard } from '@/components/Cards/ProductCard'
+import { publicRoutes } from '@/routes'
 
 export type Wishlisted = {
   productId: string
@@ -29,7 +30,7 @@ export const ProductList = ({
             <div className='flex items-center gap-4 max-md:flex-col'>
               <Link
                 className='rounded-sm bg-white px-4 py-2 shadow-sm hover:scale-105 max-md:w-full'
-                href={`/product/${product.id}`}
+                href={`/${publicRoutes.product}/${product.id}`}
               >
                 Go to product
               </Link>
