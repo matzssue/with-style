@@ -12,7 +12,7 @@ export const deleteProduct = async (productId: string) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(productId),
+        body: JSON.stringify({ productId }),
       }
     )
 
