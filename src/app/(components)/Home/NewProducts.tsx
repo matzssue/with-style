@@ -8,12 +8,12 @@ import { ButtonLink } from '../../../components/Buttons/ButtonLink'
 import { HomeProductList } from './HomeProductList'
 import { NewCollectionWrapper } from '../../../components/Wrapper/NewCollectionWrapper'
 import { getProductsBySubcategory } from '@/data/products/get-products'
+import { collectionLinks } from '@/constants/collection-links'
+import { publicRoutes } from '@/routes'
+import { subcategories } from '@/constants/categories'
+import { CollectionList } from './CollectionList'
 
-export const NewProducts = async () => {
-  const { data: sportProducts } = await getProductsBySubcategory('SPORT', 3)
-
-  const { data: summerProducts } = await getProductsBySubcategory('SUMMER', 3)
-
+export const NewProducts = () => {
   return (
     <section className='flex h-full  w-5/6 flex-col gap-4 overflow-hidden max-xl:w-full'>
       <MotionCard index={1} key={1}>
@@ -23,20 +23,18 @@ export const NewProducts = async () => {
               New summer collection
             </p>
             <div className='flex gap-2'>
-              <ButtonLink href='/products/man?subcategory=summer'>
-                Man collection
-              </ButtonLink>
-              <ButtonLink href='/products/woman?subcategory=summer'>
-                Woman collection
-              </ButtonLink>{' '}
+              {collectionLinks.map(({ link, title }) => (
+                <ButtonLink
+                  key={title}
+                  href={`/${publicRoutes.products}/${link}?subcategory=${subcategories.summer}`}
+                >
+                  {title}
+                </ButtonLink>
+              ))}
             </div>
           </div>
 
-          <ul className='flex w-full flex-wrap items-center justify-center gap-5 px-6 '>
-            {summerProducts.map((product) => (
-              <HomeProductList key={product.id} {...product} />
-            ))}
-          </ul>
+          <CollectionList subcategory={subcategories.summer} />
         </NewCollectionWrapper>
         <div className='relative h-full w-[650px] max-lg:hidden '>
           <Image
@@ -65,20 +63,18 @@ export const NewProducts = async () => {
               New sports collection
             </p>
             <div className='flex gap-2'>
-              <ButtonLink href='/products/man?subcategory=sport'>
-                Man collection
-              </ButtonLink>
-              <ButtonLink href='/products/woman?subcategory=sport'>
-                Woman collection
-              </ButtonLink>{' '}
+              {collectionLinks.map(({ link, title }) => (
+                <ButtonLink
+                  key={title}
+                  href={`/${publicRoutes.products}/${link}?subcategory=${subcategories.sport}`}
+                >
+                  {title}
+                </ButtonLink>
+              ))}
             </div>
           </div>
 
-          <ul className='flex flex-wrap justify-center gap-5 px-6 '>
-            {sportProducts.map((product) => (
-              <HomeProductList key={product.id} {...product} />
-            ))}
-          </ul>
+          <CollectionList subcategory={subcategories.sport} />
         </NewCollectionWrapper>
       </MotionCard>
     </section>
