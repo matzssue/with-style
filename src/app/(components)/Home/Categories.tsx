@@ -16,7 +16,9 @@ export const Categories = () => {
             .slice(0, 2)
             .map(({ bgImage, category, links, title }) => (
               <div
-                className={`max-w-[450px] bg-[url('/images/${bgImage}')] bg-cover bg-center 2xl:min-h-[800px]`}
+                key={title}
+                className={`max-w-[450px] bg-cover bg-center 2xl:min-h-[800px]`}
+                style={{ backgroundImage: `url('${bgImage}')` }}
               >
                 <CategoryCard
                   categoryTitle={title}
@@ -30,7 +32,9 @@ export const Categories = () => {
               .slice(2, 4)
               .map(({ bgImage, category, links, title }) => (
                 <div
-                  className={`max-w-[450px] bg-[url('/images/${bgImage}')] bg-cover bg-center 2xl:min-h-[400px]`}
+                  key={title}
+                  className={`max-w-[450px] bg-cover bg-center 2xl:min-h-[400px]`}
+                  style={{ backgroundImage: `url('${bgImage}')` }}
                 >
                   <CategoryCard
                     categoryTitle={title}
