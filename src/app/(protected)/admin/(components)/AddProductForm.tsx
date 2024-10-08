@@ -2,60 +2,32 @@
 
 import { addProduct } from '@/actions/products/add-product'
 
-import Alert from '@/components/Alert/Alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Form } from '@/components/ui/form'
 
-import {
-  addProductSchema,
-  AddProductSchema,
-} from '@/lib/schemas/product-schema'
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductCategory, ProductType } from '@prisma/client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
-import {
-  MultiSelector,
-  MultiSelectorContent,
-  MultiSelectorInput,
-  MultiSelectorItem,
-  MultiSelectorList,
-  MultiSelectorTrigger,
-} from '@/components/Select/Multiselect'
-import { shoeSizeToString, sizes } from '@/constants/sizes'
+
+import { sizeType } from '@/constants/sizes'
 import { toast } from 'sonner'
+import { adminRoutes } from '@/routes'
+import { productSchema, ProductSchema } from '@/lib/schemas/product-schema'
+import { FormFieldInput } from '@/components/Inputs/FormFieldInput'
+import { FormFieldSelect } from '@/components/Inputs/FormFieldSelect'
+import { FormFieldMultiSelect } from '@/components/Inputs/FormFieldMultiSelect'
 
 const categories = Object.values(ProductCategory)
 const types = Object.values(ProductType)
 
 export const AddProductForm = () => {
-  const [error, setError] = useState<string | undefined>('')
-  const [success, setSuccess] = useState<string | undefined>('')
-  const [selectedCategory, setSelectedCategory] = useState<string>('')
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([])
-
-  const form = useForm<AddProductSchema>({
-    resolver: zodResolver(addProductSchema),
+  const form = useForm<ProductSchema>({
+    resolver: zodResolver(productSchema),
     defaultValues: {
       name: '',
       category: undefined,
@@ -68,31 +40,23 @@ export const AddProductForm = () => {
     },
   })
 
-  useEffect(() => {
-    if (selectedCategory === 'SHOES') {
-      setSelectedSizes(shoeSizeToString)
-    } else if (selectedCategory === 'ACCESSORIES' || selectedCategory === '') {
-      setSelectedSizes([])
-    } else {
-      setSelectedSizes(sizes)
-    }
-  }, [selectedCategory])
+  const selectedCategory = form.watch('category')
+  const selectedSizes =
+    sizeType[selectedCategory as keyof typeof sizeType] || []
 
-  const onSubmit = (values: AddProductSchema) => {
-    setError('')
-    setSuccess('')
+  const onSubmit = async (values: ProductSchema) => {
     const addProductData = {
       ...values,
       size: values.size ?? [],
     }
 
-    addProduct(addProductData).then((data) => {
-      setError(data.error)
-      setSuccess(data.success)
-      if (data.success) {
-        toast('Product successfully added')
-      }
-    })
+    const response = await addProduct(addProductData)
+
+    if (response.success) {
+      toast('Product successfully added')
+    } else if (response.error) {
+      toast('An error occurred while adding the product')
+    }
   }
 
   return (
@@ -110,189 +74,75 @@ export const AddProductForm = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className='flex flex-col space-y-6'
           >
-            <FormField
+            <FormFieldInput<ProductSchema>
               control={form.control}
               name='name'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Product name</FormLabel>
-                  <FormControl>
-                    <Input placeholder='' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              label=''
             />
             <div className='flex justify-between max-sm:flex-col'>
-              <FormField
+              <FormFieldSelect
                 control={form.control}
+                label='Category'
                 name='category'
-                render={({ field }) => (
-                  <FormItem className='w-2/5 max-sm:w-full'>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      onValueChange={(value) => {
-                        field.onChange()
-                        setSelectedCategory(value)
-                      }}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='Select product category' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {categories.map((category) => (
-                          <SelectItem key={category} value={category}>
-                            {category}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
+                selectItems={categories}
+                className='w-2/5 max-sm:w-full'
+                placeholder='Select product category'
               />
-              <FormField
+              <FormFieldSelect
                 control={form.control}
+                label='Type'
                 name='type'
-                render={({ field }) => (
-                  <FormItem className='w-2/5 max-sm:w-full'>
-                    <FormLabel>Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='Select product type' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {types.map((category) => (
-                          <SelectItem key={category} value={category}>
-                            {category}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
+                selectItems={types}
+                className='w-2/5 max-sm:w-full'
+                placeholder='Select product type'
               />
             </div>
             <div className='flex justify-between'>
-              <FormField
+              <FormFieldInput<ProductSchema>
                 control={form.control}
                 name='subcategory'
-                render={({ field }) => (
-                  <FormItem className='w-2/6'>
-                    <FormLabel>Subcategory</FormLabel>
-                    <FormControl>
-                      <Input type='text' {...field} value={field.value ?? ''} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label='Subcategory'
+                className='w-2/6'
               />
-              <FormField
+              <FormFieldInput<ProductSchema>
                 control={form.control}
                 name='discountPercentage'
-                render={({ field }) => (
-                  <FormItem className='w-2/6'>
-                    <FormLabel>Discount percentage</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        {...field}
-                        value={field.value ?? ''}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label='Discount percentage'
+                type='number'
               />
-              <FormField
+              <FormFieldInput<ProductSchema>
                 control={form.control}
                 name='price'
-                render={({ field }) => (
-                  <FormItem className='w-1/6'>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl>
-                      <Input
-                        type='number'
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label='Price'
+                type='number'
               />
             </div>
-            <FormField
+            <FormFieldInput<ProductSchema>
               control={form.control}
-              name='imgUrl'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image link</FormLabel>
-                  <FormControl>
-                    <Input
-                      type='text'
-                      placeholder='https://example.com/'
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
+              name='price'
+              label='Image link'
+              placeholder='https://example.com/'
             />
-            <FormField
+
+            <FormFieldMultiSelect
               control={form.control}
+              label='Size'
+              list={selectedSizes}
               name='size'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Size</FormLabel>
-                  <FormControl>
-                    <MultiSelector
-                      values={field.value ?? []}
-                      onValuesChange={field.onChange}
-                      className='max-w-xs'
-                    >
-                      <MultiSelectorTrigger>
-                        <MultiSelectorInput placeholder='Select size' />
-                      </MultiSelectorTrigger>
-                      <MultiSelectorContent>
-                        <MultiSelectorList>
-                          {selectedSizes.map((size) => (
-                            <MultiSelectorItem
-                              key={size}
-                              value={size.toString()}
-                            >
-                              <span>{size.toString()}</span>
-                            </MultiSelectorItem>
-                          ))}
-                        </MultiSelectorList>
-                      </MultiSelectorContent>
-                    </MultiSelector>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              className='max-w-xs'
+              placeholder='Select size'
             />
             <Button className='w-full' type='submit'>
               Submit
             </Button>
-            {error && <Alert type='error'>{error}</Alert>}
-            {success && <Alert type='success'>{success}</Alert>}
+
             <Button
               asChild
               className={cn(
                 'bg-transparent py-0 text-primary hover:bg-transparent hover:underline'
               )}
             >
-              <Link href={'/admin'}>Back</Link>
+              <Link href={`/${adminRoutes.default}`}>Back</Link>
             </Button>
           </form>
         </Form>
