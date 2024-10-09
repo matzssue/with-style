@@ -57,40 +57,40 @@ export const EditProductForm = ({ product }: { product: Product }) => {
       <CardContent className='w-full'>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-            <FormFieldInput
+            <FormFieldInput<ProductSchema>
               control={form.control}
               name='name'
               label='Product name'
               placeholder={product.name}
             />
-            <FormFieldSelect
+            <FormFieldSelect<ProductSchema>
               control={form.control}
               name='category'
               label='Select category'
               placeholder={product.category}
               selectItems={categories}
             />
-            <FormFieldSelect
+            <FormFieldSelect<ProductSchema>
               control={form.control}
               name='type'
               label='Select product type'
               placeholder={product.type}
               selectItems={types}
             />
-            <FormFieldInput
+            <FormFieldInput<ProductSchema>
               control={form.control}
               name='imgUrl'
               label='Image link'
               placeholder={product.imgUrl}
             />
-            <FormFieldInput
+            <FormFieldInput<ProductSchema>
               control={form.control}
               name='price'
               label='Price'
               type='number'
               placeholder={product.imgUrl}
             />
-            <FormFieldInput
+            <FormFieldInput<ProductSchema>
               control={form.control}
               name='discountPercentage'
               label='Discount percentage'

@@ -80,7 +80,7 @@ export const AddProductForm = () => {
               label=''
             />
             <div className='flex justify-between max-sm:flex-col'>
-              <FormFieldSelect
+              <FormFieldSelect<ProductSchema>
                 control={form.control}
                 label='Category'
                 name='category'
@@ -88,7 +88,7 @@ export const AddProductForm = () => {
                 className='w-2/5 max-sm:w-full'
                 placeholder='Select product category'
               />
-              <FormFieldSelect
+              <FormFieldSelect<ProductSchema>
                 control={form.control}
                 label='Type'
                 name='type'
@@ -124,7 +124,7 @@ export const AddProductForm = () => {
               placeholder='https://example.com/'
             />
 
-            <FormFieldMultiSelect
+            <FormFieldMultiSelect<ProductSchema>
               control={form.control}
               label='Size'
               list={selectedSizes}
