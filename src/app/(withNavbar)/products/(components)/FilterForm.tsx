@@ -32,21 +32,21 @@ import {
 } from '@/lib/schemas/filter-schema'
 import { Checkbox } from '@/components/ui/checkbox'
 import { getSubcategoryTitles } from '@/data/products/get-subcategories'
+import {
+  defaultPromotions,
+  defaultSize,
+  defaultSubcategory,
+  defaultPrice,
+} from '@/constants/filters'
 
 type PriceFilter = {
   min: number
   max: number
 }
 
-const minPrice = 0
-const maxPrice = 500
-const defaultSize = 'ALL'
-const defaultSubcategory = 'ALL'
-const defaultPromotions = false
-
 const defaultFormValues = {
   size: defaultSize,
-  price: [minPrice, maxPrice],
+  price: [defaultPrice.minPrice, defaultPrice.maxPrice],
 }
 
 export const FilterForm = () => {
@@ -217,8 +217,8 @@ export const FilterForm = () => {
                 </div>
                 <FormControl>
                   <Slider
-                    min={minPrice}
-                    max={maxPrice}
+                    min={defaultPrice.minPrice}
+                    max={defaultPrice.maxPrice}
                     step={20}
                     defaultValue={field.value}
                     onValueChange={(value) => {
