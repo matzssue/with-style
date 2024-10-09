@@ -12,15 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+
 import { shoesSize, sizes } from '@/constants/sizes'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -30,7 +22,6 @@ import {
   FilterProductsSchema,
   filterProductsSchema,
 } from '@/lib/schemas/filter-schema'
-import { Checkbox } from '@/components/ui/checkbox'
 import { getSubcategoryTitles } from '@/data/products/get-subcategories'
 import {
   defaultPromotions,
@@ -38,6 +29,8 @@ import {
   defaultSubcategory,
   defaultPrice,
 } from '@/constants/filters'
+import { FormFieldSelect } from '@/components/Inputs/FormFieldSelect'
+import { FormFieldCheckbox } from '@/components/Inputs/FormFieldCheckbox'
 
 type PriceFilter = {
   min: number
@@ -87,11 +80,11 @@ export const FilterForm = () => {
 
   useEffect(() => {
     if (pathname.includes('shoes')) {
-      setProductsType(shoesSizeData)
+      setProductsType([defaultSize, ...shoesSizeData])
     } else if (pathname.includes('accessories')) {
-      setProductsType(null)
+      setProductsType([defaultSize])
     } else {
-      setProductsType(sizes)
+      setProductsType([defaultSize, ...sizes])
     }
   }, [pathname])
 
@@ -137,73 +130,23 @@ export const FilterForm = () => {
           className='flex flex-col space-y-6 px-2'
         >
           <p className='py-2 text-3xl font-bold'>Filters</p>
-          <FormField
+          <FormFieldSelect<FilterProductsSchema>
             control={form.control}
+            label='Collection'
             name='subcategory'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Collection</FormLabel>
+            selectItems={subcategories}
+            placeholder='Select collection'
+            triggerClassname='w-[180px]'
+          />
 
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Select collection' />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Collections</SelectLabel>
-                      {subcategories &&
-                        subcategories.map((size) => (
-                          <SelectItem key={size} value={size}>
-                            {size}
-                          </SelectItem>
-                        ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <FormField
+          <FormFieldSelect<FilterProductsSchema>
             control={form.control}
+            label='Size'
             name='size'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Size</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Select size' />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Sizes</SelectLabel>
-                      <SelectItem key={defaultSize} value={defaultSize}>
-                        {defaultSize}
-                      </SelectItem>
-                      {productsType &&
-                        productsType.map((size) => (
-                          <SelectItem key={size} value={size}>
-                            {size}
-                          </SelectItem>
-                        ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
+            selectItems={productsType ?? []}
+            placeholder='Select size'
+            triggerClassname='w-[180px]'
+          />
 
           <FormField
             control={form.control}
@@ -232,22 +175,11 @@ export const FilterForm = () => {
               </FormItem>
             )}
           ></FormField>
-          <FormField
+          <FormFieldCheckbox<FilterProductsSchema>
             control={form.control}
+            label='Only promotions'
             name='promotions'
-            render={({ field }) => (
-              <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md py-4'>
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className='space-y-1 leading-none'>
-                  <FormLabel>Only promotions</FormLabel>
-                </div>
-              </FormItem>
-            )}
+            className='flex flex-row items-start space-x-3 space-y-0 rounded-md py-4'
           />
 
           {error && <p>{error}</p>}
