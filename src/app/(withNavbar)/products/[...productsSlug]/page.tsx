@@ -1,6 +1,4 @@
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
-import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
-import { auth } from '@/auth'
 
 import {
   ProductsData,
