@@ -8,10 +8,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
-  if (!ordersData) {
-    return <div>Loading...</div>
-  }
-
   if (ordersData.length === 0) {
     return <div>Hey! You don&apos;t have any orders</div>
   }
