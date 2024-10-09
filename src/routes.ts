@@ -20,6 +20,7 @@ export const publicRoutes = {
 export const adminRoutes = {
   default: 'admin',
   products: 'admin/products',
+  orders: 'admin/orders',
 }
 export const userRoutes = {
   default: 'user',
