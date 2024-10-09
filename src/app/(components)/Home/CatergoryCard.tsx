@@ -1,7 +1,7 @@
 import { publicRoutes } from '@/routes'
 import Link from 'next/link'
 
-type CategoryCard = {
+type TCategoryCard = {
   links: LinksProps[]
   categoryTitle: string
   category: string
@@ -16,7 +16,7 @@ export const CategoryCard = ({
   links,
   categoryTitle,
   category,
-}: CategoryCard) => {
+}: TCategoryCard) => {
   return (
     <div className='flex w-auto flex-col p-5'>
       <p className=' rounded-sm bg-primary p-5 text-3xl font-bold text-secondary shadow-lg'>
