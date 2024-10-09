@@ -5,9 +5,8 @@ import { MotionCard } from '../../../components/Cards/MotionCard'
 
 import { ButtonLink } from '../../../components/Buttons/ButtonLink'
 
-import { HomeProductList } from './HomeProductList'
 import { NewCollectionWrapper } from '../../../components/Wrapper/NewCollectionWrapper'
-import { getProductsBySubcategory } from '@/data/products/get-products'
+
 import { collectionLinks } from '@/constants/collection-links'
 import { publicRoutes } from '@/routes'
 import { subcategories } from '@/constants/categories'

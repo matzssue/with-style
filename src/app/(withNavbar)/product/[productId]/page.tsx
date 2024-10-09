@@ -9,6 +9,8 @@ import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
 import { ProductFormButtons } from './(components)/ProductFormButtons'
 import { deliveryInformations } from '@/constants/informations'
 import { CustomAccordionItem } from '@/components/Accordion/CustomAccordionItem'
+import { Loading } from '@/components/Loading/Loading'
+import { Suspense } from 'react'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -45,11 +47,13 @@ export default async function ProductPage({
               discountPercentage={product.discountPercentage}
             />
           </div>
-          <ProductFormButtons product={product} />
+          <Suspense fallback={<Loading />}>
+            <ProductFormButtons product={product} />
+          </Suspense>
           <div>
             <Accordion type='single' collapsible className='w-full'>
               {deliveryInformations.map((information) => (
-                <CustomAccordionItem {...information} />
+                <CustomAccordionItem key={information.value} {...information} />
               ))}
             </Accordion>
           </div>

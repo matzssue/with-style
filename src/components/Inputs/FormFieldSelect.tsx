@@ -11,6 +11,7 @@ import { Control, FieldValues, Path } from 'react-hook-form'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -23,6 +24,7 @@ type TFormFieldSelect<T extends FieldValues> = {
   name: Path<T>
   className?: HTMLProps<HTMLElement>['className']
   selectItems: string[]
+  triggerClassname?: HTMLProps<HTMLElement>['className']
 }
 
 export const FormFieldSelect = <T extends FieldValues>({
@@ -32,6 +34,7 @@ export const FormFieldSelect = <T extends FieldValues>({
   name,
   className,
   selectItems,
+  triggerClassname,
 }: TFormFieldSelect<T>) => {
   return (
     <FormField
@@ -42,16 +45,18 @@ export const FormFieldSelect = <T extends FieldValues>({
           <FormLabel>{label}</FormLabel>
           <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
-              <SelectTrigger>
+              <SelectTrigger className={triggerClassname}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {selectItems.map((item: string) => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
+              <SelectGroup>
+                {selectItems.map((item: string) => (
+                  <SelectItem key={item} value={item}>
+                    {item}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
           <FormMessage />
