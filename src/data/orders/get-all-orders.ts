@@ -6,15 +6,17 @@ import { OrdersData } from '@/types/orders'
 type QueryParams = {
   page?: string
   userId?: string
+  search?: string
 }
 
-export async function getAllOrders(page: number) {
+export async function getAllOrders(filters: QueryParams) {
   const url = new URL(
     `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/all`
   )
   const queryParams: QueryParams = {}
 
-  if (page) queryParams.page = page.toString()
+  if (filters.page) queryParams.page = filters.page.toString() ?? '1'
+  if (filters.search) queryParams.search = filters.search
 
   url.search = new URLSearchParams(queryParams).toString()
 
@@ -24,6 +26,7 @@ export async function getAllOrders(page: number) {
       'Content-Type': 'application/json',
     },
     next: { tags: [orderTag] },
+    cache: 'no-cache',
   })
 
   if (!response.ok) {

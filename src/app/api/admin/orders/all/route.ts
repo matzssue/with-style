@@ -10,8 +10,12 @@ export async function GET(request: NextRequest) {
     const page = searchParams.get('page')
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
+    const orderNumber = searchParams.get('search')
 
     const orders = await prisma.order.findMany({
+      ...(orderNumber !== null && {
+        where: { orderNumber: Number(orderNumber) },
+      }),
       take: ITEMS_PER_PAGE,
       skip: skip,
       include: { products: { include: { product: true } } },
