@@ -14,17 +14,15 @@ import { toast } from 'sonner'
 export const WishlistToggleButton = ({
   productId,
   withText = false,
-  wishlisted,
+  isWishlisted,
 }: {
   productId: string
   withText?: boolean
-  wishlisted: string[]
+  isWishlisted: boolean
 }) => {
   const session = useSession()
   const router = useRouter()
   const userId = session.data?.user.id
-
-  const isWishlisted = wishlisted.includes(productId)
 
   const handleWishlistItem = () => {
     if (session.status === 'unauthenticated') {

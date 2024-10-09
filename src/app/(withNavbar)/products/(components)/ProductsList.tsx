@@ -7,18 +7,18 @@ import { AddProduct } from '../../product/[productId]/(components)/AddProduct'
 import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
 import { ProductCard } from '@/components/Cards/ProductCard'
 import { publicRoutes } from '@/routes'
+import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
+import { auth } from '@/auth'
 
 export type Wishlisted = {
   productId: string
 }
 
-export const ProductList = ({
-  products,
-  wishlisted,
-}: {
-  products: Product[]
-  wishlisted: string[] | []
-}) => {
+export const ProductList = async ({ products }: { products: Product[] }) => {
+  const session = await auth()
+  const userId = session?.user.id
+  const userWishlist = await getWishlistProductsId(userId)
+
   return (
     <div className='p-6'>
       {products.length === 0 && (
@@ -36,7 +36,7 @@ export const ProductList = ({
               </Link>
               <div className='flex items-center justify-center gap-4 '>
                 <WishlistToggleButton
-                  wishlisted={wishlisted}
+                  isWishlisted={userWishlist.includes(product.id)}
                   productId={product.id}
                 />
                 <AddProduct {...product} />
