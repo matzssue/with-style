@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import { RoleGate } from '@/components/Auth/RoleGate'
+import { RoleWrapper } from '@/components/Auth/RoleWrapper'
 import Header from '@/components/Header/Header'
 import { StaticNavigation } from '@/components/Navbar/StaticNavigation'
 import UserBar from '@/components/UserBar/UserBar'
@@ -14,11 +14,11 @@ export default async function UserLayout({
   const session = await auth()
   return (
     <SessionProvider session={session}>
-      <RoleGate allowedRole={['USER', 'ADMIN']}>
+      <RoleWrapper allowedRole={['USER', 'ADMIN']}>
         <Header staticNavigation={<StaticNavigation />} />
         <UserBar />
         <Wrapper>{children}</Wrapper>
-      </RoleGate>
+      </RoleWrapper>
     </SessionProvider>
   )
 }
