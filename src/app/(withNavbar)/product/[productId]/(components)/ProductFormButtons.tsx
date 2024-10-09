@@ -12,15 +12,13 @@ export const ProductFormButtons = async ({ product }: { product: Product }) => {
   const userWishlist = await getWishlistProductsId(userId)
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className='flex flex-col gap-2'>
-        <AddProductForm product={product} />
-        <WishlistToggleButton
-          isWishlisted={userWishlist.includes(product.id)}
-          withText
-          productId={product.id}
-        />
-      </div>
-    </Suspense>
+    <div className='flex flex-col gap-2'>
+      <AddProductForm product={product} />
+      <WishlistToggleButton
+        isWishlisted={userWishlist.includes(product.id)}
+        withText
+        productId={product.id}
+      />
+    </div>
   )
 }
