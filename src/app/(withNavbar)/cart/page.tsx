@@ -16,8 +16,7 @@ export default function CartPage() {
       <div className='flex  justify-center gap-6 bg-secondary px-5 py-5 max-lg:w-3/4 max-lg:flex-col max-md:w-full'>
         <CardWrapper>
           <h1 className='border-b-2 border-b-secondary py-2 pb-3 text-center text-2xl font-bold'>
-            {isItem && `Your bag : ${totalItems} items`}
-            {!isItem && `No items in your bag`}
+            {isItem ? `Your bag : ${totalItems} items` : `No items in your bag`}
           </h1>
           <CartItems />
         </CardWrapper>
