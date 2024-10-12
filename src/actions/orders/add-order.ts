@@ -2,12 +2,11 @@
 
 import { orderTag } from '@/constants/revalidation-keys'
 import { currentUser } from '@/lib/auth/auth'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { AddOrderData } from '@/types/products'
 import { revalidateTag } from 'next/cache'
 
 export const addOrder = async (orderData: AddOrderData) => {
-  const user = await currentUser()
-
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/add`,
@@ -15,10 +14,10 @@ export const addOrder = async (orderData: AddOrderData) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Cookie: getCookies(),
         },
         body: JSON.stringify({
           orderData,
-          user,
         }),
       }
     )
