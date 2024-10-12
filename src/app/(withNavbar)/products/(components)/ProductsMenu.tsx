@@ -1,14 +1,8 @@
 'use client'
 
-import {
-  accessoriesNavLinks,
-  manNavLinks,
-  shoesNavLinks,
-  womanNavLinks,
-} from '@/constants/navlist'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
-import { ReactNode, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { ReactNode } from 'react'
 import { FilterForm } from './FilterForm'
 import { publicRoutes } from '@/routes'
 
@@ -18,30 +12,14 @@ type NavigationLinks = {
   icon?: ReactNode
 }
 
-export const ProductsMenu = () => {
-  const param = useParams()
+export const ProductsMenu = ({
+  categories,
+  categorySlug,
+}: {
+  categories: NavigationLinks[]
+  categorySlug: string
+}) => {
   const pathname = usePathname()
-  const categorySlug = param.productsSlug[0]
-  const [categories, setCategories] = useState<NavigationLinks[] | ''>('')
-
-  useEffect(() => {
-    switch (categorySlug) {
-      case 'man':
-        setCategories(manNavLinks)
-        break
-      case 'woman':
-        setCategories(womanNavLinks)
-        break
-      case 'shoes':
-        setCategories(shoesNavLinks)
-        break
-      case 'accessories':
-        setCategories(accessoriesNavLinks)
-        break
-      default:
-        setCategories([])
-    }
-  }, [categorySlug])
 
   return (
     <div className='flex w-1/4 min-w-[300px] flex-col justify-start gap-5 border-r-2 bg-neutral-100 px-8 py-5 max-lg:w-full max-lg:border-r-0'>
