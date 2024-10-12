@@ -6,11 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { Plus, Minus } from 'lucide-react'
 import Link from 'next/link'
-import { ProductInStore, useCartStore } from '@/store/useCartStore'
+import { useCartStore } from '@/store/useCartStore'
+import { CartItemsInModal } from '@/app/(components)/Cart/CartItemsInModal'
 
 export const CartItemsCard = () => {
   const { cart, totalItems, totalPrice, decreaseQuantity, addToCart } =
@@ -23,39 +22,11 @@ export const CartItemsCard = () => {
         <CardDescription>your products</CardDescription>
       </CardHeader>
       <CardContent>
-        <ul className='max-h-60 overflow-y-scroll'>
-          {cart.map((product: ProductInStore) => (
-            <li
-              key={product.storeId}
-              className='flex w-full gap-5 border-b-2 py-5'
-            >
-              <Image
-                height={90}
-                width={90}
-                alt={product.name}
-                src={product.imgUrl}
-              />
-              <div>
-                <p className='font-semibold'>{product.name}</p>
-                <p>
-                  <span className='font-semibold'>Size:</span> {product.size}
-                </p>
-                <p className='flex '>
-                  <Minus
-                    className='cursor-pointer'
-                    onClick={() => decreaseQuantity(product)}
-                  />
-
-                  {product.quantity}
-                  <Plus
-                    onClick={() => addToCart(product)}
-                    className='cursor-pointer'
-                  />
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <CartItemsInModal
+          cart={cart}
+          addToCart={addToCart}
+          decreaseQuantity={decreaseQuantity}
+        />
       </CardContent>
       <CardFooter className={cn('flex flex-col items-start gap-2')}>
         <p>
