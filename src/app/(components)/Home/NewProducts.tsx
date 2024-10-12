@@ -3,37 +3,23 @@ import womanNewProducts from '../../../../public/images/hero-women-summer.webp'
 import Image from 'next/image'
 import { MotionCard } from '../../../components/Cards/MotionCard'
 
-import { ButtonLink } from '../../../components/Buttons/ButtonLink'
-
 import { NewCollectionWrapper } from '../../../components/Wrapper/NewCollectionWrapper'
 
 import { collectionLinks } from '@/constants/collection-links'
-import { publicRoutes } from '@/routes'
+
 import { subcategories } from '@/constants/categories'
-import { CollectionList } from './CollectionList'
+
+import { NewCollectionItem } from './NewCollectionItem'
 
 export const NewProducts = () => {
   return (
     <section className='flex h-full  w-5/6 flex-col gap-4 overflow-hidden max-xl:w-full'>
       <MotionCard index={1} key={1}>
         <NewCollectionWrapper className='bg-[#e4ebed]'>
-          <div className='flex flex-col items-center gap-y-5 max-lg:py-6'>
-            <p className='text-4xl font-bold text-primary '>
-              New summer collection
-            </p>
-            <div className='flex gap-2'>
-              {collectionLinks.map(({ link, title }) => (
-                <ButtonLink
-                  key={title}
-                  href={`/${publicRoutes.products}/${link}?subcategory=${subcategories.summer}`}
-                >
-                  {title}
-                </ButtonLink>
-              ))}
-            </div>
-          </div>
-
-          <CollectionList subcategory={subcategories.summer} />
+          <NewCollectionItem
+            list={collectionLinks}
+            subcategory={subcategories.summer}
+          />
         </NewCollectionWrapper>
         <div className='relative h-full w-[650px] max-lg:hidden '>
           <Image
@@ -57,23 +43,10 @@ export const NewProducts = () => {
           />
         </div>
         <NewCollectionWrapper className='bg-[#cdcbf0]'>
-          <div className='flex flex-col items-center gap-y-5 max-lg:py-6'>
-            <p className='text-4xl font-bold text-primary'>
-              New sports collection
-            </p>
-            <div className='flex gap-2'>
-              {collectionLinks.map(({ link, title }) => (
-                <ButtonLink
-                  key={title}
-                  href={`/${publicRoutes.products}/${link}?subcategory=${subcategories.sport}`}
-                >
-                  {title}
-                </ButtonLink>
-              ))}
-            </div>
-          </div>
-
-          <CollectionList subcategory={subcategories.sport} />
+          <NewCollectionItem
+            list={collectionLinks}
+            subcategory={subcategories.sport}
+          />
         </NewCollectionWrapper>
       </MotionCard>
     </section>
