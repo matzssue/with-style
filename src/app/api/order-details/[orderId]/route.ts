@@ -3,12 +3,11 @@ import prisma from '@/lib/prisma'
 
 import { auth } from '@/auth'
 import { OrderData } from '@/types/orders'
+import { currentRole, currentUser } from '@/lib/auth/auth'
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth()
-    const userRole = session?.user.role
-    const userId = session?.user.id
+    const user = await currentUser()
     const searchParams = req.nextUrl.searchParams
     const orderId = searchParams.get('orderId')
 
@@ -24,7 +23,7 @@ export async function GET(req: NextRequest) {
       include: { products: { include: { product: true } } },
     })
 
-    if (userRole !== 'ADMIN' && userId !== order?.userId) {
+    if (user?.role !== 'ADMIN' && user?.id !== order?.userId) {
       return NextResponse.json(
         { error: `Sorry you'r not allowed to see this page` },
         { status: 403 }
