@@ -1,4 +1,4 @@
-import { AddressSchema } from '@/lib/schemas/auth-schema'
+import { OrderSchema } from '@/lib/schemas/auth-schema'
 import { ProductInStore } from '@/store/useCartStore'
 import { Product } from '@prisma/client'
 
@@ -12,7 +12,7 @@ export type ProductsInCheckout = {
   totalItems: number
   cart: ProductInStore[]
 }
-export type AddOrderData = AddressSchema & { amount: number } & {
+export type AddOrderData = OrderSchema & { amount: number } & {
   productsData: ProductsInCheckout
 }
 export type ProductsQueryParams = {

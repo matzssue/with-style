@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { AddressSchema, addressSchema } from '@/lib/schemas/auth-schema'
+import { orderSchema, OrderSchema } from '@/lib/schemas/auth-schema'
 import { Button } from '@/components/ui/button'
 import { addOrder } from '@/actions/orders/add-order'
 
@@ -51,8 +51,8 @@ export const CheckoutPage = ({
       .then((data) => setClientSecret(data.clientSecret))
   }, [amount])
 
-  const form = useForm<AddressSchema>({
-    resolver: zodResolver(addressSchema),
+  const form = useForm<OrderSchema>({
+    resolver: zodResolver(orderSchema),
     defaultValues: {
       city: '',
       name: '',
@@ -64,7 +64,7 @@ export const CheckoutPage = ({
     },
   })
 
-  const onSubmit = async (values: AddressSchema) => {
+  const onSubmit = async (values: OrderSchema) => {
     setLoading(true)
     if (!stripe || !elements || !clientSecret) {
       return
