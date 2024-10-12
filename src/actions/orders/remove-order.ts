@@ -1,12 +1,13 @@
 'use server'
 
 import { orderTag } from '@/constants/revalidation-keys'
+import { adminRoutes } from '@/routes'
 import { revalidateTag } from 'next/cache'
 
 export const removeOrder = async (orderId: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/orders/delete`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/${adminRoutes.orders}/delete`,
       {
         method: 'DELETE',
         headers: {
