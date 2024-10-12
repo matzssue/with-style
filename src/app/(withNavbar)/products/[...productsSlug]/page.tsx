@@ -12,6 +12,9 @@ import { getProducts } from '@/data/products/get-products'
 import { SortingMenu } from '../(components)/SortingMenu'
 import { Suspense } from 'react'
 import { Loading } from '@/components/Loading/Loading'
+import { ProductsMenu } from '../(components)/ProductsMenu'
+
+import { getLinksForCategory } from '@/lib/helplers/getLinksForCategory'
 
 export default async function TypeProducts({
   params,
@@ -40,14 +43,20 @@ export default async function TypeProducts({
   const { data, metadata }: ProductsData = await getProducts(queryParams)
 
   return (
-    <div className='flex w-full flex-col'>
-      <SortingMenu />
-      <Suspense fallback={<Loading />}>
-        <ProductList products={data} />
-      </Suspense>
-      <div className='flex w-full items-center'>
-        <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+    <>
+      <ProductsMenu
+        categories={getLinksForCategory(categorySlug)}
+        categorySlug={categorySlug}
+      />
+      <div className='flex w-full flex-col'>
+        <SortingMenu />
+        <Suspense fallback={<Loading />}>
+          <ProductList products={data} />
+        </Suspense>
+        <div className='flex w-full items-center'>
+          <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
