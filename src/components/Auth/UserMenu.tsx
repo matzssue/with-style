@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils'
 import { signOut } from 'next-auth/react'
 
 import { User } from 'next-auth'
+import { userMenu } from '@/constants/user-menu'
 
 export const UserMenu = ({ user }: { user: User | undefined }) => {
   return (
@@ -39,22 +40,13 @@ export const UserMenu = ({ user }: { user: User | undefined }) => {
         <DropdownMenuSeparator />
         {user ? (
           <>
-            {' '}
-            <DropdownMenuItem>
-              <Link className='underline max-md:text-lg' href='/user/settings'>
-                Settings
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link className='underline max-md:text-lg' href='/user/orders'>
-                My orders
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link className='underline max-md:text-lg' href='/user/wishlist'>
-                Wishlist
-              </Link>
-            </DropdownMenuItem>
+            {userMenu.map(({ link, title }) => (
+              <DropdownMenuItem key={title}>
+                <Link className='underline max-md:text-lg' href={`/${link}`}>
+                  {title}
+                </Link>
+              </DropdownMenuItem>
+            ))}
             <DropdownMenuItem>
               <Button
                 onClick={() => signOut()}
