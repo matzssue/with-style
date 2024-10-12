@@ -1,8 +1,9 @@
 'use server'
 
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { revalidateTag } from 'next/cache'
 
-export async function removeFromWishlist(userId: string, productId: string) {
+export async function removeFromWishlist(productId: string) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist/delete`,
@@ -10,9 +11,9 @@ export async function removeFromWishlist(userId: string, productId: string) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Cookie: getCookies(),
         },
         body: JSON.stringify({
-          userId,
           productId,
         }),
       }

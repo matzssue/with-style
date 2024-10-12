@@ -1,14 +1,14 @@
 'use server'
 
-import { UserWishlist } from '@/app/api/user/wishlist/route'
 import {
   categoryTag,
   typeTag,
   wishlistTag,
 } from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { revalidateTag } from 'next/cache'
 
-export const addToWishlist = async (userId: string, productId: string) => {
+export const addToWishlist = async (productId: string) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist/add`,
@@ -16,18 +16,22 @@ export const addToWishlist = async (userId: string, productId: string) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Cookie: getCookies(),
         },
         body: JSON.stringify({
-          userId,
           productId,
         }),
       }
     )
+    const data = await response.json()
+
     revalidateTag(wishlistTag)
     revalidateTag(categoryTag)
     revalidateTag(typeTag)
-    const data: UserWishlist = await response.json()
-    return data
+
+    if (data) {
+      return { success: 'Product successfully added' }
+    }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {
