@@ -26,4 +26,7 @@ export const userRoutes = {
   default: 'user',
   orderDetails: 'user/order-details',
   payment: 'user/payment',
+  settings: 'user/settings',
+  orders: 'user/orders',
+  wishlist: 'user/wishlist',
 }
