@@ -1,9 +1,10 @@
 'use server'
 
 import { wishlistTag } from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
-
+import { headers } from 'next/headers'
 type QueryParams = {
   page?: string
   userId?: string
@@ -23,6 +24,7 @@ export async function getWishlist(userId: string | undefined, page: string) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Cookies: getCookies(),
     },
     next: { tags: [wishlistTag] },
   })
@@ -38,15 +40,16 @@ export async function getWishlistProductsId(userId: string | undefined) {
     `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist?userId=${userId}`,
     {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headers(),
       next: { tags: [wishlistTag] },
     }
   )
 
   const products = await response.json()
 
+  if (products.error) {
+    throw new Error(products.error)
+  }
   const productsId: string[] = products.data.map(
     (product: Product) => product.id
   )

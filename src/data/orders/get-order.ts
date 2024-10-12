@@ -1,5 +1,6 @@
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { OrderData } from '@/types/orders'
-import { headers } from 'next/headers'
+
 type QueryParams = {
   orderId?: string
 }
@@ -17,7 +18,10 @@ export async function getOrder(orderId: string) {
 
     const response = await fetch(url.toString(), {
       method: 'GET',
-      headers: headers(),
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: getCookies(),
+      },
       cache: 'no-cache',
     })
 

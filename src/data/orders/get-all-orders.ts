@@ -1,6 +1,7 @@
 'use server'
 
 import { orderTag } from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { OrdersData } from '@/types/orders'
 
 type QueryParams = {
@@ -24,6 +25,7 @@ export async function getAllOrders(filters: QueryParams) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Cookie: getCookies(),
     },
     next: { tags: [orderTag] },
     cache: 'no-cache',

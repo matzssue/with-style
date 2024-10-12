@@ -1,3 +1,4 @@
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { Product } from '@prisma/client'
 
 export const getProduct = async (id: string) => {
@@ -12,6 +13,7 @@ export const getProduct = async (id: string) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Cookie: getCookies(),
       },
       cache: 'no-cache',
     })

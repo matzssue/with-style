@@ -1,3 +1,5 @@
+import { getCookies } from '@/lib/auth/sessionCookies'
+
 export const getSubcategoryTitles = async () => {
   try {
     const url = new URL(
@@ -8,6 +10,7 @@ export const getSubcategoryTitles = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Cookie: getCookies(),
       },
       cache: 'no-cache',
     })

@@ -1,6 +1,7 @@
 'use server'
 
 import { productPath } from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { revalidatePath } from 'next/cache'
 
 export const deleteProduct = async (productId: string) => {
@@ -11,6 +12,7 @@ export const deleteProduct = async (productId: string) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Cookie: getCookies(),
         },
         body: JSON.stringify({ productId }),
       }

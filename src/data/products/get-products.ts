@@ -1,3 +1,4 @@
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { ProductsData, ProductsQueryParams } from '@/types/products'
 
 export const getProducts = async (filters?: ProductsQueryParams) => {
@@ -11,6 +12,7 @@ export const getProducts = async (filters?: ProductsQueryParams) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Cookie: getCookies(),
     },
     cache: 'no-cache',
   })
