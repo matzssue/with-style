@@ -45,4 +45,5 @@ export const subcategories = {
   new: 'NEW',
   summer: 'SUMMER',
   top: 'TOP',
-}
+} as const
+export type Subcategory = (typeof subcategories)[keyof typeof subcategories]
