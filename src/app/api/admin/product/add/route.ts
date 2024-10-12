@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { productSchema } from '@/lib/schemas/product-schema'
 
 export async function POST(request: NextRequest) {
   try {
     const productData = await request.json()
-
     if (!productData) {
       return NextResponse.json(
         {
@@ -13,12 +13,22 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+    const validateProduct = productSchema.safeParse(productData)
 
-    const product = await prisma.product.create({
+    if (validateProduct.error) {
+      return NextResponse.json(
+        {
+          error: validateProduct.error.errors.map((e) => e.message).join(', '),
+        },
+        { status: 400 }
+      )
+    }
+
+    const createProduct = await prisma.product.create({
       data: productData,
     })
 
-    return NextResponse.json(product)
+    return NextResponse.json(createProduct)
   } catch (error) {
     return NextResponse.json(
       {

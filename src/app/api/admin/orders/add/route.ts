@@ -3,11 +3,29 @@ import prisma from '@/lib/prisma'
 import { AddOrderData } from '@/types/products'
 
 import { User } from '@prisma/client'
+import { orderSchema } from '@/lib/schemas/auth-schema'
+import { currentUser } from '@/lib/auth/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const { orderData, user }: { orderData: AddOrderData; user: User } =
-      await request.json()
+    const user = await currentUser()
+
+    if (!user || !user.id) {
+      return NextResponse.json(
+        { error: 'User not authenticated' },
+        { status: 401 }
+      )
+    }
+
+    const { orderData }: { orderData: AddOrderData } = await request.json()
+    const validateOrder = orderSchema.safeParse(orderData)
+
+    if (validateOrder.error) {
+      return NextResponse.json(
+        { error: validateOrder.error.errors.map((e) => e.message).join(', ') },
+        { status: 400 }
+      )
+    }
 
     const data = await prisma.order.create({
       data: {
