@@ -10,7 +10,6 @@ export const getSubcategoryTitles = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Cookie: getCookies(),
       },
       cache: 'no-cache',
     })

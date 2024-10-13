@@ -12,7 +12,6 @@ export const getProducts = async (filters?: ProductsQueryParams) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Cookie: getCookies(),
     },
     cache: 'no-cache',
   })
