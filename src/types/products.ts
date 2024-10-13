@@ -10,7 +10,26 @@ export type ProductsData = {
 }
 export type ProductsInCheckout = {
   totalItems: number
+  amount: number
   cart: ProductInStore[]
+}
+
+export type ProductsToPayment = {
+  productId: string
+  count: number
+  size: string | null
+}
+
+export type PaymentData = {
+  orderData: OrderSchema
+  products: ProductsToPayment[]
+  totalProducts: number
+  totalAmount: number
+}
+
+export type MergedProduct = Omit<Product, 'size'> & {
+  size: string | null
+  count: number
 }
 export type AddOrderData = OrderSchema & { amount: number } & {
   productsData: ProductsInCheckout
