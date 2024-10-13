@@ -15,9 +15,7 @@ export type Wishlisted = {
 }
 
 export const ProductList = async ({ products }: { products: Product[] }) => {
-  const session = await auth()
-  const userId = session?.user.id
-  const userWishlist = await getWishlistProductsId(userId)
+  const userWishlist = await getWishlistProductsId()
 
   return (
     <div className='p-6'>
