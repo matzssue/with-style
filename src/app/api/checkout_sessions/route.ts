@@ -2,12 +2,11 @@ import Stripe from 'stripe'
 import { NextRequest, NextResponse } from 'next/server'
 import { orderSchema } from '@/lib/schemas/auth-schema'
 import { currentUser } from '@/lib/auth/auth'
-import { PaymentData } from '@/types/products'
-import prisma from '@/lib/prisma'
-
+import { AddOrderData, MergedProduct, PaymentData } from '@/types/products'
 import { getProductsById } from '@/data/products/get-products-by-id'
 import { calculatePriceWithDiscount } from '@/lib/helplers/calculatePriceWithDiscount'
 import { createCheckoutSession } from '@/lib/create-checkout-session'
+import { addOrder } from '@/actions/orders/add-order'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 
@@ -27,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     const products = await getProductsById(productIds)
 
-    const mergedProducts = paymentData.products
+    const mergedProducts: MergedProduct[] = paymentData.products
       .map((productItem) => {
         const findProduct = products.find((p) => p.id === productItem.productId)
         if (!findProduct) return null
@@ -60,14 +59,6 @@ export async function POST(request: NextRequest) {
       { totalCount: 0, totalPrice: 0 }
     )
 
-    const checkoutSession = await createCheckoutSession(mergedProducts, stripe)
-    if (checkoutSession.payment_status === 'unpaid') {
-      return NextResponse.json(
-        { error: 'Payment was not completed successfully' },
-        { status: 400 }
-      )
-    }
-
     const { orderData } = paymentData
     const validateOrder = orderSchema.safeParse(orderData)
 
@@ -78,30 +69,36 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    await prisma.order.create({
-      data: {
-        userId: user.id,
-        totalItems: totalSummary.totalCount,
-        totalPrice: totalSummary.totalPrice,
-        city: orderData.city,
-        phoneNumber: orderData.phoneNumber,
-        shippingName: `${orderData.name} ${orderData.surname}`,
-        street: orderData.street,
-        number: orderData.number,
-        zip: orderData.zip,
-        products: {
-          create: mergedProducts.map((product) => ({
-            size: product.size,
-            product: {
-              connect: { id: product.id },
-            },
-          })),
-        },
-      },
-      include: {
-        products: true,
-      },
-    })
+    const createOrderData: AddOrderData = {
+      name: orderData.name,
+      surname: orderData.surname,
+      city: orderData.city,
+      phoneNumber: orderData.phoneNumber,
+      number: orderData.number,
+      street: orderData.street,
+      zip: orderData.zip,
+      productsData: mergedProducts,
+      totalItems: totalSummary.totalCount,
+      totalPrice: totalSummary.totalPrice,
+      paid: 'pending',
+    }
+
+    const createOrder = await addOrder(createOrderData)
+
+    if (!createOrder.success) {
+      return NextResponse.json(
+        { message: 'Error while creating an order' },
+        { status: 400 }
+      )
+    }
+
+    const orderId = createOrder.data.id
+
+    const checkoutSession = await createCheckoutSession(
+      mergedProducts,
+      stripe,
+      orderId
+    )
 
     return NextResponse.json({ result: checkoutSession, ok: true })
   } catch (error) {
@@ -109,7 +106,7 @@ export async function POST(request: NextRequest) {
       const { message } = error
       return NextResponse.json({ message }, { status: error.statusCode })
     }
-    console.log(error, 'error')
+
     return new NextResponse('Internal Server', { status: 500 })
   }
 }
