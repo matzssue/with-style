@@ -3,7 +3,8 @@ import Stripe from 'stripe'
 
 export const createCheckoutSession = async (
   mergedProducts: MergedProduct[],
-  stripe: Stripe
+  stripe: Stripe,
+  orderId: string
 ) => {
   return await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -17,12 +18,13 @@ export const createCheckoutSession = async (
         },
         price_data: {
           currency: 'USD',
-          unit_amount: product.price,
+          unit_amount: Math.round(product.price * 100),
           product_data: {
             name: product.name,
             images: [product.imgUrl],
           },
         },
+
         quantity: product.count,
       }
     }),
@@ -31,5 +33,8 @@ export const createCheckoutSession = async (
 
     success_url: `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/checkout/cancel`,
+    metadata: {
+      orderId: orderId,
+    },
   })
 }
