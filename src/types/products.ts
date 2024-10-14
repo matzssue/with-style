@@ -23,17 +23,16 @@ export type ProductsToPayment = {
 export type PaymentData = {
   orderData: OrderSchema
   products: ProductsToPayment[]
-  totalProducts: number
-  totalAmount: number
 }
 
 export type MergedProduct = Omit<Product, 'size'> & {
   size: string | null
   count: number
 }
-export type AddOrderData = OrderSchema & { amount: number } & {
-  productsData: ProductsInCheckout
-}
+export type AddOrderData = OrderSchema & {
+  productsData: MergedProduct[]
+} & { totalPrice: number; totalItems: number }
+
 export type ProductsQueryParams = {
   category?: string
   type?: string
