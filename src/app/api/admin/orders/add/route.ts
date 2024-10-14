@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { AddOrderData } from '@/types/products'
 
-import { User } from '@prisma/client'
 import { orderSchema } from '@/lib/schemas/auth-schema'
 import { currentUser } from '@/lib/auth/auth'
 
@@ -30,8 +29,8 @@ export async function POST(request: NextRequest) {
     const data = await prisma.order.create({
       data: {
         userId: user.id,
-        totalItems: orderData.productsData.totalItems,
-        totalPrice: orderData.amount,
+        totalItems: orderData.totalItems,
+        totalPrice: orderData.totalPrice,
         city: orderData.city,
         phoneNumber: orderData.phoneNumber,
         shippingName: `${orderData.name} ${orderData.surname}`,
@@ -39,7 +38,7 @@ export async function POST(request: NextRequest) {
         number: orderData.number,
         zip: orderData.zip,
         products: {
-          create: orderData.productsData.cart.map((product) => ({
+          create: orderData.productsData.map((product) => ({
             size: product.size,
             product: {
               connect: { id: product.id },
