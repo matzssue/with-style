@@ -1,15 +1,42 @@
+'use client'
+
+import { Loading } from '@/components/Loading/Loading'
 import { Button } from '@/components/ui/button'
 import { getStripeSession } from '@/data/stripe/get-stripe-session'
+import { useCartStore } from '@/store/useCartStore'
 import { CircleCheckBig } from 'lucide-react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Stripe from 'stripe'
 
-export default async function PaymentSuccessPage({
+export default function PaymentSuccessPage({
   searchParams: { session_id },
 }: {
   searchParams: { session_id: string }
 }) {
-  const session = await getStripeSession(session_id)
-  const sessionData = session[0]
+  const { resetCart } = useCartStore((store) => store)
+  const [sessionData, setSessionData] =
+    useState<Stripe.Checkout.Session | null>(null)
+
+  console.log(sessionData, 'ssjion after')
+  useEffect(() => {
+    const fetchSessionData = async () => {
+      if (session_id) {
+        const session = await getStripeSession(session_id)
+        const sessionData = session[0]
+        setSessionData(sessionData)
+        if (sessionData) {
+          resetCart()
+        }
+      }
+    }
+
+    fetchSessionData()
+  }, [session_id, resetCart])
+
+  if (!sessionData) {
+    return <Loading />
+  }
   return (
     <main className='flex h-screen items-center justify-center bg-neutral-100 p-10'>
       <div className='flex w-1/2 flex-col gap-5 rounded-sm bg-secondary py-8 text-center shadow-md '>
