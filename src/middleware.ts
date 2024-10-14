@@ -25,7 +25,9 @@ export default auth(async (req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
 
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-  const isAdminRoute = adminRoute.includes(nextUrl.pathname)
+  const isAdminRoute = adminRoute.some((route) =>
+    nextUrl.pathname.startsWith(route)
+  )
 
   const isPrivateRoute = privateRoutes.some((path) =>
     nextUrl.pathname.startsWith(path)
