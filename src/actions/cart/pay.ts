@@ -19,7 +19,14 @@ export const pay = async (paymentData: PaymentData) => {
     const data = await response.json()
 
     if (!data.ok) throw new Error('Something went wrong')
+    await stripe.redirectToCheckout({
+      sessionId: data.result.id,
+    })
   } catch (error) {
-    throw error
+    if (error instanceof Error) {
+      throw new Error(`Payment failed: ${error.message}`)
+    } else {
+      throw new Error('Payment failed: Unknown error')
+    }
   }
 }
