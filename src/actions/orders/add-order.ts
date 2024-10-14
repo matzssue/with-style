@@ -4,6 +4,7 @@ import { orderTag } from '@/constants/revalidation-keys'
 import { currentUser } from '@/lib/auth/auth'
 import { getCookies } from '@/lib/auth/sessionCookies'
 import { AddOrderData } from '@/types/products'
+import { Order } from '@prisma/client'
 import { revalidateTag } from 'next/cache'
 
 export const addOrder = async (orderData: AddOrderData) => {
@@ -16,17 +17,15 @@ export const addOrder = async (orderData: AddOrderData) => {
           'Content-Type': 'application/json',
           Cookie: getCookies(),
         },
-        body: JSON.stringify({
-          orderData,
-        }),
+        body: JSON.stringify({ orderData }),
       }
     )
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    const data = await response.json()
+    const data: Order = await response.json()
     revalidateTag(orderTag)
-    return data
+    return { success: 'Succesfully added order', data }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {
