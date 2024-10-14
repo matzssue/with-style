@@ -36,6 +36,12 @@ enum ProductType {
   CAP
 }
 
+enum PaymentStatus {
+  unpaid
+  pending
+  paid
+}
+
 enum UserRole {
   ADMIN
   USER
@@ -106,6 +112,7 @@ model Order {
   zip          String
   street       String
   number       String
+  paid         PaymentStatus @default(unpaid)
 }
 
 model ProductInOrder {

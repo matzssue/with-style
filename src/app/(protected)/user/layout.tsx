@@ -11,14 +11,11 @@ export default async function UserLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await auth()
   return (
-    <SessionProvider session={session}>
-      <RoleWrapper allowedRole={['USER', 'ADMIN']}>
-        <Header staticNavigation={<StaticNavigation />} />
-        <UserBar />
-        <Wrapper>{children}</Wrapper>
-      </RoleWrapper>
-    </SessionProvider>
+    <RoleWrapper allowedRole={['USER', 'ADMIN']}>
+      <Header staticNavigation={<StaticNavigation />} />
+      <UserBar />
+      <Wrapper>{children}</Wrapper>
+    </RoleWrapper>
   )
 }

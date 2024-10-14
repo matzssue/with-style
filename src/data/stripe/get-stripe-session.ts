@@ -1,9 +1,10 @@
 import { getCookies } from '@/lib/auth/sessionCookies'
+import Stripe from 'stripe'
 
-export const getSubcategoryTitles = async () => {
+export const getStripeSession = async (sessionId: string) => {
   try {
     const url = new URL(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/products/subcategory/titles`
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/checkout_sessions/session?session_id=${sessionId}`
     )
 
     const response = await fetch(url.toString(), {
@@ -17,7 +18,8 @@ export const getSubcategoryTitles = async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    const data = await response.json()
+    const data: Stripe.Checkout.Session[] = await response.json()
+
     return data
   } catch (err) {
     throw new Error('Error getting subcategory titles')

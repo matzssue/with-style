@@ -1,31 +1,34 @@
 'use server'
 
 import { orderTag } from '@/constants/revalidation-keys'
-import { currentUser } from '@/lib/auth/auth'
 import { getCookies } from '@/lib/auth/sessionCookies'
-import { AddOrderData } from '@/types/products'
+import { adminRoutes } from '@/routes'
+
 import { Order } from '@prisma/client'
 import { revalidateTag } from 'next/cache'
 
-export const addOrder = async (orderData: AddOrderData) => {
+export const updateOrder = async (
+  orderId: string,
+  updateData: Partial<Order>
+) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/admin/orders/add`,
+      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/${adminRoutes.orders}/update`,
       {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Cookie: getCookies(),
         },
-        body: JSON.stringify({ orderData }),
+        body: JSON.stringify({ orderId, updateData }),
       }
     )
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
     }
-    const data: Order = await response.json()
     revalidateTag(orderTag)
-    return { success: 'Succesfully added order', data }
+    return { success: 'Order successfully updated' }
   } catch (error) {
     let message = 'Unknown Error'
     if (error instanceof Error) {

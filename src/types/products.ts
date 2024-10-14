@@ -1,6 +1,6 @@
 import { OrderSchema } from '@/lib/schemas/auth-schema'
 import { ProductInStore } from '@/store/useCartStore'
-import { Product } from '@prisma/client'
+import { PaymentStatus, Product } from '@prisma/client'
 
 export type ProductsData = {
   data: Product[]
@@ -10,11 +10,29 @@ export type ProductsData = {
 }
 export type ProductsInCheckout = {
   totalItems: number
+  amount: number
   cart: ProductInStore[]
 }
-export type AddOrderData = OrderSchema & { amount: number } & {
-  productsData: ProductsInCheckout
+
+export type ProductsToPayment = {
+  productId: string
+  count: number
+  size: string | null
 }
+
+export type PaymentData = {
+  orderData: OrderSchema
+  products: ProductsToPayment[]
+}
+
+export type MergedProduct = Omit<Product, 'size'> & {
+  size: string | null
+  count: number
+}
+export type AddOrderData = OrderSchema & {
+  productsData: MergedProduct[]
+} & { totalPrice: number; totalItems: number } & { paid: PaymentStatus }
+
 export type ProductsQueryParams = {
   category?: string
   type?: string

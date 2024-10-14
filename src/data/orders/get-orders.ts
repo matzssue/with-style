@@ -21,7 +21,6 @@ export async function getOrders(userId: string | undefined, page: number) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Cookie: getCookies(),
     },
 
     next: { tags: [orderTag] },

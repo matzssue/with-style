@@ -7,25 +7,20 @@ import { Product } from '@prisma/client'
 import { headers } from 'next/headers'
 type QueryParams = {
   page?: string
-  userId?: string
 }
 
-export async function getWishlist(userId: string | undefined, page: string) {
+export async function getWishlist(page: string) {
   const url = new URL(
     `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`
   )
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page
-  if (userId) queryParams.userId = userId
   url.search = new URLSearchParams(queryParams).toString()
 
   const response = await fetch(url.toString(), {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Cookies: getCookies(),
-    },
+    headers: headers(),
     next: { tags: [wishlistTag] },
   })
   const data: WishlistData = await response.json()
@@ -33,11 +28,9 @@ export async function getWishlist(userId: string | undefined, page: string) {
   return data
 }
 
-export async function getWishlistProductsId(userId: string | undefined) {
-  if (!userId) return []
-
+export async function getWishlistProductsId() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist?userId=${userId}`,
+    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`,
     {
       method: 'GET',
       headers: headers(),
