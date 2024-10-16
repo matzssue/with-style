@@ -15,11 +15,9 @@ export default async function Orders({
 }: {
   searchParams: WishlistSearchParams
 }) {
-  const user = await currentUser()
   const pageNumber = Number(searchParams.page || 1)
-  if (!user) return
 
-  const { data, metadata } = await getOrders(user.id, pageNumber)
+  const { data, metadata } = await getOrders(pageNumber)
 
   return (
     <section className='mx-[10%]'>
