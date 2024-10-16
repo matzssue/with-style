@@ -18,7 +18,6 @@ export default function PaymentSuccessPage({
   const [sessionData, setSessionData] =
     useState<Stripe.Checkout.Session | null>(null)
 
-  console.log(sessionData, 'ssjion after')
   useEffect(() => {
     const fetchSessionData = async () => {
       if (session_id) {

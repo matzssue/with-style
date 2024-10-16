@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       )
     }
-
+    console.log('user', user)
     const products = await getProductsById(productIds)
 
     const mergedProducts: MergedProduct[] = paymentData.products
@@ -85,14 +85,14 @@ export async function POST(request: NextRequest) {
 
     const createOrder = await addOrder(createOrderData)
 
-    if (!createOrder.success) {
+    if (!createOrder) {
       return NextResponse.json(
         { message: 'Error while creating an order' },
         { status: 400 }
       )
     }
 
-    const orderId = createOrder.data.id
+    const orderId = createOrder.orderId
 
     const checkoutSession = await createCheckoutSession(
       mergedProducts,

@@ -33,10 +33,10 @@ export const AddProductForm = () => {
       category: undefined,
       imgUrl: '',
       price: 0,
-      subcategory: null,
+      subcategory: undefined,
       type: undefined,
       size: [],
-      discountPercentage: null,
+      discountPercentage: undefined,
     },
   })
 
@@ -54,6 +54,7 @@ export const AddProductForm = () => {
 
     if (response.success) {
       toast('Product successfully added')
+      form.reset()
     } else if (response.error) {
       toast('An error occurred while adding the product')
     }
@@ -119,7 +120,7 @@ export const AddProductForm = () => {
             </div>
             <FormFieldInput<ProductSchema>
               control={form.control}
-              name='price'
+              name='imgUrl'
               label='Image link'
               placeholder='https://example.com/'
             />

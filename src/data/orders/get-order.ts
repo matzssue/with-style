@@ -1,6 +1,6 @@
 import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
-import { publicRoutes } from '@/routes'
+import { publicRoutes, userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
 
 type QueryParams = {
@@ -13,7 +13,7 @@ export const getOrder = async (orderId: string): Promise<OrderData> => {
   if (orderId) queryParams.orderId = orderId
 
   const order = await fetchData<OrderData>(
-    `api/${publicRoutes.orderDetails}/${orderId}`,
+    `api/${userRoutes.orderDetails}/${orderId}`,
     {
       queryParams: queryParams,
       headers: {

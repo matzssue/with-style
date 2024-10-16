@@ -28,7 +28,14 @@ export async function POST(request: NextRequest) {
       data: productData,
     })
 
-    return NextResponse.json(createdProduct)
+    if (!createdProduct) {
+      return NextResponse.json(
+        { error: 'Failed to add product' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: 'Product successfully created' })
   } catch (error) {
     return NextResponse.json(
       {

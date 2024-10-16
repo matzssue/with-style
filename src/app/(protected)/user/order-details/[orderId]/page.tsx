@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default async function Page({
   params,
@@ -24,7 +26,7 @@ export default async function Page({
   const orderDate = new Date(createdAt).toLocaleString()
 
   return (
-    <section className='flex items-center justify-center py-5'>
+    <section className='my-5 flex items-center justify-center px-2 py-5'>
       <Card className={cn('border-secondary')}>
         <CardHeader>
           <CardTitle
@@ -57,10 +59,13 @@ export default async function Page({
           </div>
           <div className='rounded-md bg-neutral-100 px-6 py-4'>
             <p className='py-2 text-2xl'>Products:</p>
-            <ul className=' flex gap-5 max-md:flex-col '>
+            <ul className=' flex flex-wrap gap-5 max-md:flex-col '>
               {products.map(
                 ({ name, price, productId, size, imgUrl, type, category }) => (
-                  <li className='flex  gap-5' key={productId}>
+                  <li
+                    className='flex max-w-[400px] justify-between gap-5 '
+                    key={productId + size}
+                  >
                     <div>
                       <span>
                         <p className=' text-lg font-semibold'>{name}</p>
@@ -84,6 +89,9 @@ export default async function Page({
               )}
             </ul>
           </div>
+          <Button asChild>
+            <Link href={'/user/orders'}>Back</Link>
+          </Button>
         </CardContent>
       </Card>
     </section>

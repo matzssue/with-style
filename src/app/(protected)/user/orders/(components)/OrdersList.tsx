@@ -13,8 +13,8 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
   }
 
   return (
-    <div className='flex w-auto'>
-      <ul className='flex  w-auto flex-col gap-2 rounded-sm  px-4 py-6 shadow-sm'>
+    <div className='flex w-full'>
+      <ul className='flex  w-full flex-col gap-2 rounded-sm  px-4 py-6 shadow-sm'>
         {ordersData.map(
           ({
             orderNumber,

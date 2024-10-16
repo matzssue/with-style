@@ -7,7 +7,8 @@ export const getProducts = async (
   filters?: ProductsQueryParams
 ): Promise<ProductsData> => {
   const products = await fetchData<ProductsData>(
-    `api/${publicRoutes.products}/${filters?.category}/${filters?.type}`
+    `api/${publicRoutes.products}/${filters?.category}/${filters?.type}`,
+    { queryParams: filters }
   )
 
   return products
