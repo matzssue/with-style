@@ -50,7 +50,13 @@ export default async function TypeProducts({
       />
       <div className='flex w-full flex-col'>
         <SortingMenu />
-        <Suspense fallback={<Loading />}>
+        <Suspense
+          fallback={
+            <div className='my-14'>
+              <Loading />
+            </div>
+          }
+        >
           <ProductList products={data} />
         </Suspense>
         <div className='flex w-full items-center'>
