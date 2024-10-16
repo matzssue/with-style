@@ -5,7 +5,7 @@ export const authRoutes = [
   '/auth/reset',
   '/auth/new-password',
 ]
-export const privateRoutes = ['/user']
+export const privateRoutes = ['/user', '/api/user']
 
 export const adminRoute = ['/admin', '/api/admin']
 export const apiAuthPrefix = '/api/auth'
@@ -15,8 +15,6 @@ export const DEFAULT_LOGIN_REDIRECT = '/'
 export const publicRoutes = {
   product: 'product',
   products: 'products',
-  orderDetails: 'order-details',
-  orders: 'orders',
 }
 
 export const adminRoutes = {
