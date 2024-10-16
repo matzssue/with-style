@@ -5,5 +5,10 @@ export const getCookies = () => {
   const sessionCookies = allCookies
     .map((cookie) => `${cookie.name}=${cookie.value}`)
     .join('; ')
+
+  if (!sessionCookies) {
+    throw new Error('User not authenticated - cookies missing')
+  }
+
   return sessionCookies
 }
