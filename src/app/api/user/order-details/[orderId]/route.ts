@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 
-import { auth } from '@/auth'
 import { OrderData } from '@/types/orders'
-import { currentRole, currentUser } from '@/lib/auth/auth'
+import { currentUser } from '@/lib/auth/auth'
+import { mapOrders } from '@/lib/helplers/mapOrders'
 
 export async function GET(req: NextRequest) {
   try {
@@ -27,27 +27,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
 
-    const orderMapped: OrderData = {
-      orderId: order.id,
-      totalPrice: order.totalPrice,
-      totalItems: order.totalItems,
-      createdAt: order.createdAt,
-      orderNumber: order.orderNumber,
-      shippingName: order.shippingName,
-      address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
-      paid: order.paid,
-      products: order.products.map((productInStore) => {
-        return {
-          productId: productInStore.product.id,
-          name: productInStore.product.name,
-          price: productInStore.product.price,
-          type: productInStore.product.type,
-          category: productInStore.product.category,
-          size: productInStore.size,
-          imgUrl: productInStore.product.imgUrl,
-        }
-      }),
-    }
+    const orderMapped: OrderData = mapOrders(order)
 
     return NextResponse.json(orderMapped)
   } catch (error) {
