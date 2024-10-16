@@ -15,7 +15,7 @@ export default function Header({
           <Image
             src={Logo}
             width={300}
-            className='max-md:max-h-[100px] max-md:w-auto'
+            className='w-auto max-md:max-h-[130px] max-md:w-auto'
             height={300}
             alt='logo'
           />
