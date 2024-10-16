@@ -1,6 +1,6 @@
 import { PaymentStatus } from '@prisma/client'
 
-type ProductsInOrdersData = {
+export type ProductsInOrdersData = {
   productId: string
   name: string
   price: number
