@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       )
     }
-    console.log('user', user)
+
     const products = await getProductsById(productIds)
 
     const mergedProducts: MergedProduct[] = paymentData.products
