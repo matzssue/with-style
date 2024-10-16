@@ -2,12 +2,18 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 import { cn } from '@/lib/utils'
-import { userRoutes } from '@/routes'
+import { adminRoutes, userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
+export const OrdersList = ({
+  ordersData,
+  adminList = false,
+}: {
+  ordersData: OrderData[]
+  adminList?: boolean
+}) => {
   if (ordersData.length === 0) {
     return <div>Hey! You don&apos;t have any orders</div>
   }
@@ -43,7 +49,13 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                     Total items: <b>{totalItems}</b>
                   </p>
                   <Button className={cn('w-full')} asChild>
-                    <Link href={`/${userRoutes.orderDetails}/${orderId}`}>
+                    <Link
+                      href={
+                        adminList
+                          ? `/${adminRoutes.orderDetails}/${orderId}`
+                          : `/${userRoutes.orderDetails}/${orderId}`
+                      }
+                    >
                       Go to details
                     </Link>
                   </Button>
@@ -61,14 +73,18 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                             <p className='text-lg font-semibold'>{name}</p>
                             <p>Price: {price} $</p>
                             <p>Size: {size}</p>
-                            {imgUrl && (
-                              <Image
-                                width={50}
-                                height={50}
-                                alt={name}
-                                src={imgUrl}
-                              />
-                            )}
+                            <div className='w-[70px]'>
+                              {imgUrl && (
+                                <Image
+                                  src={imgUrl}
+                                  alt={name}
+                                  width='0'
+                                  height='0'
+                                  sizes='100vw'
+                                  className='h-auto w-full'
+                                />
+                              )}
+                            </div>
                           </li>
                         )
                       )}
