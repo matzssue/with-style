@@ -1,9 +1,8 @@
 'use server'
 
 import { orderTag } from '@/constants/revalidation-keys'
-import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
-import { publicRoutes, userRoutes } from '@/routes'
+import { userRoutes } from '@/routes'
 import { OrdersData } from '@/types/orders'
 import { headers } from 'next/headers'
 

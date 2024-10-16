@@ -1,6 +1,6 @@
 import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
-import { publicRoutes, userRoutes } from '@/routes'
+import { userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
 
 type QueryParams = {

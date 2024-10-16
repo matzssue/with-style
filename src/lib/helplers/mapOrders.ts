@@ -1,5 +1,3 @@
-import { ProductInStore } from '@/store/useCartStore'
-import { OrderData, ProductsInOrdersData } from '@/types/orders'
 import { Order, Product } from '@prisma/client'
 
 export type ProductsOrders = {

@@ -1,5 +1,4 @@
 import { Subcategory } from '@/constants/categories'
-import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
 import { publicRoutes } from '@/routes'
 

@@ -8,7 +8,6 @@ import { WishlistToggleButton } from '../../../(protected)/user/(components)/Wis
 import { ProductCard } from '@/components/Cards/ProductCard'
 import { publicRoutes } from '@/routes'
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
-import { auth } from '@/auth'
 
 export type Wishlisted = {
   productId: string

@@ -3,7 +3,7 @@
 import { orderTag } from '@/constants/revalidation-keys'
 import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
-import { adminRoutes, userRoutes } from '@/routes'
+import { userRoutes } from '@/routes'
 
 import { Order } from '@prisma/client'
 import { revalidateTag } from 'next/cache'

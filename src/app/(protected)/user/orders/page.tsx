@@ -1,4 +1,3 @@
-import { currentUser } from '@/lib/auth/auth'
 import { Paginator } from '../../../../components/Paginator/Paginator'
 import { OrdersList } from './(components)/OrdersList'
 

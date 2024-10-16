@@ -1,5 +1,3 @@
-import { CustomAccordion } from '@/components/Accordion/CustomAccordionItem'
-import { ProductCategory } from '@prisma/client'
 import {
   accessoriesNavLinks,
   manNavLinks,

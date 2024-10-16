@@ -1,10 +1,8 @@
-import { auth } from '@/auth'
 import { RoleWrapper } from '@/components/Auth/RoleWrapper'
 import Header from '@/components/Header/Header'
 import { StaticNavigation } from '@/components/Navbar/StaticNavigation'
 import UserBar from '@/components/UserBar/UserBar'
 import Wrapper from '@/components/Wrapper/Wrapper'
-import { SessionProvider } from 'next-auth/react'
 
 export default async function UserLayout({
   children,
