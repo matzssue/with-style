@@ -22,6 +22,7 @@ export const adminRoutes = {
   products: 'admin/products',
   product: 'admin/product',
   orders: 'admin/orders',
+  orderDetails: 'admin/order-details',
   statistics: 'admin/statistics',
 }
 export const userRoutes = {

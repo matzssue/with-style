@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { Product } from '@prisma/client'
 import Link from 'next/link'
-import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductPrice } from '@/app/(components)/Products/ProductPrice/ProductPrice'
 import { publicRoutes } from '@/routes'
 
 export default function TopProduct({

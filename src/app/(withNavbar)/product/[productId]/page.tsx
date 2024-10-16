@@ -5,7 +5,7 @@ import { Accordion } from '@/components/ui/accordion'
 import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 
 import { getProduct } from '@/data/products/get-product'
-import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductPrice } from '@/app/(components)/Products/ProductPrice/ProductPrice'
 import { ProductFormButtons } from './(components)/ProductFormButtons'
 import { deliveryInformations } from '@/constants/informations'
 import { CustomAccordionItem } from '@/components/Accordion/CustomAccordionItem'

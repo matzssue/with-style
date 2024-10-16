@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 
-import { ProductPrice } from '../ProductPrice/ProductPrice'
+import { ProductPrice } from '../../app/(components)/Products/ProductPrice/ProductPrice'
 
 export const ProductCard = ({
   children,

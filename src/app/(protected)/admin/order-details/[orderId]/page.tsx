@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { OrderDetails } from '../../../../(components)/Orders/OrderDetails'
+import { OrderDetails } from '@/app/(components)/Orders/OrderDetails'
 
 export default async function Page({
   params,
@@ -14,7 +14,7 @@ export default async function Page({
   params: { orderId: string }
 }) {
   const { orderId } = params
-  const order = await getOrder(orderId)
+  const order = await getOrder(orderId, true)
 
   return (
     <section className='my-5 flex items-center justify-center px-2 py-5'>
