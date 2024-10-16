@@ -1,7 +1,9 @@
 'use server'
 
 import { wishlistTag } from '@/constants/revalidation-keys'
-import { getCookies } from '@/lib/auth/sessionCookies'
+
+import { fetchData } from '@/lib/helplers/fetchData'
+import { userRoutes } from '@/routes'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
 import { headers } from 'next/headers'
@@ -9,41 +11,25 @@ type QueryParams = {
   page?: string
 }
 
-export async function getWishlist(page: string) {
-  const url = new URL(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`
-  )
+export const getWishlist = async (page: string): Promise<WishlistData> => {
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page
-  url.search = new URLSearchParams(queryParams).toString()
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
+  const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
     headers: headers(),
     next: { tags: [wishlistTag] },
+    queryParams: queryParams,
   })
-  const data: WishlistData = await response.json()
 
-  return data
+  return wishlist
 }
 
 export async function getWishlistProductsId() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`,
-    {
-      method: 'GET',
-      headers: headers(),
-      next: { tags: [wishlistTag] },
-    }
-  )
-
-  const products = await response.json()
-
-  if (products.error) {
-    throw new Error(products.error)
-  }
-  const productsId: string[] = products.data.map(
+  const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
+    headers: headers(),
+    next: { tags: [wishlistTag] },
+  })
+  const productsId: string[] = wishlist.data.map(
     (product: Product) => product.id
   )
   return productsId
