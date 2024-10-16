@@ -33,6 +33,7 @@ export async function GET(request: NextRequest) {
         createdAt: order.createdAt,
         orderNumber: order.orderNumber,
         shippingName: order.shippingName,
+        paid: order.paid,
         address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
         products: order.products.map((productInStore) => {
           return {
