@@ -22,6 +22,7 @@ export type ProductsToPayment = {
 
 export type PaymentData = {
   orderData: OrderSchema
+  paid?: PaymentData
   products: ProductsToPayment[]
 }
 
