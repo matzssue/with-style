@@ -16,14 +16,21 @@ export async function PATCH(request: NextRequest) {
       )
     }
 
-    const product = await prisma.order.update({
+    const order = await prisma.order.update({
       where: { id: orderId },
       data: {
         paid: status,
       },
     })
 
-    return NextResponse.json(product)
+    if (!order) {
+      return NextResponse.json(
+        { error: 'Failed to update order' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json(order)
   } catch (error) {
     return NextResponse.json(
       {
