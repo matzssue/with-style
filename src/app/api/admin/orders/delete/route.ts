@@ -9,7 +9,7 @@ export async function DELETE(request: NextRequest) {
       where: { id: orderId },
     })
 
-    return NextResponse.json('Success')
+    return NextResponse.json({ success: 'sucessfully removed order' })
   } catch (error) {
     return NextResponse.json(
       {

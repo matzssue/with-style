@@ -18,7 +18,7 @@ export async function DELETE(request: NextRequest) {
       )
     }
 
-    const updated = await prisma.user.update({
+    const removeFromWishlist = await prisma.user.update({
       where: { id: userId },
       data: {
         wishlist: {
@@ -26,11 +26,16 @@ export async function DELETE(request: NextRequest) {
         },
       },
     })
-
-    return NextResponse.json(updated)
+    if (!removeFromWishlist) {
+      return NextResponse.json(
+        { error: 'Failed to remove from wishlist' },
+        { status: 500 }
+      )
+    }
+    return NextResponse.json({ success: 'Product removed from wishlist' })
   } catch (err) {
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: err instanceof Error ? err.message : 'Internal Server Error' },
       { status: 500 }
     )
   }
