@@ -1,6 +1,6 @@
 'use server'
 
-import { productPath } from '@/constants/revalidation-keys'
+import { adminProductPath, productPath } from '@/constants/revalidation-keys'
 import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
 import { adminRoutes } from '@/routes'
@@ -21,6 +21,7 @@ export const deleteProduct = async (productId: string) => {
   )
 
   revalidatePath(productPath)
+  revalidatePath(adminProductPath)
 
   return productData
 }
