@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RemoveProductFromWishlist } from './RemoveProductFromWishlist'
-import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductPrice } from '@/app/(components)/Products/ProductPrice/ProductPrice'
 import { publicRoutes } from '@/routes'
 export const WishlistProducts = ({ products }: { products: Product[] }) => {
   return (

@@ -1,4 +1,4 @@
-import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductPrice } from '@/app/(components)/Products/ProductPrice/ProductPrice'
 import { publicRoutes } from '@/routes'
 import { Product } from '@prisma/client'
 
