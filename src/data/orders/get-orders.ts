@@ -1,9 +1,11 @@
 'use server'
 
 import { orderTag } from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
 import { fetchData } from '@/lib/helplers/fetchData'
-import { publicRoutes } from '@/routes'
+import { publicRoutes, userRoutes } from '@/routes'
 import { OrdersData } from '@/types/orders'
+import { headers } from 'next/headers'
 
 type QueryParams = {
   page?: string
@@ -15,12 +17,9 @@ export const getOrders = async (page: number): Promise<OrdersData> => {
 
   if (page) queryParams.page = page.toString()
 
-  const order = await fetchData<OrdersData>(`api/${publicRoutes.orders}`, {
+  const order = await fetchData<OrdersData>(`api/${userRoutes.orders}`, {
     queryParams: queryParams,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-
+    headers: headers(),
     next: { tags: [orderTag] },
   })
 
