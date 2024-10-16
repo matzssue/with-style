@@ -8,12 +8,13 @@ import { currentUser } from '@/lib/auth/auth'
 export async function GET(request: NextRequest) {
   try {
     const user = await currentUser()
+
     const searchParams = request.nextUrl.searchParams
     const page = searchParams.get('page')
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
 
-    if (user?.id) {
+    if (!user?.id) {
       return NextResponse.json(
         {
           error: 'Bad Request: Missing userId',

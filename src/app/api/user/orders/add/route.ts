@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         shippingName: `${orderData.name} ${orderData.surname}`,
         street: orderData.street,
         number: orderData.number,
+        paid: orderData.paid,
         zip: orderData.zip,
         products: {
           create: orderData.productsData.map((product) => ({
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    return NextResponse.json({ data })
+    return NextResponse.json(data)
   } catch (error) {
     return NextResponse.json(
       {

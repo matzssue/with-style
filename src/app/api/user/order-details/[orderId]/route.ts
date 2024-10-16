@@ -19,16 +19,9 @@ export async function GET(req: NextRequest) {
     }
 
     const order = await prisma.order.findFirst({
-      where: { id: orderId },
+      where: { id: orderId, userId: user?.id },
       include: { products: { include: { product: true } } },
     })
-
-    if (user?.role !== 'ADMIN' && user?.id !== order?.userId) {
-      return NextResponse.json(
-        { error: `Sorry you'r not allowed to see this page` },
-        { status: 403 }
-      )
-    }
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
@@ -42,6 +35,7 @@ export async function GET(req: NextRequest) {
       orderNumber: order.orderNumber,
       shippingName: order.shippingName,
       address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
+      paid: order.paid,
       products: order.products.map((productInStore) => {
         return {
           productId: productInStore.product.id,
