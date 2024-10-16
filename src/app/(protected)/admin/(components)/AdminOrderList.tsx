@@ -31,7 +31,7 @@ export const AdminOrderList = ({ orders }: { orders: OrderData[] }) => {
           }}
         />
       </div>
-      <OrdersList ordersData={orders} />
+      <OrdersList adminList ordersData={orders} />
     </>
   )
 }
