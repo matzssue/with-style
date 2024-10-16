@@ -15,12 +15,16 @@ export const DEFAULT_LOGIN_REDIRECT = '/'
 export const publicRoutes = {
   product: 'product',
   products: 'products',
+  orderDetails: 'order-details',
+  orders: 'orders',
 }
 
 export const adminRoutes = {
   default: 'admin',
   products: 'admin/products',
+  product: 'admin/product',
   orders: 'admin/orders',
+  statistics: 'admin/statistics',
 }
 export const userRoutes = {
   default: 'user',
