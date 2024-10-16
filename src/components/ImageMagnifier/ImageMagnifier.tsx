@@ -3,12 +3,12 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-type ImageMagnifier = {
+type TImageMagnifier = {
   imageUrl: string
   altImage: string
 }
 
-export const ImageMagnifier = ({ imageUrl, altImage }: ImageMagnifier) => {
+export const ImageMagnifier = ({ imageUrl, altImage }: TImageMagnifier) => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [showMagnifier, setShowMagnifier] = useState(false)
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })

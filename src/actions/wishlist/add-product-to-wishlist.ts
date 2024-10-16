@@ -1,33 +1,34 @@
 'use server'
 
-import { UserWishlist } from '@/app/api/user/wishlist/route'
+import {
+  categoryTag,
+  typeTag,
+  wishlistTag,
+} from '@/constants/revalidation-keys'
+import { getCookies } from '@/lib/auth/sessionCookies'
+import { fetchData } from '@/lib/helplers/fetchData'
+import { userRoutes } from '@/routes'
+import { FetchDataResponse } from '@/types/data'
 import { revalidateTag } from 'next/cache'
 
-export const addToWishlist = async (userId: string, productId: string) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist/add`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId,
-          productId,
-        }),
-      }
-    )
-    revalidateTag('wishlist')
-    revalidateTag('categoryProducts')
-    revalidateTag('typeProducts')
-    const data: UserWishlist = await response.json()
-    return data
-  } catch (error) {
-    let message = 'Unknown Error'
-    if (error instanceof Error) {
-      message = error.message
+export const addToWishlist = async (productId: string) => {
+  const wishlistData = await fetchData<FetchDataResponse>(
+    `api/${userRoutes.wishlist}/add`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: getCookies(),
+      },
+      body: JSON.stringify({
+        productId,
+      }),
     }
-    return { error: message }
-  }
+  )
+
+  revalidateTag(wishlistTag)
+  revalidateTag(categoryTag)
+  revalidateTag(typeTag)
+
+  return wishlistData
 }

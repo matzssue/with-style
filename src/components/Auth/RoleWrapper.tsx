@@ -9,7 +9,7 @@ interface RoleGateProps {
   allowedRole: UserRole[]
 }
 
-export const RoleGate = ({ children, allowedRole }: RoleGateProps) => {
+export const RoleWrapper = ({ children, allowedRole }: RoleGateProps) => {
   const role = useCurrentRole()
 
   if (role && !allowedRole.includes(role)) {

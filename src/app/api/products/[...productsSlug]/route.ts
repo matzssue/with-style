@@ -20,12 +20,16 @@ export async function GET(request: NextRequest) {
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
     const promotions = searchParams.get('promotions')
     const subcategory = searchParams.get('subcategory')?.toUpperCase()
+    const searchValue = searchParams.get('search')
 
     const products = await prisma.product.findMany({
       ...(sortByPrice !== null && { orderBy: [{ price: sortByPrice }] }),
       take: ITEMS_PER_PAGE,
       skip: skip,
       where: {
+        ...(searchValue !== null && {
+          name: { contains: searchValue, mode: 'insensitive' },
+        }),
         ...(categoryToUpper !== null && { category: categoryToUpper }),
         ...(type !== null && { type: type }),
         ...(subcategory !== null && { subcategory: subcategory }),

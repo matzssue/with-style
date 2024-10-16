@@ -1,15 +1,9 @@
 'use client'
 
-import {
-  accessoriesNavLinks,
-  manNavLinks,
-  womanNavLinks,
-  shoesNavLinks,
-} from '../../../constants/navlist'
-
 import { Fade } from 'react-awesome-reveal'
 
 import { CategoryCard } from './CatergoryCard'
+import { categoryCardsList } from '@/constants/categories'
 export const Categories = () => {
   return (
     <Fade className='w-full'>
@@ -17,37 +11,38 @@ export const Categories = () => {
         <h2 className='my-5 w-full bg-secondary py-5 text-center text-4xl'>
           Select category
         </h2>
-
-        <div className='flex w-5/6 justify-between gap-x-10 gap-y-5 bg-neutral-50 max-md:flex-col max-md:items-center max-md:justify-center'>
-          <div className="max-w-[450px] bg-[url('/images/woman-category-image.jpg')] bg-cover bg-center 2xl:min-h-[800px]">
-            <CategoryCard
-              categoryTitle='For woman'
-              category='woman'
-              links={manNavLinks}
-            />
-          </div>
-          <div className="max-w-[450px] bg-[url('/images/clothing.jpg')] bg-cover bg-center 2xl:min-h-[800px] ">
-            <CategoryCard
-              categoryTitle='For man'
-              category='man'
-              links={womanNavLinks}
-            />
-          </div>
+        <div className='flex w-5/6 justify-between gap-x-10 gap-y-5 bg-neutral-50 max-lg:flex-col max-lg:items-center max-lg:justify-center'>
+          {categoryCardsList
+            .slice(0, 2)
+            .map(({ bgImage, category, links, title }) => (
+              <div
+                key={title}
+                className={`max-w-[450px] bg-cover bg-center 2xl:min-h-[800px]`}
+                style={{ backgroundImage: `url('${bgImage}')` }}
+              >
+                <CategoryCard
+                  categoryTitle={title}
+                  category={category}
+                  links={links}
+                />
+              </div>
+            ))}
           <div className='flex flex-col gap-y-5'>
-            <div className="max-w-[450px] bg-[url('/images/shoes.jpg')] bg-cover bg-center  2xl:min-h-[400px] ">
-              <CategoryCard
-                categoryTitle='Shoes'
-                category='shoes'
-                links={shoesNavLinks}
-              />
-            </div>
-            <div className="max-w-[450px] bg-[url('/images/accessories.jpg')] bg-cover bg-center max-xl:min-w-[300px] max-md:min-w-[200px] 2xl:min-h-[400px]">
-              <CategoryCard
-                categoryTitle='Accessories'
-                category='accessories'
-                links={accessoriesNavLinks}
-              />
-            </div>
+            {categoryCardsList
+              .slice(2, 4)
+              .map(({ bgImage, category, links, title }) => (
+                <div
+                  key={title}
+                  className={`max-w-[450px] bg-cover bg-center 2xl:min-h-[400px]`}
+                  style={{ backgroundImage: `url('${bgImage}')` }}
+                >
+                  <CategoryCard
+                    categoryTitle={title}
+                    category={category}
+                    links={links}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </section>

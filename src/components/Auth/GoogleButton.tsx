@@ -3,7 +3,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 import { signIn } from 'next-auth/react'
 
 export const GoogleButton = () => {
-  const onClick = () => {
+  const signInHandler = () => {
     signIn('google', {
       callbackUrl: DEFAULT_LOGIN_REDIRECT,
     })
@@ -12,7 +12,7 @@ export const GoogleButton = () => {
   return (
     <div className='w-full '>
       <button
-        onClick={() => onClick()}
+        onClick={() => signInHandler()}
         type='button'
         className='mb-2 mr-2  inline-flex w-full items-center justify-between rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50'
       >

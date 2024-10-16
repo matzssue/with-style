@@ -5,7 +5,7 @@ export type LoginSchema = z.infer<typeof loginSchema>
 export type EmailSchema = z.infer<typeof emailSchema>
 export type PasswordSchema = z.infer<typeof passwordSchema>
 export type SettingsSchema = z.infer<typeof settingsSchema>
-export type AddressSchema = z.infer<typeof addressSchema>
+export type OrderSchema = z.infer<typeof orderSchema>
 
 export const registerSchema = z
   .object({
@@ -55,7 +55,7 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 )
 
-export const addressSchema = z.object({
+export const orderSchema = z.object({
   name: z.string().min(3).max(15),
   surname: z.string().min(3).max(15),
   phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!'),

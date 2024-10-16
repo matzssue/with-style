@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { currentRole } from '@/lib/auth/auth'
 

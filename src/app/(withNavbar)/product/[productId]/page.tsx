@@ -1,21 +1,16 @@
 import prisma from '@/lib/prisma'
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
+import { Accordion } from '@/components/ui/accordion'
 
 import { ImageMagnifier } from '@/components/ImageMagnifier/ImageMagnifier'
 
-import { AddProductForm } from './(components)/AddProductForm'
-
-import { WishlistToggleButton } from '../../../(protected)/user/(components)/WishlistToggleButton'
-import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
-import { auth } from '@/auth'
 import { getProduct } from '@/data/products/get-product'
 import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductFormButtons } from './(components)/ProductFormButtons'
+import { deliveryInformations } from '@/constants/informations'
+import { CustomAccordionItem } from '@/components/Accordion/CustomAccordionItem'
+import { Loading } from '@/components/Loading/Loading'
+import { Suspense } from 'react'
 
 export async function generateStaticParams() {
   const products = await prisma.product.findMany()
@@ -29,10 +24,8 @@ export default async function ProductPage({
 }: {
   params: { productId: string }
 }) {
-  const session = await auth()
-  const userId = session?.user.id
   const product = await getProduct(productId)
-  const userWishlist = await getWishlistProductsId(userId)
+
   if (!product) return <div>Error while loading a product.</div>
 
   return (
@@ -54,38 +47,14 @@ export default async function ProductPage({
               discountPercentage={product.discountPercentage}
             />
           </div>
-          <div className='flex flex-col gap-2'>
-            <AddProductForm product={product} />
-            <WishlistToggleButton
-              wishlisted={userWishlist}
-              withText
-              productId={product.id}
-            />
-          </div>
+          <Suspense fallback={<Loading />}>
+            <ProductFormButtons product={product} />
+          </Suspense>
           <div>
             <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='item-1'>
-                <AccordionTrigger>Delivery Price</AccordionTrigger>
-                <AccordionContent>
-                  Enjoy flexible and free deliveries with us! Orders above 30$
-                  are free of charge. Shop hassle-free and get your items
-                  delivered quickly, tailored to your needs.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value='item-2'>
-                <AccordionTrigger>Delivery Time</AccordionTrigger>
-                <AccordionContent>
-                  We guarantee delivery within 1-3 days from placing the order
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value='item-3'>
-                <AccordionTrigger>Free return within 30 days</AccordionTrigger>
-                <AccordionContent>
-                  Take advantage of our 30-day free return option! Shop
-                  confidently, knowing you can return your items at no
-                  additional cost
-                </AccordionContent>
-              </AccordionItem>
+              {deliveryInformations.map((information) => (
+                <CustomAccordionItem key={information.value} {...information} />
+              ))}
             </Accordion>
           </div>
         </div>

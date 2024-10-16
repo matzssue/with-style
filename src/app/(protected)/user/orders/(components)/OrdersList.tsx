@@ -2,32 +2,39 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 import { cn } from '@/lib/utils'
+import { userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
-  if (!ordersData) {
-    return <div>Loading...</div>
-  }
-
   if (ordersData.length === 0) {
     return <div>Hey! You don&apos;t have any orders</div>
   }
 
   return (
-    <div className='flex w-auto'>
-      <ul className='flex  w-auto flex-col gap-2 rounded-sm  px-4 py-6 shadow-sm'>
+    <div className='flex w-full'>
+      <ul className='flex  w-full flex-col gap-2 rounded-sm  px-4 py-6 shadow-sm'>
         {ordersData.map(
-          ({ orderNumber, totalItems, totalPrice, orderId, products }) => (
+          ({
+            orderNumber,
+            totalItems,
+            totalPrice,
+            orderId,
+            products,
+            paid,
+          }) => (
             <Card
               key={orderId}
               className={cn('w-auto border-2 border-secondary')}
             >
               <CardContent className={cn('flex gap-4 py-5 max-md:flex-col')}>
                 <div className='flex flex-col gap-2'>
-                  <p className='rounded-md bg-secondary px-4 py-2 text-lg shadow-sm'>
+                  <p className=' text-nowrap rounded-md bg-secondary px-4 py-2 text-base shadow-sm'>
                     Order number: <b>{orderNumber} </b>
+                  </p>
+                  <p>
+                    Order status: <b>{paid}</b>
                   </p>
                   <p>
                     Total price: <b>{totalPrice} $</b>
@@ -36,7 +43,7 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                     Total items: <b>{totalItems}</b>
                   </p>
                   <Button className={cn('w-full')} asChild>
-                    <Link href={`/user/order-details/${orderId}`}>
+                    <Link href={`/${userRoutes.orderDetails}/${orderId}`}>
                       Go to details
                     </Link>
                   </Button>
@@ -44,11 +51,11 @@ export const OrdersList = ({ ordersData }: { ordersData: OrderData[] }) => {
                 <div className='flex items-center justify-center gap-5 max-md:flex-col'>
                   <p className='pb-2 text-xl'>Order Products: </p>
                   <div>
-                    <ul className='flex gap-6'>
+                    <ul className='flex flex-wrap gap-6'>
                       {products.map(
                         ({ name, size, price, imgUrl, productId }) => (
                           <li
-                            key={productId}
+                            key={productId + size}
                             className='flex flex-col bg-secondary px-4 py-2 shadow-md'
                           >
                             <p className='text-lg font-semibold'>{name}</p>

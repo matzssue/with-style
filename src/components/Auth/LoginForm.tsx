@@ -3,16 +3,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 import Alert from '../Alert/Alert'
-import { Input } from '@/components/ui/input'
+
 import { LoginSchema, loginSchema } from '@/lib/schemas/auth-schema'
 
 import { useState } from 'react'
@@ -21,6 +14,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { login } from '@/actions/auth/login'
 import { useSearchParams } from 'next/navigation'
+import { FormFieldInput } from '../Inputs/FormFieldInput'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
@@ -50,36 +44,21 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-        <FormField
+        <FormFieldInput<LoginSchema>
           control={form.control}
+          label='Email'
           name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  type='email'
-                  placeholder='example@example.com'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder='example@example.com'
+          type='email'
         />
-        <FormField
+        <FormFieldInput<LoginSchema>
           control={form.control}
+          label='Password'
           name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type='password' placeholder='******' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder='******'
+          type='password'
         />
+
         <Button asChild variant='link' className={cn('bg-none px-0')}>
           <Link href={'/auth/reset'}>Forgot password?</Link>
         </Button>

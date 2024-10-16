@@ -1,52 +1,35 @@
 'use server'
 
+import { wishlistTag } from '@/constants/revalidation-keys'
+
+import { fetchData } from '@/lib/helplers/fetchData'
+import { userRoutes } from '@/routes'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
-
+import { headers } from 'next/headers'
 type QueryParams = {
   page?: string
-  userId?: string
 }
 
-export async function getWishlist(userId: string | undefined, page: string) {
-  const url = new URL(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist`
-  )
+export const getWishlist = async (page: string): Promise<WishlistData> => {
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page
-  if (userId) queryParams.userId = userId
-  url.search = new URLSearchParams(queryParams).toString()
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    next: { tags: ['wishlist'] },
+  const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
+    headers: headers(),
+    next: { tags: [wishlistTag] },
+    queryParams: queryParams,
   })
-  const data: WishlistData = await response.json()
 
-  return data
+  return wishlist
 }
 
-export async function getWishlistProductsId(userId: string | undefined) {
-  if (!userId) return []
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/user/wishlist?userId=${userId}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      next: { tags: ['wishlist'] },
-    }
-  )
-
-  const products = await response.json()
-
-  const productsId: string[] = products.data.map(
+export async function getWishlistProductsId() {
+  const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
+    headers: headers(),
+    next: { tags: [wishlistTag] },
+  })
+  const productsId: string[] = wishlist.data.map(
     (product: Product) => product.id
   )
   return productsId

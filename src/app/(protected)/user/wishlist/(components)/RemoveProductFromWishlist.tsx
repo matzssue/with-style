@@ -13,7 +13,7 @@ export const RemoveProductFromWishlist = ({
   const userId = session.data?.user.id
 
   const deleteProduct = async () => {
-    if (userId) await removeFromWishlist(userId, productId)
+    if (userId) await removeFromWishlist(productId)
   }
 
   return (

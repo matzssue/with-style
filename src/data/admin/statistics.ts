@@ -1,20 +1,18 @@
+import { fetchData } from '@/lib/helplers/fetchData'
+import { adminRoutes } from '@/routes'
+import { headers } from 'next/headers'
 type StatisticsData = {
   title: string
   quantity: number
 }
+export const getStatistics = async (): Promise<StatisticsData[]> => {
+  const statistics = await fetchData<StatisticsData[]>(
+    `api/${adminRoutes.statistics}`,
+    {
+      method: 'GET',
+      headers: headers(),
+    }
+  )
 
-export const getStatistics = async () => {
-  const response = await fetch('http://localhost:3000/api/admin/statistics', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
-
-  const data: StatisticsData[] = await response.json()
-
-  return data
+  return statistics
 }

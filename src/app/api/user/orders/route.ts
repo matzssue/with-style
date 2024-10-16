@@ -3,16 +3,19 @@ import prisma from '@/lib/prisma'
 
 import { ITEMS_PER_PAGE } from '@/constants/pages'
 import { OrderData, OrdersData } from '@/types/orders'
+import { currentUser } from '@/lib/auth/auth'
+import { mapOrders } from '@/lib/helplers/mapOrders'
 
 export async function GET(request: NextRequest) {
   try {
+    const user = await currentUser()
+
     const searchParams = request.nextUrl.searchParams
     const page = searchParams.get('page')
-    const userId = searchParams.get('userId')
     const pageNumber = Number(page) || 1
     const skip = (pageNumber - 1) * ITEMS_PER_PAGE
 
-    if (!userId) {
+    if (!user?.id) {
       return NextResponse.json(
         {
           error: 'Bad Request: Missing userId',
@@ -25,7 +28,7 @@ export async function GET(request: NextRequest) {
       take: ITEMS_PER_PAGE,
       skip: skip,
       where: {
-        userId: userId,
+        userId: user?.id,
       },
 
       include: { products: { include: { product: true } } },
@@ -33,33 +36,14 @@ export async function GET(request: NextRequest) {
 
     const count = await prisma.order.count({
       where: {
-        userId: userId,
+        userId: user?.id,
       },
     })
 
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE)
 
     const ordersMapped: OrderData[] = orders.map((order) => {
-      return {
-        orderId: order.id,
-        totalPrice: order.totalPrice,
-        totalItems: order.totalItems,
-        createdAt: order.createdAt,
-        orderNumber: order.orderNumber,
-        shippingName: order.shippingName,
-        address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
-        products: order.products.map((productInStore) => {
-          return {
-            productId: productInStore.product.id,
-            name: productInStore.product.name,
-            price: productInStore.product.price,
-            type: productInStore.product.type,
-            category: productInStore.product.category,
-            size: productInStore.size,
-            imgUrl: productInStore.product.imgUrl,
-          }
-        }),
-      }
+      return mapOrders(order)
     })
 
     const ordersData: OrdersData = {

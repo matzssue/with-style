@@ -15,8 +15,7 @@ import { useCartActions } from '@/hooks/use-add-product-to-cart'
 export const AddProduct = (product: Product) => {
   const { addProductToCart } = useCartActions()
 
-  if (!product) return <div></div>
-
+  if (!product) return null
   return (
     <>
       {product.size.length > 0 ? (

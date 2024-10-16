@@ -10,16 +10,24 @@ import {
   authRoutes,
   privateRoutes,
 } from './routes'
+import { getToken } from 'next-auth/jwt'
 
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req
+  if (!process.env.AUTH_SECRET) {
+    throw new Error('AUTH_SECRET is not defined in environment variables.')
+  }
+  const token = await getToken({ req, secret: process.env.AUTH_SECRET })
 
-  const userRole = req.auth?.user.role
+  const userRole = token?.role
+
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
 
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-  const isAdminRoute = adminRoute.includes(nextUrl.pathname)
+  const isAdminRoute = adminRoute.some((route) =>
+    nextUrl.pathname.startsWith(route)
+  )
 
   const isPrivateRoute = privateRoutes.some((path) =>
     nextUrl.pathname.startsWith(path)
@@ -36,11 +44,8 @@ export default auth((req) => {
     return
   }
 
-  if (isPrivateRoute) {
-    if (!isLoggedIn) {
-      return Response.redirect(new URL('/auth/login', nextUrl))
-    }
-    return
+  if (isPrivateRoute && !isLoggedIn) {
+    return Response.redirect(new URL('/auth/login', nextUrl))
   }
 
   if (isAuthRoute) {

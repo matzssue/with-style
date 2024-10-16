@@ -1,27 +1,18 @@
+import { fetchData } from '@/lib/helplers/fetchData'
+import { publicRoutes } from '@/routes'
 import { Product } from '@prisma/client'
 
-export const getProduct = async (id: string) => {
-  try {
-    const url = new URL(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/product`)
-    const querySearch = {
-      productId: id,
-    }
-    url.search = new URLSearchParams(querySearch).toString()
-
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-cache',
-    })
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-    const data: Product = await response.json()
-    return data
-  } catch (err) {
-    throw new Error('Error getting product')
+export const getProduct = async (id: string): Promise<Product> => {
+  const querySearch = {
+    productId: id,
   }
+
+  const product = await fetchData<Product>(`api/${publicRoutes.product}`, {
+    queryParams: querySearch,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  return product
 }

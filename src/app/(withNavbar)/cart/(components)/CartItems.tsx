@@ -14,7 +14,7 @@ export const CartItems = () => {
     <ul className='flex  flex-col gap-5'>
       {cartItems.map((product) => (
         <li
-          key={product.id}
+          key={product.storeId + product.id}
           className='flex gap-5 border-b-2 border-b-secondary p-2'
         >
           <div>

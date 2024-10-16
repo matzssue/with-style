@@ -1,34 +1,26 @@
 'use server'
 
+import { orderTag } from '@/constants/revalidation-keys'
+import { fetchData } from '@/lib/helplers/fetchData'
+import { userRoutes } from '@/routes'
 import { OrdersData } from '@/types/orders'
+import { headers } from 'next/headers'
 
 type QueryParams = {
   page?: string
   userId?: string
 }
 
-export async function getOrders(userId: string | undefined, page: number) {
-  const url = new URL(`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/orders`)
+export const getOrders = async (page: number): Promise<OrdersData> => {
   const queryParams: QueryParams = {}
 
   if (page) queryParams.page = page.toString()
-  if (userId) queryParams.userId = userId
-  url.search = new URLSearchParams(queryParams).toString()
 
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-
-    next: { tags: ['orders'] },
+  const order = await fetchData<OrdersData>(`api/${userRoutes.orders}`, {
+    queryParams: queryParams,
+    headers: headers(),
+    next: { tags: [orderTag] },
   })
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
-
-  const data: OrdersData = await response.json()
-
-  return data
+  return order
 }
