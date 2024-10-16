@@ -1,6 +1,13 @@
 import { getStripe } from '@/lib/get-stripe'
+import { fetchData } from '@/lib/helplers/fetchData'
 
 import { PaymentData } from '@/types/products'
+import Stripe from 'stripe'
+
+type StripeData = {
+  result: Stripe.Checkout.Session
+  ok: boolean
+}
 
 export const pay = async (paymentData: PaymentData) => {
   const stripe = await getStripe()
@@ -9,18 +16,15 @@ export const pay = async (paymentData: PaymentData) => {
   }
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/checkout_sessions`,
-      {
-        method: 'POST',
-        body: JSON.stringify(paymentData),
-      }
-    )
-    const data = await response.json()
+    const stripeData = await fetchData<StripeData>('api/checkout_sessions', {
+      method: 'POST',
+      body: JSON.stringify(paymentData),
+    })
 
-    if (!data.ok) throw new Error('Something went wrong')
+    if (!stripeData) throw new Error('Something went wrong')
+
     await stripe.redirectToCheckout({
-      sessionId: data.result.id,
+      sessionId: stripeData.result.id,
     })
   } catch (error) {
     if (error instanceof Error) {

@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { productId } = body
 
-    const updated = await prisma.user.update({
+    const addToWishlist = await prisma.user.update({
       where: { id: user?.id },
       data: {
         wishlist: {
@@ -18,7 +18,15 @@ export async function POST(request: NextRequest) {
         },
       },
     })
-    return NextResponse.json(updated)
+
+    if (!addToWishlist) {
+      return NextResponse.json(
+        { error: 'Failed to add to wishlist' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: 'Product added to wishlist' })
   } catch (error) {
     return NextResponse.json(
       {

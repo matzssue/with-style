@@ -24,11 +24,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const createProduct = await prisma.product.create({
+    const createdProduct = await prisma.product.create({
       data: productData,
     })
 
-    return NextResponse.json(createProduct)
+    return NextResponse.json(createdProduct)
   } catch (error) {
     return NextResponse.json(
       {

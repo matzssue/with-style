@@ -29,8 +29,14 @@ export async function PUT(request: NextRequest) {
       where: { id: productData.id },
       data: productData,
     })
+    if (!product) {
+      return NextResponse.json(
+        { error: 'Failed to edit product' },
+        { status: 500 }
+      )
+    }
 
-    return NextResponse.json(product)
+    return NextResponse.json({ success: 'Product sucessfully edited' })
   } catch (error) {
     return NextResponse.json(
       {
