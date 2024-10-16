@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 
 import { ITEMS_PER_PAGE } from '@/constants/pages'
 import { OrderData, OrdersData } from '@/types/orders'
+import { mapOrders } from '@/lib/helplers/mapOrders'
 
 export async function GET(request: NextRequest) {
   try {
@@ -26,27 +27,7 @@ export async function GET(request: NextRequest) {
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE)
 
     const ordersMapped: OrderData[] = orders.map((order) => {
-      return {
-        orderId: order.id,
-        totalPrice: order.totalPrice,
-        totalItems: order.totalItems,
-        createdAt: order.createdAt,
-        orderNumber: order.orderNumber,
-        shippingName: order.shippingName,
-        paid: order.paid,
-        address: `${order.zip} ${order.city}, ${order.street} ${order.number}`,
-        products: order.products.map((productInStore) => {
-          return {
-            productId: productInStore.product.id,
-            name: productInStore.product.name,
-            price: productInStore.product.price,
-            type: productInStore.product.type,
-            category: productInStore.product.category,
-            size: productInStore.size,
-            imgUrl: productInStore.product.imgUrl,
-          }
-        }),
-      }
+      return mapOrders(order)
     })
 
     const ordersData: OrdersData = {
