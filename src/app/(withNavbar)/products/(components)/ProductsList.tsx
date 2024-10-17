@@ -8,13 +8,15 @@ import { WishlistToggleButton } from '../../../(protected)/user/(components)/Wis
 import { ProductCard } from '@/components/Cards/ProductCard'
 import { publicRoutes } from '@/routes'
 import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
+import { currentUser } from '@/lib/auth/auth'
 
 export type Wishlisted = {
   productId: string
 }
 
 export const ProductList = async ({ products }: { products: Product[] }) => {
-  const userWishlist = await getWishlistProductsId()
+  const user = await currentUser()
+  const userWishlist = user ? await getWishlistProductsId() : []
 
   return (
     <div className='p-6'>
