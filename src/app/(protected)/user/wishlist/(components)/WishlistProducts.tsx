@@ -2,7 +2,8 @@ import { Product } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RemoveProductFromWishlist } from './RemoveProductFromWishlist'
-import { ProductPrice } from '@/components/ProductPrice/ProductPrice'
+import { ProductPrice } from '@/app/(components)/Products/ProductPrice/ProductPrice'
+import { publicRoutes } from '@/routes'
 export const WishlistProducts = ({ products }: { products: Product[] }) => {
   return (
     <ul className='flex w-full flex-wrap gap-5 max-lg:justify-center'>
@@ -31,7 +32,7 @@ export const WishlistProducts = ({ products }: { products: Product[] }) => {
             <div className='flex items-center gap-4 max-md:flex-col'>
               <Link
                 className='w-full rounded-sm bg-white px-4 py-2 shadow-sm hover:scale-105 max-md:w-full'
-                href={`/product/${id}`}
+                href={`/${publicRoutes.product}/${id}`}
               >
                 Go to product
               </Link>

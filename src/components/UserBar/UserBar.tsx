@@ -1,6 +1,5 @@
 import { UserMenu } from '../Auth/UserMenu'
 import { ShoppingBag } from '../ShoppingBag/ShoppingBag'
-import Link from 'next/link'
 
 import { currentUser } from '@/lib/auth/auth'
 

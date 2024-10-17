@@ -29,7 +29,7 @@ export default async function RootLayout({
           )}
         >
           {children}
-          <Toaster position='top-right' />
+          <Toaster duration={3000} position='top-right' />
         </body>
       </html>
     </SessionProvider>

@@ -1,37 +1,32 @@
+import { getCookies } from '@/lib/auth/sessionCookies'
+import { fetchData } from '@/lib/helplers/fetchData'
+import { adminRoutes, userRoutes } from '@/routes'
 import { OrderData } from '@/types/orders'
-import { headers } from 'next/headers'
+
 type QueryParams = {
   orderId?: string
 }
 
-export async function getOrder(orderId: string) {
-  try {
-    const url = new URL(
-      `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/api/order-details/${orderId}`
-    )
-    const queryParams: QueryParams = {}
+export const getOrder = async (
+  orderId: string,
+  adminOrder: boolean = false
+): Promise<OrderData> => {
+  const queryParams: QueryParams = {}
 
-    if (orderId) queryParams.orderId = orderId
+  if (orderId) queryParams.orderId = orderId
 
-    url.search = new URLSearchParams(queryParams).toString()
+  const selectedUrl = adminOrder
+    ? `api/${adminRoutes.orderDetails}/${orderId}`
+    : `api/${userRoutes.orderDetails}/${orderId}`
 
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: headers(),
-      cache: 'no-cache',
-    })
+  const order = await fetchData<OrderData>(selectedUrl, {
+    queryParams: queryParams,
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: getCookies(),
+    },
+    cache: 'no-cache',
+  })
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch order. Status: ${response.status}`)
-    }
-
-    const data: OrderData = await response.json()
-
-    return data
-  } catch (err) {
-    if (err instanceof Error) {
-      throw new Error(err.message)
-    }
-    throw new Error('Something went wrong')
-  }
+  return order
 }

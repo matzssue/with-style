@@ -1,20 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 
+import { currentUser } from '@/lib/auth/auth'
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { userId, productId } = body
+    const user = await currentUser()
 
-    const updated = await prisma.user.update({
-      where: { id: userId },
+    const body = await request.json()
+    const { productId } = body
+
+    const addToWishlist = await prisma.user.update({
+      where: { id: user?.id },
       data: {
         wishlist: {
           connect: { id: productId },
         },
       },
     })
-    return NextResponse.json(updated)
+
+    if (!addToWishlist) {
+      return NextResponse.json(
+        { error: 'Failed to add to wishlist' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: 'Product added to wishlist' })
   } catch (error) {
     return NextResponse.json(
       {

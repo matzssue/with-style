@@ -1,6 +1,4 @@
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
-import { getWishlistProductsId } from '@/data/wishlist/get-wishlist'
-import { auth } from '@/auth'
 
 import {
   ProductsData,
@@ -12,6 +10,11 @@ import { Paginator } from '@/components/Paginator/Paginator'
 import { ProductList } from '../(components)/ProductsList'
 import { getProducts } from '@/data/products/get-products'
 import { SortingMenu } from '../(components)/SortingMenu'
+import { Suspense } from 'react'
+import { Loading } from '@/components/Loading/Loading'
+import { ProductsMenu } from '../(components)/ProductsMenu'
+
+import { getLinksForCategory } from '@/lib/helplers/getLinksForCategory'
 
 export default async function TypeProducts({
   params,
@@ -20,8 +23,6 @@ export default async function TypeProducts({
   params: Params
   searchParams: ProductSearchParams
 }) {
-  const session = await auth()
-  const userId = session?.user.id
   const pageNumber = Number(searchParams.page || 1)
   const categorySlug = params.productsSlug[0]
   const typeSlug = params.productsSlug[1]
@@ -41,16 +42,27 @@ export default async function TypeProducts({
 
   const { data, metadata }: ProductsData = await getProducts(queryParams)
 
-  const userWishlist = await getWishlistProductsId(userId)
-  const wishlist = session ? userWishlist : []
-
   return (
-    <div className='flex w-full flex-col'>
-      <SortingMenu />
-      <ProductList wishlisted={wishlist} products={data} />
-      <div className='flex w-full items-center'>
-        <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+    <>
+      <ProductsMenu
+        categories={getLinksForCategory(categorySlug)}
+        categorySlug={categorySlug}
+      />
+      <div className='flex w-full flex-col'>
+        <SortingMenu />
+        <Suspense
+          fallback={
+            <div className='my-14'>
+              <Loading />
+            </div>
+          }
+        >
+          <ProductList products={data} />
+        </Suspense>
+        <div className='flex w-full items-center'>
+          <Paginator page={pageNumber} totalPages={metadata.totalPages} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }

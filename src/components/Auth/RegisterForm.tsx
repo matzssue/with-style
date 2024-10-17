@@ -3,15 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Form } from '@/components/ui/form'
+
 import { RegisterSchema, registerSchema } from '@/lib/schemas/auth-schema'
 import { useState } from 'react'
 
@@ -20,8 +13,9 @@ import { GoogleButton } from '../Auth/GoogleButton'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { register } from '@/actions/auth/register'
+import { FormFieldInput } from '../Inputs/FormFieldInput'
 
-export default function RegisterForm() {
+export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
 
@@ -48,65 +42,33 @@ export default function RegisterForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-        <FormField
+        <FormFieldInput<RegisterSchema>
           control={form.control}
+          label='Username'
           name='username'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder='' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
         />
-        <FormField
+        <FormFieldInput<RegisterSchema>
           control={form.control}
+          label='Email'
           name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  type='email'
-                  placeholder='example@email.com'
-                  {...field}
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
+          type='email'
+          placeholder='example@email.com'
         />
-        <FormField
+        <FormFieldInput<RegisterSchema>
           control={form.control}
+          label='Password'
           name='password'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type='password' placeholder='********' {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
+          type='password'
+          placeholder='********'
         />
-        <FormField
+        <FormFieldInput<RegisterSchema>
           control={form.control}
+          label='Confirm Password'
           name='confirmPassword'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <Input type='password' placeholder='********' {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
+          type='password'
+          placeholder='********'
         />
+
         <Button className='w-full' type='submit'>
           Submit
         </Button>

@@ -3,14 +3,16 @@ import prisma from '@/lib/prisma'
 import { Product } from '@prisma/client'
 import { WISHLISTED_ITEMS_PER_PAGE } from '@/constants/pages'
 import { WishlistData } from '@/types/wishlist'
+import { currentUser } from '@/lib/auth/auth'
 
 export type UserWishlist = {
   wishlist: Product[]
 }
 
 export async function GET(request: NextRequest) {
+  const user = await currentUser()
   const searchParams = request.nextUrl.searchParams
-  const userId = searchParams.get('userId') as string
+  const userId = user?.id
   const page = searchParams.get('page') as string
 
   const pageNumber = Number(page) || 1

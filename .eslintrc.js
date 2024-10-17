@@ -18,5 +18,6 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/prop-types': 'off',
     'no-undef': 'off',
+    'no-unused-vars': ['error', { args: 'none', ignoreRestSiblings: true }],
   },
 }

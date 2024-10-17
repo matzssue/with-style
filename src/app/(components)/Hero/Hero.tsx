@@ -1,7 +1,9 @@
+import { heroLinks } from '@/constants/hero-links'
+import { publicRoutes } from '@/routes'
 import Link from 'next/link'
 export const Hero = () => {
   return (
-    <section className="mb-5 flex h-[600px] w-full justify-between bg-[url('https://i.ibb.co/PQ32nyH/testbg1.jpg')] bg-cover bg-center max-lg:h-[400px]">
+    <section className="mb-5 flex h-[600px] w-full justify-between bg-[url('https://i.ibb.co/5n0V9Yx/hero-bg-image.webp')] bg-cover bg-center max-lg:h-[400px]">
       <div className='flex w-full flex-col items-center justify-center p-5'>
         <div className='ml-10 flex flex-col justify-start gap-1 self-start px-7 py-2  text-start max-md:ml-0 max-md:gap-2 max-md:self-center'>
           <div className=' rounded-lg bg-neutral-200  bg-opacity-70 px-5  py-7 max-md:py-4'>
@@ -16,18 +18,15 @@ export const Hero = () => {
             </p>
           </div>
           <div className='flex w-full gap-2 max-md:flex-col max-md:gap-1'>
-            <Link
-              className='w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
-              href={'/products/man?promotions=true'}
-            >
-              For Man
-            </Link>
-            <Link
-              className=' w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
-              href={'/products/woman?promotions=true'}
-            >
-              For Woman
-            </Link>
+            {heroLinks.map(({ link, title }) => (
+              <Link
+                className='w-full rounded-sm bg-secondary py-4 text-center text-2xl font-bold text-primary-white shadow-md max-lg:text-xl max-md:py-3'
+                href={`/${publicRoutes.products}/${link}?promotions=true`}
+                key={title}
+              >
+                {title}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

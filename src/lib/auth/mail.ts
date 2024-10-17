@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail'
 
-const sendgrid = sgMail.setApiKey(process.env.SENDGRID_API_KEY as string)
+sgMail.setApiKey(process.env.SENDGRID_API_KEY as string)
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/auth/new-verification?token=${token}`

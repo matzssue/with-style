@@ -10,36 +10,46 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { removeFromWishlist } from '@/actions/wishlist/remove-product-from-wishlist'
 import { toast } from 'sonner'
+import { useState } from 'react'
+import { Loading } from '@/components/Loading/Loading'
 
 export const WishlistToggleButton = ({
   productId,
   withText = false,
-  wishlisted,
+  isWishlisted,
 }: {
   productId: string
   withText?: boolean
-  wishlisted: string[]
+  isWishlisted: boolean
 }) => {
   const session = useSession()
   const router = useRouter()
   const userId = session.data?.user.id
+  const [loading, setLoading] = useState<boolean>(false)
 
-  const isWishlisted = wishlisted.includes(productId)
-
-  const handleWishlistItem = () => {
+  const handleWishlistItem = async () => {
+    setLoading(true)
     if (session.status === 'unauthenticated') {
       router.push('/auth/login')
       return
     }
+
     if (isWishlisted && userId) {
-      removeFromWishlist(userId, productId)
+      await removeFromWishlist(productId)
+
       toast('Product removed from wishlist')
     }
     if (!isWishlisted && userId) {
-      addToWishlist(userId, productId)
+      await addToWishlist(productId)
+
       toast('Product added to wishlist')
     }
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }
+
+  if (loading) return <Loading />
 
   return (
     <>

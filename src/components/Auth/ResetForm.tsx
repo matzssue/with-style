@@ -3,24 +3,18 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 import Alert from '../Alert/Alert'
-import { Input } from '@/components/ui/input'
+
 import { EmailSchema, emailSchema } from '@/lib/schemas/auth-schema'
 
 import { useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { reset } from '@/lib/auth/reset'
+import { FormFieldInput } from '../Inputs/FormFieldInput'
 
-export default function ResetForm() {
+export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
 
@@ -43,22 +37,12 @@ export default function ResetForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
         <h1 className='text-center text-xl'>Forgot your password?</h1>
-        <FormField
+        <FormFieldInput<EmailSchema>
           control={form.control}
+          label='Email'
           name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  type='email'
-                  placeholder='example@example.com'
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder='example@example.com'
+          type='email'
         />
 
         <Button className='w-full' type='submit'>

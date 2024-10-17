@@ -5,6 +5,7 @@ import { ButtonLink } from '@/components/Buttons/ButtonLink'
 import { paymentMethods } from '@/constants/payment-methods'
 import { CardWrapper } from './(components)/CardWrapper'
 import { CartItems } from './(components)/CartItems'
+import { userRoutes } from '@/routes'
 export default function CartPage() {
   const { totalItems, totalPrice } = useCartStore((store) => store)
 
@@ -15,8 +16,7 @@ export default function CartPage() {
       <div className='flex  justify-center gap-6 bg-secondary px-5 py-5 max-lg:w-3/4 max-lg:flex-col max-md:w-full'>
         <CardWrapper>
           <h1 className='border-b-2 border-b-secondary py-2 pb-3 text-center text-2xl font-bold'>
-            {isItem && `Your bag : ${totalItems} items`}
-            {!isItem && `No items in your bag`}
+            {isItem ? `Your bag : ${totalItems} items` : `No items in your bag`}
           </h1>
           <CartItems />
         </CardWrapper>
@@ -25,7 +25,9 @@ export default function CartPage() {
             <p className='text-2xl font-bold'>Total</p>
             <p className='font-semibold'>Total price: {totalPrice}</p>
             <p className='font-semibold'>Total items: {totalItems}</p>
-            <ButtonLink href='/user/payment'>GO TO CHECKOUT</ButtonLink>
+            <ButtonLink href={`/${userRoutes.payment}`}>
+              GO TO CHECKOUT
+            </ButtonLink>
           </CardWrapper>
           <CardWrapper>
             <p className='text-2xl font-bold'>Payment methods</p>
