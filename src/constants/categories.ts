@@ -16,25 +16,25 @@ export const categories: ProductCategory[] = [
 export const categoryCardsList = [
   {
     title: 'For man',
-    bgImage: '/images/man-category-image.jpg',
+    bgImage: '/images/man-category-image.webp',
     category: 'man',
     links: manNavLinks,
   },
   {
     title: 'For woman',
-    bgImage: '/images/woman-category-image.jpg',
+    bgImage: '/images/woman-category-image.webp',
     category: 'woman',
     links: womanNavLinks,
   },
   {
     title: 'Shoes',
-    bgImage: '/images/shoes.jpg',
+    bgImage: '/images/shoes.webp',
     category: 'shoes',
     links: shoesNavLinks,
   },
   {
     title: 'accessiores',
-    bgImage: '/images/accessories.jpg',
+    bgImage: '/images/accessories.webp',
     category: 'accessories',
     links: accessoriesNavLinks,
   },
