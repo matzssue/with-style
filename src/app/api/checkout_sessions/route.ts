@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
           size: productItem.size,
         }
       })
-      .filter((item) => item !== null)
+      .filter((item): item is MergedProduct => item !== null)
 
     const totalSummary = mergedProducts.reduce(
       (acc, product) => {
