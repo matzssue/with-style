@@ -10,7 +10,7 @@ export default async function UserLayout({
   children: React.ReactNode
 }>) {
   return (
-    <RoleWrapper allowedRole={['USER', 'ADMIN']}>
+    <RoleWrapper allowedRole={['USER', 'ADMIN', 'TEST']}>
       <Header staticNavigation={<StaticNavigation />} />
       <UserBar />
       <Wrapper>{children}</Wrapper>
