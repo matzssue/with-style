@@ -16,7 +16,7 @@ type TFormFieldInput<T extends FieldValues> = {
   name: Path<T>
   className?: HTMLProps<HTMLElement>['className']
   type?: HTMLInputTypeAttribute
-  props: InputProps
+  props?: InputProps
 }
 
 export const FormFieldInput = <T extends FieldValues>({
