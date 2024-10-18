@@ -21,12 +21,6 @@ export default function SettingsPage() {
   const [error, setError] = useState<string | undefined>()
   const [success, setSuccess] = useState<string | undefined>()
 
-  if (status === 'loading')
-    return (
-      <div>
-        <Loading />
-      </div>
-    )
   const form = useForm<SettingsSchema>({
     resolver: zodResolver(settingsSchema),
     defaultValues: {
@@ -36,6 +30,12 @@ export default function SettingsPage() {
       email: user?.email || undefined,
     },
   })
+  if (status === 'loading')
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
 
   const onSubmit = (values: SettingsSchema) => {
     startTransition(() => {
