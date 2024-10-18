@@ -3,8 +3,9 @@ import type { Metadata } from 'next'
 import { Advent_Pro } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { Toaster } from 'sonner'
-import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/auth'
+
+import { CustomSessionProvider } from '@/components/Provider/CustomSessionProvider'
 
 const inter = Advent_Pro({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -19,8 +20,9 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const session = await auth()
+  const sessionKey = new Date().valueOf()
   return (
-    <SessionProvider session={session}>
+    <CustomSessionProvider session={session} sessionKey={sessionKey}>
       <html lang='en'>
         <body
           className={cn(
@@ -32,6 +34,6 @@ export default async function RootLayout({
           <Toaster duration={3000} position='top-right' />
         </body>
       </html>
-    </SessionProvider>
+    </CustomSessionProvider>
   )
 }
