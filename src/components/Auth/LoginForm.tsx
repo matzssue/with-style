@@ -15,10 +15,12 @@ import { cn } from '@/lib/utils'
 import { login } from '@/actions/auth/login'
 import { useSearchParams } from 'next/navigation'
 import { FormFieldInput } from '../Inputs/FormFieldInput'
+import { testUserCredentials } from '@/constants/testUser'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
+  const [loading, setLoading] = useState<boolean>(false)
   const params = useSearchParams()
   const urlError =
     params.get('error') === 'OAuthAccountNotLinked'
@@ -34,11 +36,28 @@ export default function LoginForm() {
   })
 
   const onSubmit = (values: LoginSchema) => {
+    setLoading(true)
     setError('')
     login(values).then((data) => {
       setError(data?.error)
       setSuccess(data?.success)
     })
+    setLoading(false)
+  }
+
+  const loginTestUser = () => {
+    setLoading(true)
+    setError('')
+    form.setValue('email', testUserCredentials.email)
+    form.setValue('password', testUserCredentials.password)
+    login({
+      email: testUserCredentials.email,
+      password: testUserCredentials.password,
+    }).then((data) => {
+      setError(data?.error)
+      setSuccess(data?.success)
+    })
+    setLoading(false)
   }
 
   return (
@@ -63,9 +82,12 @@ export default function LoginForm() {
           <Link href={'/auth/reset'}>Forgot password?</Link>
         </Button>
         <Button className='w-full' type='submit'>
-          Submit
+          {loading ? 'Loading...' : 'Submit'}
         </Button>
         <GoogleButton />
+        <Button className='w-full' onClick={() => loginTestUser()}>
+          {loading ? 'Loading...' : 'Login to test account'}
+        </Button>
         {error && <Alert type='error'>{error}</Alert>}
         {success && <Alert type='success'>{success}</Alert>}
         {urlError && <Alert type='error'>{urlError}</Alert>}
