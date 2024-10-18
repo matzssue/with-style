@@ -19,6 +19,7 @@ import { FormFieldInput } from '../Inputs/FormFieldInput'
 export default function LoginForm() {
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
+  const [loading, setLoading] = useState<boolean>(false)
   const params = useSearchParams()
   const urlError =
     params.get('error') === 'OAuthAccountNotLinked'
@@ -34,11 +35,13 @@ export default function LoginForm() {
   })
 
   const onSubmit = (values: LoginSchema) => {
+    setLoading(true)
     setError('')
     login(values).then((data) => {
       setError(data?.error)
       setSuccess(data?.success)
     })
+    setLoading(false)
   }
 
   return (
@@ -63,7 +66,7 @@ export default function LoginForm() {
           <Link href={'/auth/reset'}>Forgot password?</Link>
         </Button>
         <Button className='w-full' type='submit'>
-          Submit
+          {loading ? 'Loading...' : 'Submit'}
         </Button>
         <GoogleButton />
         {error && <Alert type='error'>{error}</Alert>}
