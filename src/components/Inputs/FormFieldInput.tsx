@@ -5,7 +5,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Input, InputProps } from '@/components/ui/input'
 import { HTMLInputTypeAttribute, HTMLProps } from 'react'
 import { Control, FieldValues, Path } from 'react-hook-form'
 
@@ -16,6 +16,7 @@ type TFormFieldInput<T extends FieldValues> = {
   name: Path<T>
   className?: HTMLProps<HTMLElement>['className']
   type?: HTMLInputTypeAttribute
+  props: InputProps
 }
 
 export const FormFieldInput = <T extends FieldValues>({
@@ -25,6 +26,7 @@ export const FormFieldInput = <T extends FieldValues>({
   name,
   className,
   type = 'text',
+  props,
 }: TFormFieldInput<T>) => {
   return (
     <FormField
@@ -43,6 +45,7 @@ export const FormFieldInput = <T extends FieldValues>({
                   type === 'number' ? Number(e.target.value) : e.target.value
                 )
               }
+              {...props}
             />
           </FormControl>
           <FormMessage />
