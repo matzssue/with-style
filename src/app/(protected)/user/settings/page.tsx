@@ -1,16 +1,11 @@
 'use client'
 
 import Alert from '@/components/Alert/Alert'
+import { FormFieldInput } from '@/components/Inputs/FormFieldInput'
 import { Loading } from '@/components/Loading/Loading'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Form } from '@/components/ui/form'
+
 import { settings } from '@/lib/auth/settings'
 import { SettingsSchema, settingsSchema } from '@/lib/schemas/auth-schema'
 import { cn } from '@/lib/utils'
@@ -26,6 +21,12 @@ export default function SettingsPage() {
   const [error, setError] = useState<string | undefined>()
   const [success, setSuccess] = useState<string | undefined>()
 
+  if (status === 'loading')
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
   const form = useForm<SettingsSchema>({
     resolver: zodResolver(settingsSchema),
     defaultValues: {
@@ -51,12 +52,7 @@ export default function SettingsPage() {
         .catch(() => setError('Something went wrong!'))
     })
   }
-  if (status === 'loading')
-    return (
-      <div>
-        <Loading />
-      </div>
-    )
+
   return (
     <div className='flex  flex-col items-center px-2  py-5 max-md:py-8 '>
       <div className='flex h-[800px] w-full max-w-[800px] flex-col  justify-around gap-2 rounded-sm  bg-neutral-100 px-4 py-6 shadow-md'>
@@ -66,80 +62,48 @@ export default function SettingsPage() {
         <Form {...form}>
           <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
             <div>
-              <FormField
+              <FormFieldInput<SettingsSchema>
                 control={form.control}
                 name='name'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder={user?.name || ''}
-                        disabled={isPending}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
+                label='Name'
+                placeholder={user?.name || ''}
+                props={{ disabled: isPending }}
               />
+
               {user?.isOauth === false && (
                 <>
-                  <FormField
+                  <FormFieldInput<SettingsSchema>
                     control={form.control}
                     name='email'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder={user?.email || ''}
-                            disabled={isPending}
-                            type='email'
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                    label='Email'
+                    type='email'
+                    placeholder={user?.email || ''}
+                    props={{ disabled: isPending || user.role === 'TEST' }}
                   />
-                  <FormField
+                  <FormFieldInput<SettingsSchema>
                     control={form.control}
                     name='password'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder='******'
-                            disabled={isPending}
-                            type='password'
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                    label='Password'
+                    type='password'
+                    placeholder='******'
+                    props={{ disabled: isPending || user.role === 'TEST' }}
                   />
-                  <FormField
+                  <FormFieldInput<SettingsSchema>
                     control={form.control}
                     name='newPassword'
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>New Password</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder='******'
-                            disabled={isPending}
-                            type='password'
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                    label='New Password'
+                    type='password'
+                    placeholder='******'
+                    props={{ disabled: isPending || user.role === 'TEST' }}
                   />
                 </>
               )}
             </div>
             {success && <Alert type='success'>{success}</Alert>}
             {error && <Alert type='error'>{error}</Alert>}
+            {user?.role === 'TEST' && (
+              <p>Some options might be disabled for test account</p>
+            )}
             <Button className={cn('px-10 py-2')} disabled={isPending}>
               Update
             </Button>
