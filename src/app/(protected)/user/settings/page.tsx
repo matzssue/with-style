@@ -44,8 +44,8 @@ export default function SettingsPage() {
           if (data.error) {
             setError(data.error)
           }
-          if (data.succes) {
-            setSuccess(data.succes)
+          if (data.success) {
+            setSuccess(data.success)
             setError(undefined)
           }
         })
