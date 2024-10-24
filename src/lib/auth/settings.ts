@@ -23,7 +23,7 @@ export const settings = async (values: SettingsSchema) => {
     return { error: 'Unauthorized' }
   }
 
-  if (user.isOauth) {
+  if (user.isOauth || user.role === 'TEST') {
     values.email = undefined
     values.password = undefined
     values.newPassword = undefined
@@ -62,5 +62,5 @@ export const settings = async (values: SettingsSchema) => {
     data: { ...values },
   })
 
-  return { succes: 'Settings updated' }
+  return { success: 'Settings updated' }
 }
