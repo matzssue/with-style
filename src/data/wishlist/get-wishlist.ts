@@ -19,7 +19,7 @@ export const getWishlist = async (page: string): Promise<WishlistData> => {
   const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
     next: { tags: [wishlistTag] },
     queryParams: queryParams,
-    headers: headers(),
+    headers: new Headers(headers()),
   })
 
   return wishlist
@@ -28,7 +28,7 @@ export const getWishlist = async (page: string): Promise<WishlistData> => {
 export async function getWishlistProductsId() {
   const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
     next: { tags: [wishlistTag] },
-    headers: headers(),
+    headers: new Headers(headers()),
   })
   const productsId: string[] = wishlist.data.map(
     (product: Product) => product.id
