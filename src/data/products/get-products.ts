@@ -1,10 +1,12 @@
 import { fetchData } from '@/lib/helplers/fetchData'
 import { publicRoutes } from '@/routes'
 import { ProductsData, ProductsQueryParams } from '@/types/products'
+import { headers } from 'next/headers'
 
 export const getProducts = async (
   filters?: ProductsQueryParams
 ): Promise<ProductsData> => {
+  headers()
   const products = await fetchData<ProductsData>(
     `api/${publicRoutes.products}/${filters?.category}/${filters?.type}`,
     {
