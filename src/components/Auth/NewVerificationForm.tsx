@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import Alert from '../Alert/Alert'
 import { Loading } from '../Loading/Loading'
+import { Button } from '../ui/button'
+import { Link } from 'lucide-react'
 
 export const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>()
@@ -38,7 +40,15 @@ export const NewVerificationForm = () => {
       <p>Verification</p>
       {!success && !error && <Loading />}
       {error && <Alert type='error'>{error}</Alert>}
-      {error && <Alert type='success'>{success}</Alert>}
+      {success && <Alert type='success'>{success}</Alert>}
+      {error ||
+        (success && (
+          <Button asChild>
+            <Link href={`${process.env.NEXT_PUBLIC_VERCEL_DOMAIN}/auth/login`}>
+              Go to login page
+            </Link>
+          </Button>
+        ))}
     </div>
   )
 }
