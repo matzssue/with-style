@@ -7,6 +7,7 @@ import { userRoutes } from '@/routes'
 import { WishlistData } from '@/types/wishlist'
 import { Product } from '@prisma/client'
 import { headers } from 'next/headers'
+
 type QueryParams = {
   page?: string
 }
@@ -16,9 +17,9 @@ export const getWishlist = async (page: string): Promise<WishlistData> => {
 
   if (page) queryParams.page = page
   const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
-    headers: headers(),
     next: { tags: [wishlistTag] },
     queryParams: queryParams,
+    headers: new Headers(headers()),
   })
 
   return wishlist
@@ -26,8 +27,8 @@ export const getWishlist = async (page: string): Promise<WishlistData> => {
 
 export async function getWishlistProductsId() {
   const wishlist = await fetchData<WishlistData>(`api/${userRoutes.wishlist}`, {
-    headers: headers(),
     next: { tags: [wishlistTag] },
+    headers: new Headers(headers()),
   })
   const productsId: string[] = wishlist.data.map(
     (product: Product) => product.id

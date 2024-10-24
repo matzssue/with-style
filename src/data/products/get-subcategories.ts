@@ -4,12 +4,7 @@ import { publicRoutes } from '@/routes'
 
 export const getSubcategoryTitles = async () => {
   const subcategoryTitles = await fetchData<Subcategory[]>(
-    `api/${publicRoutes.products}/subcategory/titles`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
+    `api/${publicRoutes.products}/subcategory/titles`
   )
 
   return subcategoryTitles

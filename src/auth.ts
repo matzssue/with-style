@@ -15,6 +15,7 @@ export const {
     signIn: '/auth/login',
     error: '/auth/error',
   },
+  trustHost: true,
   events: {
     async linkAccount({ user }) {
       await prisma.user.update({
@@ -33,6 +34,7 @@ export const {
 
       return true
     },
+
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
