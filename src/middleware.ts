@@ -14,12 +14,12 @@ import { getToken } from 'next-auth/jwt'
 
 export default auth(async (req) => {
   const { nextUrl } = req
-  if (!process.env.AUTH_SECRET) {
+  if (!process.env.NEXTAUTH_SECRET) {
     throw new Error('AUTH_SECRET is not defined in environment variables.')
   }
   const token = await getToken({
     req,
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     secureCookie: process.env.NODE_ENV === 'production',
     salt:
       process.env.NODE_ENV === 'production'
@@ -31,7 +31,7 @@ export default auth(async (req) => {
 
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-
+  console.log(isLoggedIn, 'islogged')
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
   const isAdminRoute = adminRoute.some((route) =>
     nextUrl.pathname.startsWith(route)

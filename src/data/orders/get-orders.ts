@@ -18,7 +18,7 @@ export const getOrders = async (page: number): Promise<OrdersData> => {
 
   const order = await fetchData<OrdersData>(`api/${userRoutes.orders}`, {
     queryParams: queryParams,
-    headers: headers(),
+    headers: new Headers(headers()),
     next: { tags: [orderTag] },
   })
 

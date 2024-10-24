@@ -10,7 +10,7 @@ export const getStatistics = async (): Promise<StatisticsData[]> => {
     `api/${adminRoutes.statistics}`,
     {
       method: 'GET',
-      headers: headers(),
+      headers: new Headers(headers()),
     }
   )
 
