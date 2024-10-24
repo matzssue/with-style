@@ -7,7 +7,9 @@ export const getProducts = async (
 ): Promise<ProductsData> => {
   const products = await fetchData<ProductsData>(
     `api/${publicRoutes.products}/${filters?.category}/${filters?.type}`,
-    { queryParams: filters }
+    {
+      queryParams: filters,
+    }
   )
 
   return products
@@ -26,9 +28,6 @@ export const getProductsBySubcategory = async (
     `api/${publicRoutes.products}/subcategory`,
     {
       queryParams: searchParams,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     }
   )
 
@@ -47,9 +46,6 @@ export const getProductsByCategory = async (
     `api/${publicRoutes.products}/category`,
     {
       queryParams: searchParams,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     }
   )
 
