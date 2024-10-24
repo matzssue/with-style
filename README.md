@@ -6,7 +6,7 @@ With-style is an e-commerce platform for fashion enthusiasts, offering clothing,
 
 ## Live
 
-[FreightEx Platform Vercel](https://with-style.vercel.app)
+[With style e-commerce](https://with-style.vercel.app)
 
 _Test Account_
 

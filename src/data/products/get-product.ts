@@ -1,6 +1,7 @@
 import { fetchData } from '@/lib/helplers/fetchData'
 import { publicRoutes } from '@/routes'
 import { Product } from '@prisma/client'
+import { headers } from 'next/headers'
 
 export const getProduct = async (id: string): Promise<Product> => {
   const querySearch = {
@@ -9,9 +10,6 @@ export const getProduct = async (id: string): Promise<Product> => {
 
   const product = await fetchData<Product>(`api/${publicRoutes.product}`, {
     queryParams: querySearch,
-    headers: {
-      'Content-Type': 'application/json',
-    },
   })
 
   return product

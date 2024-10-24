@@ -13,9 +13,6 @@ export const getProductsById = async (
     `api/${publicRoutes.products}/id`,
     {
       queryParams: querySearch,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     }
   )
 

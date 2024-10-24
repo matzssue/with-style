@@ -38,11 +38,14 @@ export default function LoginForm() {
   const onSubmit = (values: LoginSchema) => {
     setLoading(true)
     setError('')
-    login(values).then((data) => {
-      setError(data?.error)
-      setSuccess(data?.success)
-    })
-    setLoading(false)
+    login(values)
+      .then((data) => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   const loginTestUser = () => {
@@ -53,11 +56,14 @@ export default function LoginForm() {
     login({
       email: testUserCredentials.email,
       password: testUserCredentials.password,
-    }).then((data) => {
-      setError(data?.error)
-      setSuccess(data?.success)
     })
-    setLoading(false)
+      .then((data) => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -85,7 +91,7 @@ export default function LoginForm() {
           {loading ? 'Loading...' : 'Submit'}
         </Button>
         <GoogleButton />
-        <Button className='w-full' onClick={() => loginTestUser()}>
+        <Button type='button' className='w-full' onClick={loginTestUser}>
           {loading ? 'Loading...' : 'Login to test account'}
         </Button>
         {error && <Alert type='error'>{error}</Alert>}
