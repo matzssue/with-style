@@ -4,14 +4,6 @@
 
 With-style is an e-commerce platform for fashion enthusiasts, offering clothing, shoes, and accessories. The project is built with Next.js, utilizing Prisma for database management.
 
-## Live
-
-[With style e-commerce](https://with-style.vercel.app)
-
-_Test Account_
-
-Login: testaccount@withstyle.com
-Password: test12345
 
 ## Installation
 
@@ -22,8 +14,6 @@ Install my-project with npm or arn
   # or
   yarn dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Instructions
 
